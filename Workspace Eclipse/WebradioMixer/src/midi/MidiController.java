@@ -169,7 +169,7 @@ public class MidiController {
 					}
 				}
 
-				if (note_cc != 84) {
+				if (note_cc != 82 && note_cc != 83 && note_cc != 84) {
 					if (velocity < 10) {
 						velocity = 0;
 					} else if (velocity >= 109) {
