@@ -1,0 +1,31 @@
+TODO:
+
+- Standardwiedergabe zuschalten/Äther muten CHECK
+- MIDI-Rücksendung Farben
+
+- Kopfhörer auf Kanal 7 CHECK
+- CUE-Editor mit Pfeiltasten+Solotaste CHECK
+PLAYLIST 1 MOVE UP
+PLAYLIST 1 MOVE DOWN
+PLAYLIST 1 EXTRAPFL ON/OFF
+
+- ONAir-Signal in mAirList 
+
+- MUTE-Taste für Monitormute
+ CHECK
+- Cartwall im Aircheck CHECK
+
+
+
+
+
+SYNCHRONISATION:
+
+midi handler sendet nur befehle an mairlist, die lösen einen interrupt im hintergrundscript aus, das wird zurück an das programm gesendet und in statusänderungen umgesetzt
+
+
+
+mic activiert und fader oben unten rot
+pfl = rot
+untere reihe: musik geladen = grün, laufen = gleb, eof= rot blinkend, nihcts geladen= aus
+solo = rot

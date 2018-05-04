@@ -1,0 +1,14 @@
+-mikrofone auf wiedergabequelle mit kopfhörer als wiedergabegerät
+-alle eingänge auf den gleichen pegel (vll auf 20-50 gegen übersteuern)
+
+-einen wirtuellen ausgang als standard, den dann per programm auf lautsprecher (monitor) mappen
+
+
+
+Eingänge: microphone1, microphone2, mairlistChannel1, mairlistChannel2, mairlistPFL, mairlistCartwall, stdOut, RECORD
+
+Ausgänge: monitor, phone, mairlistMaster
+
+Strings: samplerate, bits
+
+

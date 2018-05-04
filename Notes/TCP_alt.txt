@@ -1,0 +1,76 @@
+package main;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class Mairlist {
+	private static Mairlist instance;
+
+	private Socket pingSocket = null;
+	private PrintWriter out = null;
+
+	public enum Command {
+		PLAYER1_START("PLAYER 1-1 START"),
+		PLAYER1_STOP("PLAYER 1-1 STOP"),
+		PLAYER1_STARTSTOP("PLAYER 1-1 START/STOP"),
+		PLAYER1_PFL_ON("PLAYER 1-1 PFL ON"),
+		PLAYER1_PFL_OFF("PLAYER 1-1 PFL OFF"),
+		PLAYER1_PFL_ONOFF("PLAYER 1-1 PFL ON/OFF"),
+		PLAYER2_START("PLAYER 1-2 START"),
+		PLAYER2_STOP("PLAYER 1-2 STOP"),
+		PLAYER2_STARTSTOP("PLAYER 1-2 START/STOP"),
+		PLAYER2_PFL_ON("PLAYER 1-2 PFL ON"),
+		PLAYER2_PFL_OFF("PLAYER 1-2 PFL OFF"),
+		PLAYER2_PFL_ONOFF("PLAYER 1-2 PFL ON/OFF"),
+		CARTWALL_START("CARTWALL 1 START"),
+		CARTWALL_STOP("CARTWALL 1 STOP"),
+		CARTWALL_STARTSTOP("CARTWALL 1 START/STOP");
+		
+		private final String text;
+	
+		Command(String text) {
+			this.text = text;
+		}
+	
+		public String getText() {
+			return text;
+		}
+	}
+
+	public static Mairlist getInstance() {
+		if (instance == null) {
+			instance = new Mairlist();
+		}
+		return instance;
+	}
+
+	private Mairlist() {
+		/*
+		try {
+			pingSocket = new Socket("127.0.0.1", 9000);
+			out = new PrintWriter(pingSocket.getOutputStream(), true);
+		} catch (IOException e) {
+			System.out.println("mAirList Server not reachable!");
+		}
+		*/
+	}
+
+	public void sendCommand(Command command) {
+		//sendText(command.getText());
+	}
+	
+	private void sendText(String text) {
+		out.println(text);
+	}
+
+	public void close() {
+		out.close();
+		try {
+			pingSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

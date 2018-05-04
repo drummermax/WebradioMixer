@@ -1,0 +1,23 @@
+Legende:
+PFL - Pre-Fader-Listen (Kanal wird vorgehört, ähnlich wie CUE)
+EOF - End of file (Lied im Player endet in wenigen Sekunden - standardmäßig in 10s)
+Cartwall - kurze Jingles etc. die über einen weiteren Player abgespielt werden können
+AirCheck - Autodatei mit dem Master, der die Moderation beinhaltet
+
+Kanalaufteilung:
+FADER  - auf den Fadern liegt der jeweilige Kanal mit Lautstärkeregelung
+TASTE UNTERM FADER - PFL aktivieren bzw. deaktivieren
+TASTE UNTER DER TASTE - Hinweislampen über Player- bzw. Kanalstatus (s.u.), gleichzeitig zum Starten/Stoppen des Players bzw. scharf schalten der Mics
+Kanal 1: MIC 1
+Kanal 2: MIC 2 (noch leer, sollte aber trotzdem programmiert werden)
+Kanal 3: Player 1
+Kanal 4: Player 2
+Kanal 5: Cartwall
+
+Funktionen:
+- EOF Warnung -> playerbezogen, wenn ein Player EOF erreicht, blinkt die Lampe unterm Fader rot
+- PlayerLoad -> playerbezogen, wenn ein Player mit einem Lied geladen wurde, aber noch nicht läuft, leuchtet die Lampe unterm Fader grün
+- PlayerSart -> playerbezogen, wenn ein Player läuft leuchtet die Lampe unterm Fader gelb
+- PlayerPFL -> playerbezogen, wenn die PFL Taste für den Player gedrückt wurde leuchtet die Lampe des PFL rot, dazu wird am Kopfhörer der Master gemuted und nur der PFL Kanal übertragen, umgekehrt beim deaktivieren des PFL
+- OnAir -> wenn der MIC-Fader hochgezogen wird UND der Kanal scharf geschaltet ist, wird der Monitormaster gemutet, umgekehrt bei Deaktivierung
+- AirCheck -> wenn einer oder beide MIC-Kanäle aktiviert UND der Fader hochgezogen wird, wird parallel zum OnAir eine mp3-Datei erstellt, die den Master enthält, Dateiaufnahme wird beendet, wenn MIC-Kanäle deaktiviert werden und der Fader unten ist (speichern im Hintergrund als "dd.mm.yyyy hh:mm:ss AirCheck"; wobei hh:mm:ss den Zeitpunkt des Beginns des Airchecks darstellen)
