@@ -188,7 +188,12 @@ public class MixingDesk {
 		phones.unmuteSingle(1);
 		phones.muteSingle(2);
 		phones.unmuteSingle(3);
-		phones.muteSingle(4);
+		phones.unmuteSingle(4);
+		phones.setVolumeOfSingleInput(0, 1);
+		phones.setVolumeOfSingleInput(1, 1);
+		phones.setVolumeOfSingleInput(2, 0);
+		phones.setVolumeOfSingleInput(3, 1);
+		phones.setVolumeOfSingleInput(4, 0);
 	}
 
 	public void activateMicrophones(int microphoneNumber) {

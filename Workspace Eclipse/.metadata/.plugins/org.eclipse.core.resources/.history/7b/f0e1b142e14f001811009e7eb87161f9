@@ -176,19 +176,19 @@ public class MixingDesk {
 	}
 
 	public void activatePhonesPFL() {
-		phones.muteSingle(0);
-		phones.muteSingle(1);
-		phones.unmuteSingle(2);
-		phones.muteSingle(3);
-		phones.muteSingle(4);
+		phones.setVolumeOfSingleInput(0, 0);
+		phones.setVolumeOfSingleInput(1, 0);
+		phones.setVolumeOfSingleInput(2, 1);
+		phones.setVolumeOfSingleInput(3, 0);
+		phones.setVolumeOfSingleInput(4, 0);
 	}
 
 	public void deactivatePhonesPFL() {
-		phones.unmuteSingle(0);
-		phones.unmuteSingle(1);
-		phones.muteSingle(2);
-		phones.unmuteSingle(3);
-		phones.muteSingle(4);
+		phones.setVolumeOfSingleInput(0, 1);
+		phones.setVolumeOfSingleInput(1, 1);
+		phones.setVolumeOfSingleInput(2, 0);
+		phones.setVolumeOfSingleInput(3, 1);
+		phones.setVolumeOfSingleInput(4, 0);
 	}
 
 	public void activateMicrophones(int microphoneNumber) {
