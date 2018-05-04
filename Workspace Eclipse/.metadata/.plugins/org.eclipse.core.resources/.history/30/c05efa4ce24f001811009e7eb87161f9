@@ -153,7 +153,6 @@ public class MidiController {
 						return;
 					case 107: // Solo key
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_EXTRAPFL);
-						MixingDesk.getInstance().togglePflActive();
 						return;
 					}
 				}
