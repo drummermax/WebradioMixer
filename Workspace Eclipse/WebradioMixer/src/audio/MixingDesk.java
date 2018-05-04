@@ -86,9 +86,14 @@ public class MixingDesk {
 
 		mairlistMaster = new OutputCombined(audioFormat,
 				(int) Filemanager.getInstance().variables.get("mairlist master"), mairlistMasterInputs, mairlistMasterInputsLatencyCompensation);
+		mairlistMaster.setVolume(1);
+		
 		monitor = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("monitor"),
 				monitorInputs, monitorInputsLatencyCompensation);
+		monitor.setVolume(1);
+		
 		phones = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("phones"), phonesInputs, phonesInputsLatencyCompensation);
+		phones.setVolume(1);
 	}
 
 	public void updateLines() {
@@ -217,15 +222,15 @@ public class MixingDesk {
 	}
 
 	public void activateCartwall() {
-		mairlistMaster.setVolumeOfSingleInput(4, 1);
-		monitor.setVolumeOfSingleInput(2, 1);
-		phones.setVolumeOfSingleInput(3, 1);
+		mairlistMaster.unmuteSingle(4);
+		monitor.unmuteSingle(2);
+		phones.unmuteSingle(3);
 	}
 
 	public void deactivateCartwall() {
-		mairlistMaster.setVolumeOfSingleInput(4, 0);
-		monitor.setVolumeOfSingleInput(2, 0);
-		phones.setVolumeOfSingleInput(3, 0);
+		mairlistMaster.muteSingle(4);
+		monitor.muteSingle(2);
+		phones.muteSingle(3);
 	}
 	
 	public void activatePhonesStdWiedergabe() {
