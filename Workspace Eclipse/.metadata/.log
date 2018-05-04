@@ -18,3 +18,59 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.equinox.ds 1 0 2018-05-04 19:10:30.093
 !MESSAGE Could not bind a reference of component org.eclipse.fx.ide.css.cssext.ui.internal.DefaultCssExtProvider. The reference is: Reference[name = ICSSExtModelProvider, interface = org.eclipse.fx.ide.css.cssext.ICSSExtModelProvider, policy = dynamic, cardinality = 0..n, target = null, bind = bindCssExtensionModelProvider, unbind = unbindCssExtensionModelProvider]
+
+!ENTRY org.eclipse.egit.ui 4 0 2018-05-04 19:25:14.235
+!MESSAGE git@github.com:drummermax/WebradioMixer.git: Auth fail
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: git@github.com:drummermax/WebradioMixer.git: Auth fail
+	at org.eclipse.jgit.api.FetchCommand.call(FetchCommand.java:139)
+	at org.eclipse.jgit.api.PullCommand.call(PullCommand.java:263)
+	at org.eclipse.egit.core.op.PullOperation$1.run(PullOperation.java:97)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.egit.core.op.PullOperation.execute(PullOperation.java:128)
+	at org.eclipse.egit.ui.internal.pull.PullOperationUI.execute(PullOperationUI.java:140)
+	at org.eclipse.egit.ui.internal.pull.PullOperationUI$1.runInWorkspace(PullOperationUI.java:115)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:39)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.eclipse.jgit.errors.TransportException: git@github.com:drummermax/WebradioMixer.git: Auth fail
+	at org.eclipse.jgit.transport.JschConfigSessionFactory.getSession(JschConfigSessionFactory.java:159)
+	at org.eclipse.jgit.transport.SshTransport.getSession(SshTransport.java:136)
+	at org.eclipse.jgit.transport.TransportGitSsh$SshFetchConnection.<init>(TransportGitSsh.java:262)
+	at org.eclipse.jgit.transport.TransportGitSsh.openFetch(TransportGitSsh.java:161)
+	at org.eclipse.jgit.transport.FetchProcess.executeImp(FetchProcess.java:136)
+	at org.eclipse.jgit.transport.FetchProcess.execute(FetchProcess.java:122)
+	at org.eclipse.jgit.transport.Transport.fetch(Transport.java:1138)
+	at org.eclipse.jgit.api.FetchCommand.call(FetchCommand.java:130)
+	... 8 more
+Caused by: com.jcraft.jsch.JSchException: Auth fail
+	at com.jcraft.jsch.Session.connect(Session.java:512)
+	at org.eclipse.jgit.transport.JschConfigSessionFactory.getSession(JschConfigSessionFactory.java:116)
+	... 15 more
+
+!ENTRY org.eclipse.egit.ui 4 0 2018-05-04 19:25:37.521
+!MESSAGE git@github.com:drummermax/WebradioMixer.git: Auth fail
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: git@github.com:drummermax/WebradioMixer.git: Auth fail
+	at org.eclipse.jgit.api.FetchCommand.call(FetchCommand.java:139)
+	at org.eclipse.jgit.api.PullCommand.call(PullCommand.java:263)
+	at org.eclipse.egit.core.op.PullOperation$1.run(PullOperation.java:97)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.egit.core.op.PullOperation.execute(PullOperation.java:128)
+	at org.eclipse.egit.ui.internal.pull.PullOperationUI.execute(PullOperationUI.java:140)
+	at org.eclipse.egit.ui.internal.pull.PullOperationUI$1.runInWorkspace(PullOperationUI.java:115)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:39)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.eclipse.jgit.errors.TransportException: git@github.com:drummermax/WebradioMixer.git: Auth fail
+	at org.eclipse.jgit.transport.JschConfigSessionFactory.getSession(JschConfigSessionFactory.java:159)
+	at org.eclipse.jgit.transport.SshTransport.getSession(SshTransport.java:136)
+	at org.eclipse.jgit.transport.TransportGitSsh$SshFetchConnection.<init>(TransportGitSsh.java:262)
+	at org.eclipse.jgit.transport.TransportGitSsh.openFetch(TransportGitSsh.java:161)
+	at org.eclipse.jgit.transport.FetchProcess.executeImp(FetchProcess.java:136)
+	at org.eclipse.jgit.transport.FetchProcess.execute(FetchProcess.java:122)
+	at org.eclipse.jgit.transport.Transport.fetch(Transport.java:1138)
+	at org.eclipse.jgit.api.FetchCommand.call(FetchCommand.java:130)
+	... 8 more
+Caused by: com.jcraft.jsch.JSchException: Auth fail
+	at com.jcraft.jsch.Session.connect(Session.java:512)
+	at org.eclipse.jgit.transport.JschConfigSessionFactory.getSession(JschConfigSessionFactory.java:116)
+	... 15 more
