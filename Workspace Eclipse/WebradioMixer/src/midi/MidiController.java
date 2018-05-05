@@ -204,11 +204,11 @@ public class MidiController {
 					return;
 				case 104: // Select up
 					if (velocity == 127)
-						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_MOVEUP);
+						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_CURSORUP);
 					return;
 				case 105: // Select down
 					if (velocity == 127)
-						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_MOVEDOWN);
+						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_CURSORDOWN);
 					return;
 				case 106: // Select left
 					if (velocity == 127)
