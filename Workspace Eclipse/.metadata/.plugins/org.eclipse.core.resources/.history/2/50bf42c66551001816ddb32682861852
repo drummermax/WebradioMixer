@@ -127,8 +127,6 @@ public class MidiController {
 
 		Thread ledUpdaterThread = new Thread(new ledUpdater());
 		ledUpdaterThread.start();
-		
-		System.out.println("MIDI");
 	}
 
 	public int[] getTimestamp() {
