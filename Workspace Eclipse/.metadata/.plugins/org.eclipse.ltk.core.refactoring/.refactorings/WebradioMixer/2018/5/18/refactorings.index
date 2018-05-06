@@ -1,0 +1,6 @@
+1525508855636	Rename enum constant 'PLAYLIST_MOVEUP'
+1525508865368	Rename enum constant 'PLAYLIST_MOVEDOWN'
+1525527518913	Encapsulate field 'setPFL'
+1525527651544	Rename type 'mairlistPlayerState'
+1525527659764	Rename type 'mairlistPFLSources'
+1525528288739	Rename field 'setPFL'

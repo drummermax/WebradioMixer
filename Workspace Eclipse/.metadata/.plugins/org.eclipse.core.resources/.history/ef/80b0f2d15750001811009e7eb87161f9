@@ -1,0 +1,49 @@
+import java.net.*; // Contains Socket classes
+import java.io.*; // Contains Input/Output classes
+import java.nio.file.*;
+
+class Main {
+	public static void main(String argv[]) throws IOException {
+		ServerSocket s = new ServerSocket(9001);
+
+		System.out.println("Server waiting for client on port " + s.getLocalPort());
+		int count = 0;
+		do {
+			count = count + 1;
+			Socket connected = s.accept();
+			new clientThread(connected, count).start();
+		} while (true);
+
+	}
+}
+
+class clientThread extends Thread {
+
+	Socket myclientSocket = null;
+	int mycount;
+	DataInputStream is = null;
+	PrintStream os = null;
+
+	public clientThread(Socket clientSocket, int count) {
+		this.myclientSocket = clientSocket;
+		this.mycount = count;
+	}
+
+	public void run() {
+		try {
+
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(myclientSocket.getInputStream()));
+
+			String data = reader.readLine();
+
+			System.out.println(data);
+			
+			myclientSocket.close();
+			  
+			
+		}catch(IOException ex)
+
+	{
+	}
+}}

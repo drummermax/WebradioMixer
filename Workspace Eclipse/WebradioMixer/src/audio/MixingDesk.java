@@ -180,7 +180,7 @@ public class MixingDesk {
 		}
 	}
 
-	public void activatePhonesPFL() {
+	private void activatePhonesPFL() {
 		phones.muteSingle(0);
 		phones.muteSingle(1);
 		phones.unmuteSingle(2);
@@ -188,7 +188,7 @@ public class MixingDesk {
 		phones.muteSingle(4);
 	}
 
-	public void deactivatePhonesPFL() {
+	private void deactivatePhonesPFL() {
 		phones.unmuteSingle(0);
 		phones.unmuteSingle(1);
 		phones.muteSingle(2);
@@ -196,7 +196,7 @@ public class MixingDesk {
 		phones.muteSingle(4);
 	}
 
-	public void activateMicrophones(int microphoneNumber) {
+	private void activateMicrophones(int microphoneNumber) {
 		if (microphoneNumber == 1) {
 			microphone1.setPhonesActivated(true);
 			mairlistMaster.setVolumeOfSingleInput(0, 1);
@@ -208,7 +208,7 @@ public class MixingDesk {
 		setMonitorMuted(true);
 	}
 
-	public void deactivateMicrophones(int microphoneNumber) {
+	private void deactivateMicrophones(int microphoneNumber) {
 		if (microphoneNumber == 1) {
 			microphone1.setPhonesActivated(false);
 			mairlistMaster.setVolumeOfSingleInput(0, 0);
@@ -221,13 +221,13 @@ public class MixingDesk {
 			setMonitorMuted(false);
 	}
 
-	public void activateCartwall() {
+	private void activateCartwall() {
 		mairlistMaster.unmuteSingle(4);
 		monitor.unmuteSingle(2);
 		phones.unmuteSingle(3);
 	}
 
-	public void deactivateCartwall() {
+	private void deactivateCartwall() {
 		mairlistMaster.muteSingle(4);
 		monitor.muteSingle(2);
 		phones.muteSingle(3);
@@ -259,7 +259,7 @@ public class MixingDesk {
 		}
 	}
 
-	private void setSpeakingAktive(int microphoneNumber, boolean speakingActive) {
+	public void setSpeakingAktive(int microphoneNumber, boolean speakingActive) {
 		if (speakingActive) {
 			MixingDesk.speakingActive1 = speakingActive;
 			activateMicrophones(microphoneNumber);
@@ -277,7 +277,7 @@ public class MixingDesk {
 		setPflActive(pflActive);
 	}
 
-	private void setPflActive(boolean pflActive) {
+	public void setPflActive(boolean pflActive) {
 		MixingDesk.pflActive = pflActive;
 		if (pflActive) {
 			activatePhonesPFL();
@@ -291,7 +291,7 @@ public class MixingDesk {
 		setCartwallActive(cartwallActive);
 	}
 
-	private void setCartwallActive(boolean cartwallActive) {
+	public void setCartwallActive(boolean cartwallActive) {
 		MixingDesk.cartwallActive = cartwallActive;
 		if (cartwallActive) {
 			activateCartwall();
@@ -305,7 +305,7 @@ public class MixingDesk {
 		setMonitorMuted(monitorMuted);
 	}
 
-	private void setMonitorMuted(boolean monitorMuted) {
+	public void setMonitorMuted(boolean monitorMuted) {
 		MixingDesk.monitorMuted = monitorMuted;
 		if (monitorMuted) {
 			monitor.mute();
@@ -384,6 +384,18 @@ public class MixingDesk {
 
 	public void setSetRecording(boolean setRecording) {
 		MixingDesk.setRecording = setRecording;
+	}
+
+	public boolean isSpeakingActive1() {
+		return speakingActive1;
+	}
+
+	public boolean isSpeakingActive2() {
+		return speakingActive2;
+	}
+
+	public boolean isMonitorMuted() {
+		return monitorMuted;
 	}
 	
 	

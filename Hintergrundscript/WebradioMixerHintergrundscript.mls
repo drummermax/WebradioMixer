@@ -1,0 +1,56 @@
+procedure OnLoad;
+begin
+end;
+
+procedure OnPlayerEOFWarning(PlaylistIndex: integer; PlayerIndex: integer; Item: IPlaylistItem);
+var text: string;
+begin
+	text := '"EOF ' + IntToStr(PlayerIndex) + '"';
+	ShellExecuteHidden('cmd.exe', '/c D: && cd D:\WebradioMixer\Software && java -jar WebradioMixerPackageTransmitter.jar ' + text);
+end;
+
+procedure OnPlayerStop(PlaylistIndex: integer; PlayerIndex: integer; Duration: TTimeValue; Item: IPlaylistItem);
+var text: string;
+begin
+	text := '"STOP ' + IntToStr(PlayerIndex) + '"';
+	ShellExecuteHidden('cmd.exe', '/c D: && cd D:\WebradioMixer\Software && java -jar WebradioMixerPackageTransmitter.jar ' + text);
+end;
+
+procedure OnPFLOn(PlayerControl: IPlayerControl; Item: IPlaylistItem; PFLCount: integer);
+var text: string;
+begin
+	text := '"PFL ON"';
+
+	ShellExecuteHidden('cmd.exe', '/c D: && cd D:\WebradioMixer\Software && java -jar WebradioMixerPackageTransmitter.jar ' + text);
+end;
+
+procedure OnPFLOff(PlayerControl: IPlayerControl; Item: IPlaylistItem; PFLCount: integer);
+var text: string;
+begin
+	text := '"PFL OFF"';
+
+	ShellExecuteHidden('cmd.exe', '/c D: && cd D:\WebradioMixer\Software && java -jar WebradioMixerPackageTransmitter.jar ' + text);
+end;
+
+procedure OnPlayerStateChange(PlaylistIndex: integer; PlayerIndex: integer; OldState: TPlayerState; NewState: TPlayerState; Item: IPlaylistItem);
+var text: string;
+begin
+	if (NewState = psLoaded) then
+	begin
+		text := '"LOADED ' + IntToStr(PlayerIndex) + '"';
+		ShellExecuteHidden('cmd.exe', '/c D: && cd D:\WebradioMixer\Software && java -jar WebradioMixerPackageTransmitter.jar ' + text);
+	end;
+	if (NewState = psEmpty) then
+	begin
+		text := '"EMPTY ' + IntToStr(PlayerIndex) + '"';
+		ShellExecuteHidden('cmd.exe', '/c D: && cd D:\WebradioMixer\Software && java -jar WebradioMixerPackageTransmitter.jar ' + text);
+	end;
+	if (NewState = psPlaying) then
+	begin
+		text := '"PLAYING ' + IntToStr(PlayerIndex) + '"';
+		ShellExecuteHidden('cmd.exe', '/c D: && cd D:\WebradioMixer\Software && java -jar WebradioMixerPackageTransmitter.jar ' + text);
+	end;
+end;
+
+begin
+end.
