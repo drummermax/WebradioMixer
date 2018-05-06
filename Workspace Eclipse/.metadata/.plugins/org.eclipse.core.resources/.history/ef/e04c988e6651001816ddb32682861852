@@ -8,8 +8,6 @@ import midi.MidiController;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("HIER");
-		
 		if (args.length == 2) {
 			GlobalVariables.getInstance().setBufferSize(Integer.parseInt(args[0]));
 			GlobalVariables.getInstance().setLatencyCompensation(Integer.parseInt(args[1]));
