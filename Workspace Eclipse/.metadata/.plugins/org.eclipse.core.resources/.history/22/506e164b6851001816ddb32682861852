@@ -70,8 +70,8 @@ public class MidiController {
 		}
 
 		public boolean isFader() {
-			if (this.equalsMIDIKey(FADER1) || this.equalsMIDIKey(FADER2) || this.equalsMIDIKey(FADER3) || this.equalsMIDIKey(FADER4)
-					|| this.equalsMIDIKey(FADER5) || this.equalsMIDIKey(FADER6) || this.equalsMIDIKey(FADER7) || this.equalsMIDIKey(FADER8)) {
+			if (this.equals(FADER1) || this.equals(FADER2) || this.equals(FADER3) || this.equals(FADER4)
+					|| this.equals(FADER5) || this.equals(FADER6) || this.equals(FADER7) || this.equals(FADER8)) {
 				return true;
 			} else {
 				return false;
@@ -194,6 +194,10 @@ public class MidiController {
 				velocity = msg.getMessage()[2];
 
 			MIDIKey midikey = new MIDIKey(channel, note_cc);
+			
+			System.out.println(channel + " " + note_cc + " " + velocity);
+			
+			System.out.println(midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN3));
 
 			if (midikey.isFader()) {
 				if (MidiController.getInstance().getCurrentTimestamp()
@@ -205,42 +209,42 @@ public class MidiController {
 				}
 			}
 
-			if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP1)) {
+			if (midikey.equals(MIDIKey.BUTTONUP1)) {
 				if (velocity == 127) {
 
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP2)) {
+			} else if (midikey.equals(MIDIKey.BUTTONUP2)) {
 				if (velocity == 127) {
 
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP3)) {
+			} else if (midikey.equals(MIDIKey.BUTTONUP3)) {
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYER1_PFL_ONOFF);
 					Mairlist.getInstance().setMairlistPFLSource(MairlistPFLSource.PLAYER1);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP4)) {
+			} else if (midikey.equals(MIDIKey.BUTTONUP4)) {
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYER2_PFL_ONOFF);
 					Mairlist.getInstance().setMairlistPFLSource(MairlistPFLSource.PLAYER2);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP5)) {
+			} else if (midikey.equals(MIDIKey.BUTTONUP5)) {
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEPFL);
 					Mairlist.getInstance().setMairlistPFLSource(MairlistPFLSource.CARTWALL);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP6)) {
+			} else if (midikey.equals(MIDIKey.BUTTONUP6)) {
 				if (velocity == 127) {
 
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP7)) {
+			} else if (midikey.equals(MIDIKey.BUTTONUP7)) {
 				if (velocity == 127) {
 					MixingDesk.getInstance().setPhonesStdWiedergabe(false);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP8)) {
+			} else if (midikey.equals(MIDIKey.BUTTONUP8)) {
 				if (velocity == 127) {
 
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN1)) {
+			} else if (midikey.equals(MIDIKey.BUTTONDOWN1)) {
 				if (velocity == 127) {
 					MixingDesk.getInstance().toggleSpeakingActive(1);
 					
@@ -250,7 +254,7 @@ public class MidiController {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_OFFAIR);
 					}
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN2)) {
+			} else if (midikey.equals(MIDIKey.BUTTONDOWN2)) {
 				if (velocity == 127) {
 					MixingDesk.getInstance().toggleSpeakingActive(2);
 					
@@ -260,31 +264,31 @@ public class MidiController {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_OFFAIR);
 					}
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN3)) {
+			} else if (midikey.equals(MIDIKey.BUTTONDOWN3)) {
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYER1_STARTSTOP);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN4)) {
+			} else if (midikey.equals(MIDIKey.BUTTONDOWN4)) {
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYER2_STARTSTOP);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN5)) {
+			} else if (midikey.equals(MIDIKey.BUTTONDOWN5)) {
 				if (velocity == 127) {
 
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN6)) {
+			} else if (midikey.equals(MIDIKey.BUTTONDOWN6)) {
 				if (velocity == 127) {
 
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN7)) {
+			} else if (midikey.equals(MIDIKey.BUTTONDOWN7)) {
 				if (velocity == 127) {
 					MixingDesk.getInstance().setPhonesStdWiedergabe(true);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN8)) {
+			} else if (midikey.equals(MIDIKey.BUTTONDOWN8)) {
 				if (velocity == 127) {
 
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.FADER1)) {
+			} else if (midikey.equals(MIDIKey.FADER1)) {
 				if (velocity < 10) {
 					velocity = 0;
 				} else if (velocity >= 109) {
@@ -292,7 +296,7 @@ public class MidiController {
 				}
 
 				MixingDesk.getInstance().getMicrophone1().setVolume(velocity / 127);
-			} else if (midikey.equalsMIDIKey(MIDIKey.FADER2)) {
+			} else if (midikey.equals(MIDIKey.FADER2)) {
 				if (velocity < 10) {
 					velocity = 0;
 				} else if (velocity >= 109) {
@@ -300,7 +304,7 @@ public class MidiController {
 				}
 
 				MixingDesk.getInstance().getMicrophone2().setVolume(velocity / 127);
-			} else if (midikey.equalsMIDIKey(MIDIKey.FADER3)) {
+			} else if (midikey.equals(MIDIKey.FADER3)) {
 				if (velocity < 10) {
 					velocity = 0;
 				} else if (velocity >= 109) {
@@ -308,7 +312,7 @@ public class MidiController {
 				}
 
 				MixingDesk.getInstance().getMairlistChannel1().setVolume(velocity / 127);
-			} else if (midikey.equalsMIDIKey(MIDIKey.FADER4)) {
+			} else if (midikey.equals(MIDIKey.FADER4)) {
 				if (velocity < 10) {
 					velocity = 0;
 				} else if (velocity >= 109) {
@@ -316,7 +320,7 @@ public class MidiController {
 				}
 
 				MixingDesk.getInstance().getMairlistChannel2().setVolume(velocity / 127);
-			} else if (midikey.equalsMIDIKey(MIDIKey.FADER5)) {
+			} else if (midikey.equals(MIDIKey.FADER5)) {
 				if (velocity < 10) {
 					velocity = 0;
 				} else if (velocity >= 109) {
@@ -324,36 +328,36 @@ public class MidiController {
 				}
 
 				MixingDesk.getInstance().getMairlistCartwall().setVolume(velocity / 127);
-			} else if (midikey.equalsMIDIKey(MIDIKey.FADER6)) {
+			} else if (midikey.equals(MIDIKey.FADER6)) {
 				MixingDesk.getInstance().getStdOut().setVolume(velocity / 127);
-			} else if (midikey.equalsMIDIKey(MIDIKey.FADER7)) {
+			} else if (midikey.equals(MIDIKey.FADER7)) {
 				MixingDesk.getInstance().getPhone().setVolume(velocity / 127);
 				
 				System.out.println("PHONES FADER " + (velocity / 127));
-			} else if (midikey.equalsMIDIKey(MIDIKey.FADER8)) {
+			} else if (midikey.equals(MIDIKey.FADER8)) {
 				MixingDesk.getInstance().getMonitor().setVolume(velocity / 127);
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONMUTE)) {
+			} else if (midikey.equals(MIDIKey.BUTTONMUTE)) {
 				if (velocity == 127) {
 					MixingDesk.getInstance().toggleMonitorMuted();
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSOLO)) {
+			} else if (midikey.equals(MIDIKey.BUTTONSOLO)) {
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_EXTRAPFL);
 					Mairlist.getInstance().setMairlistPFLSource(MairlistPFLSource.EXTRA);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTUP)) {
+			} else if (midikey.equals(MIDIKey.BUTTONSELECTUP)) {
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_CURSORUP);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTDOWN)) {
+			} else if (midikey.equals(MIDIKey.BUTTONSELECTDOWN)) {
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_CURSORDOWN);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTLEFT)) {
+			} else if (midikey.equals(MIDIKey.BUTTONSELECTLEFT)) {
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_PREVPAGE);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTRIGHT)) {
+			} else if (midikey.equals(MIDIKey.BUTTONSELECTRIGHT)) {
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_NEXTPAGE);
 				}
