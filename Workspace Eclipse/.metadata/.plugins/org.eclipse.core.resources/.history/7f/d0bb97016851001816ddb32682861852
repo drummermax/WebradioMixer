@@ -197,7 +197,7 @@ public class MidiController {
 			
 			System.out.println(channel + " " + note_cc + " " + velocity);
 			
-			System.out.println(midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN3));
+			System.out.println(midikey.equals(MIDIKey.BUTTONDOWN3));
 
 			if (midikey.isFader()) {
 				if (MidiController.getInstance().getCurrentTimestamp()

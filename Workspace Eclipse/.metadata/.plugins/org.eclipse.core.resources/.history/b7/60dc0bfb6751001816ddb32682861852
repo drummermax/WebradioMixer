@@ -89,14 +89,6 @@ public class MidiController {
 		public boolean isLedActivated() {
 			return ledActivated;
 		}
-		
-		public boolean equalsMIDIKey(MIDIKey midikey) {
-			if (midikey.getChannel() == this.getChannel() && midikey.getNote_cc() == this.getNote_cc()) {
-				return true;
-			} else {
-				return false;
-			}
-		}
 	}
 
 	private MidiController() {
@@ -197,7 +189,7 @@ public class MidiController {
 			
 			System.out.println(channel + " " + note_cc + " " + velocity);
 			
-			System.out.println(midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN3));
+			System.out.println(midikey.equals(MIDIKey.BUTTONDOWN3));
 
 			if (midikey.isFader()) {
 				if (MidiController.getInstance().getCurrentTimestamp()
