@@ -123,7 +123,7 @@ public class MidiHandler {
 		 */
 	}
 
-	public static class MyMidiDevice implements Transmitter, Receiver {
+	public class MyMidiDevice implements Transmitter, Receiver {
 
 		private Receiver receiver;
 

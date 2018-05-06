@@ -6,44 +6,78 @@ import java.io.*;
 
 public class MidiHandler {
 
-	public static void main(String[] args) throws MidiUnavailableException {
+	public static void main(String[] args) {
 		MyMidiDevice myDevice = new MyMidiDevice();
 
-		MidiDevice inputDevice, outputDevice;
+		MidiDevice inputDevice;
+		inputDevice.getTransmitter().setReceiver(myDevice);
+		myDevice.setReceiver(outputDevice.getReceiver());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		MidiDevice device;
 		MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
 
 		for (int i = 0; i < infos.length; i++) {
 			System.out.println(i + ": " + infos[i]);
 		}
 
-		System.out.println("Bitte den Index des Midi-Gerätes eingeben input:");
+		System.out.println("Bitte den Index des Midi-Gerätes eingeben:");
 		Scanner in = new Scanner(System.in);
 		int index = in.nextInt();
 		in.close();
 
-		inputDevice = MidiSystem.getMidiDevice(infos[index]);
+		Transmitter trans = null;
 
-		System.out.println("Bitte den Index des Midi-Gerätes eingeben output:");
-		in = new Scanner(System.in);
-		index = in.nextInt();
-		in.close();
+		try {
+			device = MidiSystem.getMidiDevice(infos[index]);
+			// does the device have any transmitters?
+			// if it does, add it to the device list
+			System.out.println(infos[index]);
 
-		outputDevice = MidiSystem.getMidiDevice(infos[index]);
+			// get all transmitters
+			List<Transmitter> transmitters = device.getTransmitters();
+			// and for each transmitter
 
-		inputDevice.getTransmitter().setReceiver(myDevice);
-		myDevice.setReceiver(outputDevice.getReceiver());
+			for (int j = 0; j < transmitters.size(); j++) {
+				// create a new receiver
+				transmitters.get(j).setReceiver(
+						// using my own MidiInputReceiver
+						new MidiInputReceiver(device.getDeviceInfo().toString()));
+			}
 
+			trans = device.getTransmitter();
+			trans.setReceiver(new MidiInputReceiver(device.getDeviceInfo().toString()));
+
+			// open each device
+			device.open();
+			// if code gets this far without throwing an exception
+			// print a success message
+			System.out.println(device.getDeviceInfo() + " Was Opened");
+
+		} catch (MidiUnavailableException e) {
+			System.out.println("FAILED");
+		}
+		
 		ShortMessage myMsg = new ShortMessage();
 
 		while (true) {
 			try {
-				myMsg.setMessage(ShortMessage.NOTE_ON, 0x01, 41, 15); // 144/145
+				myMsg.setMessage(ShortMessage.NOTE_ON, 0x01, 41, 15); //144/145
 			} catch (InvalidMidiDataException e) {
 				e.printStackTrace();
 			}
 
-			myDevice.getReceiver().send(myMsg, -1);
-
+			trans.getReceiver().send(myMsg, -1);
+			
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -51,14 +85,13 @@ public class MidiHandler {
 			}
 
 			try {
-				myMsg.setMessage(ShortMessage.NOTE_ON, 0x01, 41, 60); // 0x98
-																		// //128/129
+				myMsg.setMessage(ShortMessage.NOTE_ON, 0x01, 41, 60); //0x98 //128/129
 			} catch (InvalidMidiDataException e) {
 				e.printStackTrace();
 			}
 
-			myDevice.getReceiver().send(myMsg, -1);
-
+			trans.getReceiver().send(myMsg, -1);
+			
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -66,86 +99,36 @@ public class MidiHandler {
 			}
 		}
 
-		/*
-		 * MidiDevice device; MidiDevice.Info[] infos =
-		 * MidiSystem.getMidiDeviceInfo();
-		 * 
-		 * for (int i = 0; i < infos.length; i++) { System.out.println(i + ": "
-		 * + infos[i]); }
-		 * 
-		 * System.out.println("Bitte den Index des Midi-Gerätes eingeben:");
-		 * Scanner in = new Scanner(System.in); int index = in.nextInt();
-		 * in.close();
-		 * 
-		 * Transmitter trans = null;
-		 * 
-		 * try { device = MidiSystem.getMidiDevice(infos[index]); // does the
-		 * device have any transmitters? // if it does, add it to the device
-		 * list System.out.println(infos[index]);
-		 * 
-		 * // get all transmitters List<Transmitter> transmitters =
-		 * device.getTransmitters(); // and for each transmitter
-		 * 
-		 * for (int j = 0; j < transmitters.size(); j++) { // create a new
-		 * receiver transmitters.get(j).setReceiver( // using my own
-		 * MidiInputReceiver new
-		 * MidiInputReceiver(device.getDeviceInfo().toString())); }
-		 * 
-		 * trans = device.getTransmitter(); trans.setReceiver(new
-		 * MidiInputReceiver(device.getDeviceInfo().toString()));
-		 * 
-		 * // open each device device.open(); // if code gets this far without
-		 * throwing an exception // print a success message
-		 * System.out.println(device.getDeviceInfo() + " Was Opened");
-		 * 
-		 * } catch (MidiUnavailableException e) { System.out.println("FAILED");
-		 * }
-		 * 
-		 * ShortMessage myMsg = new ShortMessage();
-		 * 
-		 * while (true) { try { myMsg.setMessage(ShortMessage.NOTE_ON, 0x01, 41,
-		 * 15); //144/145 } catch (InvalidMidiDataException e) {
-		 * e.printStackTrace(); }
-		 * 
-		 * trans.getReceiver().send(myMsg, -1);
-		 * 
-		 * try { Thread.sleep(500); } catch (InterruptedException e) {
-		 * e.printStackTrace(); }
-		 * 
-		 * try { myMsg.setMessage(ShortMessage.NOTE_ON, 0x01, 41, 60); //0x98
-		 * //128/129 } catch (InvalidMidiDataException e) { e.printStackTrace();
-		 * }
-		 * 
-		 * trans.getReceiver().send(myMsg, -1);
-		 * 
-		 * try { Thread.sleep(500); } catch (InterruptedException e) {
-		 * e.printStackTrace(); } }
-		 */
 	}
+	
+	public class MyMidiDevice implements Transmitter, Receiver
+	{
 
-	public static class MyMidiDevice implements Transmitter, Receiver {
+	    private Receiver receiver;
 
-		private Receiver receiver;
+	    @Override
+	    public Receiver getReceiver()
+	    {
+	        return this.receiver;
+	    }
 
-		@Override
-		public Receiver getReceiver() {
-			return this.receiver;
-		}
+	    @Override
+	    public void setReceiver(Receiver receiver)
+	    {
+	        this.receiver = receiver;
+	    }
 
-		@Override
-		public void setReceiver(Receiver receiver) {
-			this.receiver = receiver;
-		}
+	    @Override
+	    public void close()
+	    {
+	    }
 
-		@Override
-		public void close() {
-		}
-
-		@Override
-		public void send(MidiMessage message, long timeStamp) {
-			System.out.println(message); // computations
-			this.getReceiver().send(message, timeStamp);
-		}
+	    @Override
+	    public void send(MidiMessage message, long timeStamp)
+	    {
+	        System.out.println(message); // computations
+	        this.getReceiver().send(message, timeStamp);
+	    }
 	}
 
 	// tried to write my own class. I thought the send method handles an
@@ -164,6 +147,8 @@ public class MidiHandler {
 			// System.out.println("midi received status " + i + ": " +
 			// msg.getStatus());
 
+			
+			
 			int channel = msg.getMessage()[0];
 			int note_cc = msg.getMessage()[1];
 			int velocity = 0;
