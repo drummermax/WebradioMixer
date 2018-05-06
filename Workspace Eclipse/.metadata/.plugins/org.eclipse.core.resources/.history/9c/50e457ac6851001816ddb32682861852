@@ -326,6 +326,8 @@ public class MidiController {
 				MixingDesk.getInstance().getStdOut().setVolume(velocity / 127);
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER7)) {
 				MixingDesk.getInstance().getPhone().setVolume(velocity / 127);
+				
+				System.out.println("PHONES FADER " + (velocity / 127));
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER8)) {
 				MixingDesk.getInstance().getMonitor().setVolume(velocity / 127);
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONMUTE)) {

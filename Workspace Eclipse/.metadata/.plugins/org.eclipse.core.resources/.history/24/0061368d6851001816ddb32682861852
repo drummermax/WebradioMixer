@@ -56,6 +56,9 @@ public class MixingDesk {
 			nircmdPath = nircmdPath.replace("\\workspace\\WebradioMixer", "");
 
 		initLines();
+		
+		
+		System.out.println("MIXING DESK");
 	}
 
 	public void initLines() {

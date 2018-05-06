@@ -32,6 +32,9 @@ public class Main {
 
 		mixingDeskUpdater.start();
 		
+		
+		System.out.println("MAIN");
+		
 		 /*
 		while (true) {
 			// MixingDesk.getInstance().getMairlistMaster().setVolume(0.6);
