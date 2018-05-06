@@ -13,11 +13,11 @@ public class Main {
 			GlobalVariables.getInstance().setLatencyCompensation(Integer.parseInt(args[1]));
 		}
 
-		Filemanager.getInstance();
-		
 		MixingDesk.getInstance();
 		
 		MidiController.getInstance();
+		
+		Filemanager.getInstance();
 		
 		GUI gui = new GUI();
 

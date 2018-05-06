@@ -68,6 +68,7 @@ public class Input {
 	}
 
 	public void open() {
+		System.out.println("OPEN TRY");
 		try {
 			targetDataLineIn.open(audioFormat);
 		} catch (LineUnavailableException e) {
