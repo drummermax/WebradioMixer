@@ -40,6 +40,8 @@ public class OutputCombined {
 	}
 
 	public void setVolume(double volume) {
+		System.out.println("Volume: " + volume);
+		
 		this.volume = volume;
 
 		for (int i = 0; i < numberOfInputs; i++) {
