@@ -1,1 +1,1 @@
-java -jar C:\JulianWebradioMixer\WebradioMixer.jar 64 650
+java -jar D:\Desktop\WebradioMixer\Software\WebradioMixer.jar 64 650
