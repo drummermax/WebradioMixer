@@ -234,7 +234,7 @@ public class MixingDesk {
 	}
 	
 	public void setPhonesStdWiedergabe(boolean phonesStdWiedergabe) {
-		MixingDesk.phonesStdWiedergabe = phonesStdWiedergabe;
+		Mairlist.pho
 		if (phonesStdWiedergabe) {
 			activatePhonesStdWiedergabe();
 		} else {
@@ -242,7 +242,7 @@ public class MixingDesk {
 		}
 	}
 	
-	private void activatePhonesStdWiedergabe() {
+	public void activatePhonesStdWiedergabe() {
 		phones.unmuteSingle(0);
 		phones.unmuteSingle(1);
 		phones.unmuteSingle(2);
@@ -250,7 +250,7 @@ public class MixingDesk {
 		phones.muteSingle(4);
 	}
 	
-	private void activatePhonesNormal() {
+	public void activatePhonesNormal() {
 		phones.muteSingle(0);
 		phones.muteSingle(1);
 		phones.muteSingle(2);
@@ -416,8 +416,6 @@ public class MixingDesk {
 	public boolean isMonitorMuted() {
 		return monitorMuted;
 	}
-
-	public boolean isPhonesStdWiedergabe() {
-		return phonesStdWiedergabe;
-	}
+	
+	
 }

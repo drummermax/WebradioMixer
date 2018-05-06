@@ -545,13 +545,7 @@ public class MidiController {
 					MIDIKey.BUTTONMUTE.setLedActivated(false, 0); // aus
 				}
 				
-				if (MixingDesk.getInstance().isPhonesStdWiedergabe()) {
-					MIDIKey.BUTTONDOWN7.setLedActivated(true, 0); // rot
-					MIDIKey.BUTTONUP7.setLedActivated(false, 0); // aus
-				} else {
-					MIDIKey.BUTTONDOWN7.setLedActivated(false, 0); // rot
-					MIDIKey.BUTTONUP7.setLedActivated(true, 0); // aus
-				}
+				if (MixingDesk.getInstance().is)
 
 				try {
 					Thread.sleep(100);

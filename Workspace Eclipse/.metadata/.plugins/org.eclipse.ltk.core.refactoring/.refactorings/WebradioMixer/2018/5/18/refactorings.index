@@ -4,3 +4,5 @@
 1525527651544	Rename type 'mairlistPlayerState'
 1525527659764	Rename type 'mairlistPFLSources'
 1525528288739	Rename field 'setPFL'
+1525604078368	Rename method 'activateMicrophones'
+1525604085558	Rename method 'deactivateMicrophones'

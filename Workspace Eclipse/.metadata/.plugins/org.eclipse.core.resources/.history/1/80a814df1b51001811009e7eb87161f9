@@ -29,7 +29,7 @@ public class MixingDesk {
 	private static String nircmdPath;
 
 	private static boolean setRecording = false, isRecording = false;
-	private static boolean speakingActive1 = false, speakingActive2 = false, pflActive = false, cartwallActive = false, monitorMuted = false, phonesStdWiedergabe = false;
+	private static boolean speakingActive1 = false, speakingActive2 = false, pflActive = false, cartwallActive = false, monitorMuted = false;
 	private static AudioInputStream aircheck;
 	private static File aircheckFile;
 	private static AudioFileFormat.Type aircheckFileType = AudioFileFormat.Type.WAVE;
@@ -196,7 +196,7 @@ public class MixingDesk {
 		phones.muteSingle(4);
 	}
 
-	private void activateMicrophone(int microphoneNumber) {
+	private void activateMicrophones(int microphoneNumber) {
 		if (microphoneNumber == 1) {
 			microphone1.setPhonesActivated(true);
 			mairlistMaster.setVolumeOfSingleInput(0, 1);
@@ -208,7 +208,7 @@ public class MixingDesk {
 		setMonitorMuted(true);
 	}
 
-	private void deactivateMicrophone(int microphoneNumber) {
+	private void deactivateMicrophones(int microphoneNumber) {
 		if (microphoneNumber == 1) {
 			microphone1.setPhonesActivated(false);
 			mairlistMaster.setVolumeOfSingleInput(0, 0);
@@ -233,16 +233,7 @@ public class MixingDesk {
 		phones.muteSingle(3);
 	}
 	
-	public void setPhonesStdWiedergabe(boolean phonesStdWiedergabe) {
-		MixingDesk.phonesStdWiedergabe = phonesStdWiedergabe;
-		if (phonesStdWiedergabe) {
-			activatePhonesStdWiedergabe();
-		} else {
-			activatePhonesNormal();
-		}
-	}
-	
-	private void activatePhonesStdWiedergabe() {
+	public void activatePhonesStdWiedergabe() {
 		phones.unmuteSingle(0);
 		phones.unmuteSingle(1);
 		phones.unmuteSingle(2);
@@ -250,7 +241,7 @@ public class MixingDesk {
 		phones.muteSingle(4);
 	}
 	
-	private void activatePhonesNormal() {
+	public void activatePhonesNormal() {
 		phones.muteSingle(0);
 		phones.muteSingle(1);
 		phones.muteSingle(2);
@@ -273,10 +264,10 @@ public class MixingDesk {
 			speakingActive1 = speakingActive;
 			
 			if (speakingActive) {
-				activateMicrophone(microphoneNumber);
+				activateMicrophones(microphoneNumber);
 				setSetRecording(true);
 			} else {
-				deactivateMicrophone(microphoneNumber);
+				deactivateMicrophones(microphoneNumber);
 				if (!speakingActive1 && !speakingActive2)
 					setSetRecording(false);
 			}
@@ -284,10 +275,10 @@ public class MixingDesk {
 			speakingActive2 = speakingActive;
 			
 			if (speakingActive) {
-				activateMicrophone(microphoneNumber);
+				activateMicrophones(microphoneNumber);
 				setSetRecording(true);
 			} else {
-				deactivateMicrophone(microphoneNumber);
+				deactivateMicrophones(microphoneNumber);
 				if (!speakingActive1 && !speakingActive2)
 					setSetRecording(false);
 			}
@@ -416,8 +407,6 @@ public class MixingDesk {
 	public boolean isMonitorMuted() {
 		return monitorMuted;
 	}
-
-	public boolean isPhonesStdWiedergabe() {
-		return phonesStdWiedergabe;
-	}
+	
+	
 }

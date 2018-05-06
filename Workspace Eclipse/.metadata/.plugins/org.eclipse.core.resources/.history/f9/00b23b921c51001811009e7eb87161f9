@@ -224,7 +224,7 @@ public class MidiController {
 				}
 			} else if (midikey.equals(MIDIKey.BUTTONUP7)) {
 				if (velocity == 127) {
-					MixingDesk.getInstance().setPhonesStdWiedergabe(false);
+					MixingDesk.getInstance().activatePhonesNormal();
 				}
 			} else if (midikey.equals(MIDIKey.BUTTONUP8)) {
 				if (velocity == 127) {
@@ -268,7 +268,7 @@ public class MidiController {
 				}
 			} else if (midikey.equals(MIDIKey.BUTTONDOWN7)) {
 				if (velocity == 127) {
-					MixingDesk.getInstance().setPhonesStdWiedergabe(true);
+					MixingDesk.getInstance().activatePhonesStdWiedergabe();
 				}
 			} else if (midikey.equals(MIDIKey.BUTTONDOWN8)) {
 				if (velocity == 127) {
@@ -543,14 +543,6 @@ public class MidiController {
 					MIDIKey.BUTTONMUTE.setLedActivated(true, 0); // rot
 				} else {
 					MIDIKey.BUTTONMUTE.setLedActivated(false, 0); // aus
-				}
-				
-				if (MixingDesk.getInstance().isPhonesStdWiedergabe()) {
-					MIDIKey.BUTTONDOWN7.setLedActivated(true, 0); // rot
-					MIDIKey.BUTTONUP7.setLedActivated(false, 0); // aus
-				} else {
-					MIDIKey.BUTTONDOWN7.setLedActivated(false, 0); // rot
-					MIDIKey.BUTTONUP7.setLedActivated(true, 0); // aus
 				}
 
 				try {
