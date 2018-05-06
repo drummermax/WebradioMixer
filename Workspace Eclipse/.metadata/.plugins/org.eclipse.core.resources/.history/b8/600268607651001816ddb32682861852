@@ -24,11 +24,11 @@ public class MidiHandler {
 		inputDevice = MidiSystem.getMidiDevice(infos[index]);
 
 		System.out.println("Bitte den Index des Midi-Gerätes eingeben output:");
-		Scanner in2 = new Scanner(System.in);
-		int index2 = in2.nextInt();
-		in2.close();
+		in = new Scanner(System.in);
+		index = in.nextInt();
+		in.close();
 
-		outputDevice = MidiSystem.getMidiDevice(infos[index2]);
+		outputDevice = MidiSystem.getMidiDevice(infos[index]);
 
 		inputDevice.getTransmitter().setReceiver(myDevice);
 		myDevice.setReceiver(outputDevice.getReceiver());
