@@ -55,7 +55,7 @@ public class MidiHandler {
 
 		while (true) {
 			try {
-				myMsg.setMessage(ShortMessage.NOTE_ON, 1, 41, 15); //144/145
+				myMsg.setMessage(ShortMessage.NOTE_ON, 144, 41, 15);
 			} catch (InvalidMidiDataException e) {
 				e.printStackTrace();
 			}
@@ -69,7 +69,7 @@ public class MidiHandler {
 			}
 
 			try {
-				myMsg.setMessage(ShortMessage.NOTE_OFF, 1, 41, 60); //0x98 //128/129
+				myMsg.setMessage(ShortMessage.NOTE_OFF, 128, 41, 60); //0x98
 			} catch (InvalidMidiDataException e) {
 				e.printStackTrace();
 			}
