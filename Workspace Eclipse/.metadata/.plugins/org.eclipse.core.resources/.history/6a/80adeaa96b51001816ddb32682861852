@@ -239,8 +239,6 @@ public class Mairlist {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(myclientSocket.getInputStream()));
 
 				String data = reader.readLine();
-				
-				System.out.println("MAIRLIST RETURN: " + data);
 
 				if (data.contains("LOADED")) {
 					if (data.split(" ")[1].equals("0")) {
