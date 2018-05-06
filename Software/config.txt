@@ -1,22 +1,22 @@
 microphone 1
-14
+26
 microphone 2
-17
-mairlist channel 1
-22
-mairlist channel 2
-16
-mairlist pfl
 20
+mairlist channel 1
+18
+mairlist channel 2
+23
+mairlist pfl
+19
 mairlist cartwall
-15
+22
 stdout
-12
+27
 mairlist master record
-13
+28
 mairlist master
-6
+8
 monitor
 3
 phones
-9
+4
