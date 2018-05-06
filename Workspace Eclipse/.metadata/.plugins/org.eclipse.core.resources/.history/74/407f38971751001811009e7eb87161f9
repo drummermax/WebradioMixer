@@ -234,7 +234,7 @@ public class MidiController {
 				if (velocity == 127) {
 					MixingDesk.getInstance().toggleSpeakingActive(1);
 					
-					if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) {
+					if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_ONAIR);
 					} else {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_OFFAIR);
@@ -244,7 +244,7 @@ public class MidiController {
 				if (velocity == 127) {
 					MixingDesk.getInstance().toggleSpeakingActive(2);
 					
-					if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) {
+					if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_ONAIR);
 					} else {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_OFFAIR);

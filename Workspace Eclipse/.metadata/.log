@@ -74,3 +74,6 @@ Caused by: com.jcraft.jsch.JSchException: Auth fail
 	at com.jcraft.jsch.Session.connect(Session.java:512)
 	at org.eclipse.jgit.transport.JschConfigSessionFactory.getSession(JschConfigSessionFactory.java:116)
 	... 15 more
+
+!ENTRY org.eclipse.jdt.ui 2 0 2018-05-06 12:22:07.534
+!MESSAGE The 'org.eclipse.fx.ide.jdt.ui.id2' proposal computer from the 'org.eclipse.fx.ide.jdt.ui' plug-in did not complete normally. The extension violated the API contract of the 'computeContextInformation()' operation.
