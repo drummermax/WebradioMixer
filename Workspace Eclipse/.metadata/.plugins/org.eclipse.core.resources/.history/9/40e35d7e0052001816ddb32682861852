@@ -21,14 +21,12 @@ public class MidiHandler {
 		int index = in.nextInt();
 
 		inputDevice = MidiSystem.getMidiDevice(infos[index]);
-		inputDevice.open();
 
 		System.out.println("Bitte den Index des Midi-Gerätes eingeben output:");
 		int index2 = in.nextInt();
 		in.close();
 
 		outputDevice = MidiSystem.getMidiDevice(infos[index2]);
-		outputDevice.open();
 
 		System.out.println("input max rec " + inputDevice.getMaxReceivers());
 		System.out.println("input max tran " + inputDevice.getMaxTransmitters());
