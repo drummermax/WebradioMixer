@@ -43,11 +43,6 @@ public class MidiHandler {
 			e1.printStackTrace();
 		}
 		
-
-		myDevice.getReceiver().send(myMsg, -1);
-		outputDevice.getReceiver().send(myMsg, -1);
-		
-		
 		try {
 			Thread.sleep(100000);
 		} catch (InterruptedException e1) {

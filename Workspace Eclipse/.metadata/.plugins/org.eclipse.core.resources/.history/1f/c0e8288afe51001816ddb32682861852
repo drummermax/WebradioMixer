@@ -33,29 +33,6 @@ public class MidiHandler {
 
 		ShortMessage myMsg = new ShortMessage();
 
-		
-		
-		
-		try {
-			myMsg.setMessage(ShortMessage.CONTROL_CHANGE, 0x00, 0, 127);
-		} catch (InvalidMidiDataException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-
-		myDevice.getReceiver().send(myMsg, -1);
-		outputDevice.getReceiver().send(myMsg, -1);
-		
-		
-		try {
-			Thread.sleep(100000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
 		while (true) {
 			try {
 				myMsg.setMessage(ShortMessage.NOTE_ON, 0x01, 41, 15); // 144/145
