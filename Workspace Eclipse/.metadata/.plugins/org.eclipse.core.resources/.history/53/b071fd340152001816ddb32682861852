@@ -34,7 +34,6 @@ public class MidiHandler {
 		System.out.println("input max tran " + inputDevice.getMaxTransmitters());
 		System.out.println("input get rec " + inputDevice.getReceivers());
 		System.out.println("input get trans " + inputDevice.getTransmitters());
-		
 		System.out.println("output max rec " + outputDevice.getMaxReceivers());
 		System.out.println("output max tran " + outputDevice.getMaxTransmitters());
 		System.out.println("output get rec " + outputDevice.getReceivers());
@@ -43,8 +42,8 @@ public class MidiHandler {
 		
 		
 		
-//		inputDevice.getTransmitter().setReceiver(myDevice);
-//		myDevice.setReceiver(outputDevice.getReceiver());
+		inputDevice.getTransmitter().setReceiver(myDevice);
+		myDevice.setReceiver(outputDevice.getReceiver());
 
 		ShortMessage myMsg = new ShortMessage();
 
@@ -59,16 +58,16 @@ public class MidiHandler {
 		}
 		
 
-//		myDevice.getReceiver().send(myMsg, -1);
+		myDevice.getReceiver().send(myMsg, -1);
 		outputDevice.getReceiver().send(myMsg, -1);
 		
 		
-//		try {
-//			Thread.sleep(100000);
-//		} catch (InterruptedException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+		try {
+			Thread.sleep(100000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		
 		while (true) {
