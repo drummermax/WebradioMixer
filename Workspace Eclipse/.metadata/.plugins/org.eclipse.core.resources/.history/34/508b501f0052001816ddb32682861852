@@ -28,18 +28,6 @@ public class MidiHandler {
 
 		outputDevice = MidiSystem.getMidiDevice(infos[index2]);
 
-		System.out.println("input max rec " + inputDevice.getMaxReceivers());
-		System.out.println("input max tran " + inputDevice.getMaxTransmitters());
-		System.out.println("input get rec " + inputDevice.getReceivers());
-		System.out.println("input get trans " + inputDevice.getTransmitters());
-		System.out.println("output max rec " + outputDevice.getMaxReceivers());
-		System.out.println("output max tran " + outputDevice.getMaxTransmitters());
-		System.out.println("output get rec " + outputDevice.getReceivers());
-		System.out.println("output get trans " + outputDevice.getTransmitters());
-		
-		
-		
-		
 		inputDevice.getTransmitter().setReceiver(myDevice);
 		myDevice.setReceiver(outputDevice.getReceiver());
 
