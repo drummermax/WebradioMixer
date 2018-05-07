@@ -1,5 +1,4 @@
 import javax.sound.midi.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,7 +9,7 @@ public class MidiHandler {
 	public static void main(String[] args) throws MidiUnavailableException {
 		MyMidiDevice myDevice = new MyMidiDevice();
 
-		MidiDevice inputDevice = null, outputDevice = null;
+		MidiDevice inputDevice, outputDevice;
 		MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
 
 		for (int i = 0; i < infos.length; i++) {
@@ -28,23 +27,8 @@ public class MidiHandler {
 		int index2 = in.nextInt();
 		in.close();
 
-		try {
-			outputDevice = MidiSystem.getMidiDevice(MidiSystem.getMidiDeviceInfo()[index2]);
-
-			List<Transmitter> transmitters = outputDevice.getTransmitters();
-
-			for (int j = 0; j < transmitters.size(); j++) {
-				transmitters.get(j).setReceiver(new MidiInputReceiver(outputDevice.getDeviceInfo().toString()));
-			}
-
-			Transmitter trans = outputDevice.getTransmitter();
-			trans.setReceiver(new MidiInputReceiver(outputDevice.getDeviceInfo().toString()));
-
-			outputDevice.open();
-
-		} catch (MidiUnavailableException e) {
-			System.out.println("FAILED");
-		}
+		outputDevice = MidiSystem.getMidiDevice(infos[index2]);
+		outputDevice.open();
 
 		System.out.println("input max rec " + inputDevice.getMaxReceivers());
 		System.out.println("input max tran " + inputDevice.getMaxTransmitters());
@@ -56,7 +40,6 @@ public class MidiHandler {
 		System.out.println("output max tran " + outputDevice.getMaxTransmitters());
 		System.out.println("output get rec " + outputDevice.getReceivers());
 		System.out.println("output get trans " + outputDevice.getTransmitters());
-		System.out.println("output print " + outputDevice.getReceiver().toString());
 		
 		
 		

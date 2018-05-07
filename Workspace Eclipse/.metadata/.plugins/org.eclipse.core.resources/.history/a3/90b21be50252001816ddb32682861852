@@ -10,7 +10,7 @@ public class MidiHandler {
 	public static void main(String[] args) throws MidiUnavailableException {
 		MyMidiDevice myDevice = new MyMidiDevice();
 
-		MidiDevice inputDevice = null, outputDevice = null;
+		MidiDevice inputDevice, outputDevice;
 		MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
 
 		for (int i = 0; i < infos.length; i++) {
