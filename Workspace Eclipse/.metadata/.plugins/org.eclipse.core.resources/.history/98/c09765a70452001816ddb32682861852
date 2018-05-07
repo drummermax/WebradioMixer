@@ -17,13 +17,12 @@ public class MidiHandler {
 			System.out.println(i + ": " + infos[i]);
 		}
 
-		// System.out.println("Bitte den Index des Midi-Gerätes eingeben
-		// input:");
+//		System.out.println("Bitte den Index des Midi-Gerätes eingeben input:");
 		Scanner in = new Scanner(System.in);
-		// int index = in.nextInt();
+//		int index = in.nextInt();
 
-		// inputDevice = MidiSystem.getMidiDevice(infos[index]);
-		// inputDevice.open();
+//		inputDevice = MidiSystem.getMidiDevice(infos[index]);
+//		inputDevice.open();
 
 		System.out.println("Bitte den Index des Midi-Gerätes eingeben output:");
 		int index2 = in.nextInt();
@@ -33,7 +32,7 @@ public class MidiHandler {
 			outputDevice = MidiSystem.getMidiDevice(MidiSystem.getMidiDeviceInfo()[index2]);
 
 			System.out.println("1");
-
+			
 			List<Transmitter> transmitters = outputDevice.getTransmitters();
 
 			System.out.println("2");
@@ -42,10 +41,10 @@ public class MidiHandler {
 			}
 			System.out.println("3");
 
-			if (transmitters.size() != 0) {
-				Transmitter trans = outputDevice.getTransmitter();
-				System.out.println("4");
-				trans.setReceiver(new MidiInputReceiver(outputDevice.getDeviceInfo().toString()));
+			if (transmitters.size() != 0){
+			Transmitter trans = outputDevice.getTransmitter();
+			System.out.println("4");
+			trans.setReceiver(new MidiInputReceiver(outputDevice.getDeviceInfo().toString()));
 
 			}
 			System.out.println("5");
@@ -59,47 +58,49 @@ public class MidiHandler {
 			System.out.println("FAILED open");
 		}
 
-		// System.out.println("input max rec " + inputDevice.getMaxReceivers());
-		// System.out.println("input max tran " +
-		// inputDevice.getMaxTransmitters());
-		// System.out.println("input get rec " + inputDevice.getReceivers());
-		// System.out.println("input get trans " +
-		// inputDevice.getTransmitters());
-		// System.out.println("input print " +
-		// inputDevice.getReceiver().toString());
-		//
-		// System.out.println("output max rec " +
-		// outputDevice.getMaxReceivers());
-		// System.out.println("output max tran " +
-		// outputDevice.getMaxTransmitters());
-		// System.out.println("output get rec " + outputDevice.getReceivers());
-		// System.out.println("output get trans " +
-		// outputDevice.getTransmitters());
-		// System.out.println("output print " +
-		// outputDevice.getReceiver().toString());
-
-		// inputDevice.getTransmitter().setReceiver(myDevice);
-		// myDevice.setReceiver(outputDevice.getReceiver());
+//		System.out.println("input max rec " + inputDevice.getMaxReceivers());
+//		System.out.println("input max tran " + inputDevice.getMaxTransmitters());
+//		System.out.println("input get rec " + inputDevice.getReceivers());
+//		System.out.println("input get trans " + inputDevice.getTransmitters());
+//		System.out.println("input print " + inputDevice.getReceiver().toString());
+//		
+//		System.out.println("output max rec " + outputDevice.getMaxReceivers());
+//		System.out.println("output max tran " + outputDevice.getMaxTransmitters());
+//		System.out.println("output get rec " + outputDevice.getReceivers());
+//		System.out.println("output get trans " + outputDevice.getTransmitters());
+//		System.out.println("output print " + outputDevice.getReceiver().toString());
+		
+		
+		
+		
+//		inputDevice.getTransmitter().setReceiver(myDevice);
+//		myDevice.setReceiver(outputDevice.getReceiver());
 
 		ShortMessage myMsg = new ShortMessage();
 
+		
+		
+		
 		try {
 			myMsg.setMessage(ShortMessage.CONTROL_CHANGE, 0x00, 0, 127);
 		} catch (InvalidMidiDataException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
 
-		// myDevice.getReceiver().send(myMsg, -1);
+//		myDevice.getReceiver().send(myMsg, -1);
 		outputDevice.getReceiver().send(myMsg, -1);
-
-		// try {
-		// Thread.sleep(100000);
-		// } catch (InterruptedException e1) {
-		// // TODO Auto-generated catch block
-		// e1.printStackTrace();
-		// }
-
+		
+		
+//		try {
+//			Thread.sleep(100000);
+//		} catch (InterruptedException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+		
+		
 		while (true) {
 			try {
 				myMsg.setMessage(ShortMessage.NOTE_ON, 0x01, 41, 15); // 144/145
