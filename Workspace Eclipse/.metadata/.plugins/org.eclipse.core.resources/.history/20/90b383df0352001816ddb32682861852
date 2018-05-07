@@ -31,21 +31,15 @@ public class MidiHandler {
 		try {
 			outputDevice = MidiSystem.getMidiDevice(MidiSystem.getMidiDeviceInfo()[index2]);
 
-			System.out.println("1");
-			
 			List<Transmitter> transmitters = outputDevice.getTransmitters();
 
-			System.out.println("2");
 			for (int j = 0; j < transmitters.size(); j++) {
 				transmitters.get(j).setReceiver(new MidiInputReceiver(outputDevice.getDeviceInfo().toString()));
 			}
-			System.out.println("3");
 
 			Transmitter trans = outputDevice.getTransmitter();
-			System.out.println("4");
 			trans.setReceiver(new MidiInputReceiver(outputDevice.getDeviceInfo().toString()));
 
-			System.out.println("5");
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED pre");
 		}
