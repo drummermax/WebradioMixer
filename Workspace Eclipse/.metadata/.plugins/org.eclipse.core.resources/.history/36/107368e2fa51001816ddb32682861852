@@ -192,7 +192,6 @@ public class Mairlist {
 	}
 
 	public void sendCommandTCP(CommandTCP commandTCP) {
-		System.out.println(commandTCP.getText());
 		sendText(commandTCP.getText());
 	}
 
