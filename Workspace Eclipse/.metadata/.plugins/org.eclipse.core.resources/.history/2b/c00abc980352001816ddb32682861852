@@ -40,14 +40,10 @@ public class MidiHandler {
 			Transmitter trans = outputDevice.getTransmitter();
 			trans.setReceiver(new MidiInputReceiver(outputDevice.getDeviceInfo().toString()));
 
-		} catch (MidiUnavailableException e) {
-			System.out.println("FAILED pre");
-		}
-		try {
 			outputDevice.open();
 
 		} catch (MidiUnavailableException e) {
-			System.out.println("FAILED open");
+			System.out.println("FAILED");
 		}
 
 //		System.out.println("input max rec " + inputDevice.getMaxReceivers());
