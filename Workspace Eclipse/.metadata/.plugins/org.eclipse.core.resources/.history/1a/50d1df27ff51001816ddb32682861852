@@ -46,7 +46,6 @@ public class MidiHandler {
 
 		myDevice.getReceiver().send(myMsg, -1);
 		outputDevice.getReceiver().send(myMsg, -1);
-		inputDevice.getReceiver().send(myMsg, -1);
 		
 		
 		try {
