@@ -113,7 +113,7 @@ public class Mairlist {
 	}
 
 	public enum MairlistPFLSource {
-		PLAYER1(0), PLAYER2(1), CARTWALL(2), EXTRA(3), UNKNOWN(4);
+		PLAYER1(0), PLAYER2(1), CARTWALL(2), EXTRA(3);
 
 		private final int state;
 		private boolean PFLActive = false;
@@ -275,10 +275,8 @@ public class Mairlist {
 				} else if (data.contains("PFL")) {
 					if (data.split(" ")[1].equals("OFF")) {
 						mairlistPFLSource.setPFLActive(false);
-						mairlistPFLSource = MairlistPFLSource.UNKNOWN;
 					} else if (data.split(" ")[1].equals("ON")) {
 						mairlistPFLSource.setPFLActive(true);
-						mairlistPFLSource = MairlistPFLSource.UNKNOWN;
 					}
 				}
 

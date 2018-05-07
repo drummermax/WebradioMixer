@@ -275,10 +275,8 @@ public class Mairlist {
 				} else if (data.contains("PFL")) {
 					if (data.split(" ")[1].equals("OFF")) {
 						mairlistPFLSource.setPFLActive(false);
-						mairlistPFLSource = MairlistPFLSource.UNKNOWN;
 					} else if (data.split(" ")[1].equals("ON")) {
 						mairlistPFLSource.setPFLActive(true);
-						mairlistPFLSource = MairlistPFLSource.UNKNOWN;
 					}
 				}
 

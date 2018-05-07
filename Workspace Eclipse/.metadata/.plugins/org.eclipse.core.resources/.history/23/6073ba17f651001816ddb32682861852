@@ -501,7 +501,7 @@ public class MidiController {
 				} else {
 					MIDIKey.BUTTONUP3.setLedActivated(false, 0); // aus
 					if (!MairlistPFLSource.PLAYER2.isPFLActive() && !MairlistPFLSource.CARTWALL.isPFLActive()
-							&& !MairlistPFLSource.EXTRA.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
+							&& !MairlistPFLSource.EXTRA.isPFLActive())
 						MixingDesk.getInstance().setPflActive(false);
 				}
 
@@ -511,7 +511,7 @@ public class MidiController {
 				} else {
 					MIDIKey.BUTTONUP4.setLedActivated(false, 0); // aus
 					if (!MairlistPFLSource.PLAYER1.isPFLActive() && !MairlistPFLSource.CARTWALL.isPFLActive()
-							&& !MairlistPFLSource.EXTRA.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
+							&& !MairlistPFLSource.EXTRA.isPFLActive())
 						MixingDesk.getInstance().setPflActive(false);
 				}
 
@@ -521,7 +521,7 @@ public class MidiController {
 				} else {
 					MIDIKey.BUTTONUP5.setLedActivated(false, 0); // aus
 					if (!MairlistPFLSource.PLAYER1.isPFLActive() && !MairlistPFLSource.PLAYER2.isPFLActive()
-							&& !MairlistPFLSource.EXTRA.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
+							&& !MairlistPFLSource.EXTRA.isPFLActive())
 						MixingDesk.getInstance().setPflActive(false);
 				}
 
@@ -531,7 +531,7 @@ public class MidiController {
 				} else {
 					MIDIKey.BUTTONSOLO.setLedActivated(false, 0); // aus
 					if (!MairlistPFLSource.PLAYER1.isPFLActive() && !MairlistPFLSource.PLAYER2.isPFLActive()
-							&& !MairlistPFLSource.CARTWALL.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
+							&& !MairlistPFLSource.CARTWALL.isPFLActive())
 						MixingDesk.getInstance().setPflActive(false);
 				}
 
