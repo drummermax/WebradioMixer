@@ -78,6 +78,7 @@ public class MidiHandler {
 				e.printStackTrace();
 			}
 
+			myDevice.getReceiver().send(myMsg, -1);
 			outputDevice.getReceiver().send(myMsg, -1);
 
 			try {
@@ -93,6 +94,7 @@ public class MidiHandler {
 				e.printStackTrace();
 			}
 
+			myDevice.getReceiver().send(myMsg, -1);
 			outputDevice.getReceiver().send(myMsg, -1);
 
 			try {
