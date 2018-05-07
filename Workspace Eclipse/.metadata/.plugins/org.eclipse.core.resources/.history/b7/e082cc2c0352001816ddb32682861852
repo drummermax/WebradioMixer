@@ -17,7 +17,7 @@ public class MidiHandler {
 			System.out.println(i + ": " + infos[i]);
 		}
 
-//		System.out.println("Bitte den Index des Midi-Gerätes eingeben input:");
+		System.out.println("Bitte den Index des Midi-Gerätes eingeben input:");
 		Scanner in = new Scanner(System.in);
 //		int index = in.nextInt();
 
