@@ -24,7 +24,7 @@ public class Mairlist {
 
 	private static MairlistPlayerState mairlistPlayerStatePlayer1 = MairlistPlayerState.EMPTY,
 			mairlistPlayerStatePlayer2 = MairlistPlayerState.EMPTY;
-	private static MairlistPFLSource mairlistPFLSource = MairlistPFLSource.UNKNOWN;
+	private static MairlistPFLSource mairlistPFLSource = MairlistPFLSource.PLAYER1;
 
 	public enum CommandShortcut {
 		PLAYER1_STARTSTOP(1), PLAYER1_PFL_ONOFF(3), PLAYER2_STARTSTOP(2), PLAYER2_PFL_ONOFF(4), CARTWALL_MODEPFL(
