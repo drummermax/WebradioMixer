@@ -494,12 +494,6 @@ public class MidiController {
 								.setTimestampEOF2(MidiController.getInstance().getCurrentTimestamp());
 					}
 				}
-				
-				if (MixingDesk.getInstance().isCartwallActive()) {
-					MIDIKey.BUTTONDOWN5.setLedActivated(true, 0); //gelb
-				} else {
-					MIDIKey.BUTTONDOWN5.setLedActivated(true, 0); //grün
-				}
 
 				if (MairlistPFLSource.PLAYER1.isPFLActive()) {
 					MIDIKey.BUTTONUP3.setLedActivated(true, 0); // rot

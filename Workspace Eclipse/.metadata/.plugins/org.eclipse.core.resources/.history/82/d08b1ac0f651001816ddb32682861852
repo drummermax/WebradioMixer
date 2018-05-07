@@ -268,7 +268,7 @@ public class MidiController {
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN5)) {
 				if (velocity == 127) {
-					MixingDesk.getInstance().toggleCartwallActive();
+
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN6)) {
 				if (velocity == 127) {
@@ -493,12 +493,6 @@ public class MidiController {
 						MidiController.getInstance()
 								.setTimestampEOF2(MidiController.getInstance().getCurrentTimestamp());
 					}
-				}
-				
-				if (MixingDesk.getInstance().isCartwallActive()) {
-					MIDIKey.BUTTONDOWN5.setLedActivated(true, 0); //gelb
-				} else {
-					MIDIKey.BUTTONDOWN5.setLedActivated(true, 0); //grün
 				}
 
 				if (MairlistPFLSource.PLAYER1.isPFLActive()) {

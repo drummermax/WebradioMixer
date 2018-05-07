@@ -420,8 +420,4 @@ public class MixingDesk {
 	public boolean isPhonesStdWiedergabe() {
 		return phonesStdWiedergabe;
 	}
-
-	public boolean isCartwallActive() {
-		return cartwallActive;
-	}
 }
