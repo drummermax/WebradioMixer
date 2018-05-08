@@ -1,5 +1,6 @@
 import javax.sound.midi.*;
 
+import midi.MidiController.MIDIKey;
 
 import java.util.List;
 import java.util.Scanner;

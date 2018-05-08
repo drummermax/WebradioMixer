@@ -1,6 +1,5 @@
 import javax.sound.midi.*;
 
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -227,7 +226,7 @@ public class MidiHandler {
 		// }
 
 		while (true) {
-/*
+
 			MIDIKey.BUTTONUP1.setLedActivated(true, MIDIKey.LEDColor.RED);
 			MIDIKey.BUTTONUP2.setLedActivated(true, MIDIKey.LEDColor.RED);
 			MIDIKey.BUTTONUP3.setLedActivated(true, MIDIKey.LEDColor.RED);
@@ -245,24 +244,7 @@ public class MidiHandler {
 			MIDIKey.BUTTONDOWN6.setLedActivated(true, MIDIKey.LEDColor.GREEN);
 			MIDIKey.BUTTONDOWN7.setLedActivated(true, MIDIKey.LEDColor.GREEN);
 			MIDIKey.BUTTONDOWN8.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-*/
-			MIDIKey.BUTTONUP1.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP2.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP3.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP4.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP5.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP6.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP7.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP8.setLedActivated(false, MIDIKey.LEDColor.OFF);
 
-			MIDIKey.BUTTONDOWN1.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN2.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN3.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN4.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN5.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN6.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN7.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN8.setLedActivated(false, MIDIKey.LEDColor.OFF);
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
