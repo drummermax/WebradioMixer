@@ -101,8 +101,6 @@ public class MidiHandler {
 
 		while (true) {
 			for (int i = 0; i < 16; i++) {
-				System.out.println("channel " + i);
-				
 				try {
 					myMsg.setMessage(ShortMessage.NOTE_OFF, i, 41, 15); // 144/145
 				} catch (InvalidMidiDataException e) {
