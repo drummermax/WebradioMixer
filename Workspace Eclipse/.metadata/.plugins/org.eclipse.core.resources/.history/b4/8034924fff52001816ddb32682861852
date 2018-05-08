@@ -210,10 +210,10 @@ public class MidiController {
 			}
 
 			if (transmitters.size() != 0) {
-				Transmitter trans = midiDeviceOutput.getTransmitter();
-				trans.setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
+			Transmitter trans = midiDeviceOutput.getTransmitter();
+			trans.setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
 			}
-
+			
 			midiDeviceOutput.open();
 
 		} catch (MidiUnavailableException e) {

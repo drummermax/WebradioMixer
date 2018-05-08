@@ -209,10 +209,8 @@ public class MidiController {
 				transmitters.get(j).setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
 			}
 
-			if (transmitters.size() != 0) {
-				Transmitter trans = midiDeviceOutput.getTransmitter();
-				trans.setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
-			}
+			Transmitter trans = midiDeviceOutput.getTransmitter();
+			trans.setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
 
 			midiDeviceOutput.open();
 
