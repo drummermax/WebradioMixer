@@ -83,17 +83,15 @@ public class MidiHandler {
 
 		ShortMessage myMsg = new ShortMessage();
 
-		/*
 		try {
 			myMsg.setMessage(ShortMessage.CONTROL_CHANGE, 0x00, 0, 127);
 		} catch (InvalidMidiDataException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		*/
 
 		// myDevice.getReceiver().send(myMsg, -1);
-		//outputDevice.getReceiver().send(myMsg, -1);
+		outputDevice.getReceiver().send(myMsg, -1);
 
 		// try {
 		// Thread.sleep(100000);
@@ -119,6 +117,35 @@ public class MidiHandler {
 
 			try {
 				myMsg.setMessage(ShortMessage.NOTE_ON, 0x01, 41, 60); // 0x98
+																		// //128/129
+			} catch (InvalidMidiDataException e) {
+				e.printStackTrace();
+			}
+
+			outputDevice.getReceiver().send(myMsg, -1);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				myMsg.setMessage(ShortMessage.NOTE_ON, 0x00, 41, 15); // 144/145
+			} catch (InvalidMidiDataException e) {
+				e.printStackTrace();
+			}
+
+			outputDevice.getReceiver().send(myMsg, -1);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				myMsg.setMessage(ShortMessage.NOTE_ON, 0x00, 41, 60); // 0x98
 																		// //128/129
 			} catch (InvalidMidiDataException e) {
 				e.printStackTrace();
