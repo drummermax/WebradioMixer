@@ -1,13 +1,16 @@
 import javax.sound.midi.*;
 
+
 import java.util.List;
 import java.util.Scanner;
 
 public class MidiHandler {
+	
 
 	public MidiDevice inputDevice = null;
 	public static MidiDevice outputDevice = null;
-
+	
+	
 	public static class MIDIKey {
 		public static MIDIKey FADER1 = new MIDIKey(-72, 77), BUTTONUP1 = new MIDIKey(-104, 41),
 				BUTTONDOWN1 = new MIDIKey(-104, 73), FADER2 = new MIDIKey(-72, 78), BUTTONUP2 = new MIDIKey(-104, 42),
@@ -130,6 +133,7 @@ public class MidiHandler {
 			}
 		}
 	}
+	
 
 	public static void main(String[] args) throws MidiUnavailableException {
 		MyMidiDevice myDevice = new MyMidiDevice();
@@ -247,7 +251,7 @@ public class MidiHandler {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
+			
 			MIDIKey.BUTTONUP1.setLedActivated(false, MIDIKey.LEDColor.OFF);
 			MIDIKey.BUTTONUP2.setLedActivated(false, MIDIKey.LEDColor.OFF);
 			MIDIKey.BUTTONUP3.setLedActivated(false, MIDIKey.LEDColor.OFF);
