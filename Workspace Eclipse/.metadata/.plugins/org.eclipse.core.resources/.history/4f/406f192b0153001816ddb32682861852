@@ -1,6 +1,7 @@
 package midi;
 
 import java.util.List;
+import java.util.Scanner;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiDevice;
@@ -11,6 +12,7 @@ import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Transmitter;
 import javax.swing.JOptionPane;
+
 import audio.MixingDesk;
 import main.Mairlist;
 import main.Mairlist.MairlistPFLSource;
@@ -535,25 +537,9 @@ public class MidiController {
 
 		@Override
 		public void run() {
-			MIDIKey.BUTTONUP1.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP2.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP3.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP4.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP5.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP6.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP7.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONUP8.setLedActivated(false, MIDIKey.LEDColor.OFF);
-
-			MIDIKey.BUTTONDOWN1.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN2.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN3.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN4.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN5.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN6.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN7.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			MIDIKey.BUTTONDOWN8.setLedActivated(false, MIDIKey.LEDColor.OFF);
-			
 			while (true) {
+				System.out.println("LED UPDATE");
+				
 				if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.EMPTY) {
 					MIDIKey.BUTTONDOWN3.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.LOADED) {
