@@ -44,8 +44,7 @@ public class MixingDesk {
 			instance.setSpeakingAktive(2, false);
 			instance.setPflActive(false);
 			instance.setCartwallActive(false);
-			instance.setPhonesStdWiedergabe(false);
-			instance.setMonitorMuted(false);
+			instance.activatePhonesNormal();
 		}
 		return instance;
 	}
