@@ -100,36 +100,38 @@ public class MidiHandler {
 		// }
 
 		while (true) {
+			for (int i = 7; i < 12; i++) {
+				System.out.println("channel " + i);
+				
+				try {
+					myMsg.setMessage(ShortMessage.NOTE_ON, i, 41, 15); // 144/145
+				} catch (InvalidMidiDataException e) {
+					e.printStackTrace();
+				}
 
-			try {
-				myMsg.setMessage(ShortMessage.NOTE_ON, 8, 41, 15); // 144/145
-			} catch (InvalidMidiDataException e) {
-				e.printStackTrace();
+				outputDevice.getReceiver().send(myMsg, -1);
+
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				try {
+					myMsg.setMessage(ShortMessage.NOTE_ON, i, 41, 60); // 0x98
+																			// //128/129
+				} catch (InvalidMidiDataException e) {
+					e.printStackTrace();
+				}
+
+				outputDevice.getReceiver().send(myMsg, -1);
+
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
-
-			outputDevice.getReceiver().send(myMsg, -1);
-
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-			try {
-				myMsg.setMessage(ShortMessage.NOTE_ON, 8, 41, 60); // 0x98
-																	// //128/129
-			} catch (InvalidMidiDataException e) {
-				e.printStackTrace();
-			}
-
-			outputDevice.getReceiver().send(myMsg, -1);
-
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
 		}
 
 		/*
