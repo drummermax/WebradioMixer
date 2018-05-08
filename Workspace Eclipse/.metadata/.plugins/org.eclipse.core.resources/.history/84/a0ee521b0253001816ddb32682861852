@@ -23,7 +23,7 @@ public class MidiHandler {
 				BUTTONSELECTRIGHT = new MIDIKey(-72, 107);
 
 		private int channel = 0, note_cc = 0;
-		private LEDColor ledColor = LEDColor.OFF;
+		private boolean ledActivated = false;
 
 		public enum LEDColor {
 			OFF(0), RED(1), YELLOW(2), GREEN(3);
@@ -70,10 +70,10 @@ public class MidiHandler {
 			}
 		}
 
-		public void setLEDColor(LEDColor ledColor) {
+		public void setLedActivated(LEDColor ledColor) {
 			ShortMessage myMsg = new ShortMessage();
 
-			if (ledColor != this.ledColor) {
+			if (ledActivated && !this.ledActivated) {
 				if (ledColor == LEDColor.RED) {
 					try {
 						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 15);
@@ -105,9 +105,19 @@ public class MidiHandler {
 				} catch (MidiUnavailableException e) {
 					e.printStackTrace();
 				}
+			} else if (!ledActivated && this.ledActivated) {
+				try {
+					myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12);
+					outputDevice.getReceiver().send(myMsg, -1);
+				} catch (InvalidMidiDataException e) {
+					e.printStackTrace();
+				} catch (MidiUnavailableException e) {
+					e.printStackTrace();
+				}
 			}
-			
-			this.ledColor = ledColor;
+
+		}
+
 		}
 
 		public boolean equalsMIDIKey(MIDIKey midikey) {

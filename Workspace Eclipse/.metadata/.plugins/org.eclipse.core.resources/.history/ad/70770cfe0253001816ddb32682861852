@@ -579,7 +579,7 @@ public class MidiController {
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.EOF) {
 					if (MidiController.getInstance().getCurrentTimestamp()
 							- MidiController.getInstance().getTimestampEOF2() > 500) {
-						if (MIDIKey.BUTTONDOWN4.getLedColor() != MIDIKey.LEDColor.OFF) {
+						if (MIDIKey.BUTTONDOWN4.isLedActivated()) {
 							MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 						} else {
 							MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.RED); // rot

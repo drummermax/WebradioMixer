@@ -70,7 +70,7 @@ public class MidiHandler {
 			}
 		}
 
-		public void setLEDColor(LEDColor ledColor) {
+		public void setLedActivated(LEDColor ledColor) {
 			ShortMessage myMsg = new ShortMessage();
 
 			if (ledColor != this.ledColor) {
