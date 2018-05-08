@@ -21,8 +21,6 @@ public class Mairlist {
 	private PrintWriter out = null;
 
 	private ServerSocket mairlistListenerServer = null;
-	
-	private boolean firstMessageOffAirResponse = false;
 
 	private static MairlistPlayerState mairlistPlayerStatePlayer1 = MairlistPlayerState.EMPTY,
 			mairlistPlayerStatePlayer2 = MairlistPlayerState.EMPTY;
@@ -242,10 +240,7 @@ public class Mairlist {
 
 				String data = reader.readLine();
 				
-				if (!firstMessageOffAirResponse) {
-					sendCommandTCP(CommandTCP.GUI_OFFAIR);
-					firstMessageOffAirResponse = true;
-				}
+				System.out.println("MAIRLIST RETURN: " + data);
 
 				if (data.contains("LOADED")) {
 					if (data.split(" ")[1].equals("0")) {

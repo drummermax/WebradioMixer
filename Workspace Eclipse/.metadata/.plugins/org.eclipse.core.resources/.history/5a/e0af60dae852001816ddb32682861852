@@ -225,6 +225,16 @@ public class Mairlist {
 	public void setMairlistPFLSource(MairlistPFLSource mairlistPFLSource) {
 		Mairlist.mairlistPFLSource = mairlistPFLSource;
 	}
+	
+	public boolean isFirstMessageOffAirResponse() {
+		return firstMessageOffAirResponse;
+	}
+
+	public void setFirstMessageOffAirResponse(boolean firstMessageOffAirResponse) {
+		this.firstMessageOffAirResponse = firstMessageOffAirResponse;
+	}
+
+
 
 	class mairlistListener extends Thread {
 
@@ -242,10 +252,7 @@ public class Mairlist {
 
 				String data = reader.readLine();
 				
-				if (!firstMessageOffAirResponse) {
-					sendCommandTCP(CommandTCP.GUI_OFFAIR);
-					firstMessageOffAirResponse = true;
-				}
+				System.out.println("MAIRLIST RETURN: " + data);
 
 				if (data.contains("LOADED")) {
 					if (data.split(" ")[1].equals("0")) {
