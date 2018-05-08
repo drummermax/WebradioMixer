@@ -101,25 +101,25 @@ public class MidiController {
 			if (ledActivated && !this.ledActivated) {
 				if (ledColor == LEDColor.RED) {
 					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 15);
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 15); // 144/145
 					} catch (InvalidMidiDataException e) {
 						e.printStackTrace();
 					}
 				} else if (ledColor == LEDColor.YELLOW) {
 					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 62);
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 62); // 144/145
 					} catch (InvalidMidiDataException e) {
 						e.printStackTrace();
 					}
 				} else if (ledColor == LEDColor.GREEN) {
 					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 60);
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 60); // 144/145
 					} catch (InvalidMidiDataException e) {
 						e.printStackTrace();
 					}
 				} else if (ledColor == LEDColor.OFF) {
 					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12);
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12); // 144/145
 					} catch (InvalidMidiDataException e) {
 						e.printStackTrace();
 					}
@@ -132,11 +132,9 @@ public class MidiController {
 				}
 			} else if (!ledActivated && this.ledActivated) {
 				try {
-					myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12);
+					myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12); // 144/145
 					midiDeviceOutput.getReceiver().send(myMsg, -1);
 				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				} catch (MidiUnavailableException e) {
 					e.printStackTrace();
 				}
 			}

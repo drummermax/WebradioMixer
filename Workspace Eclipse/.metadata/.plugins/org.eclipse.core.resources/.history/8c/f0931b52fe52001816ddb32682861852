@@ -49,12 +49,12 @@ public class MidiController {
 
 		private int channel = 0, note_cc = 0;
 		private boolean ledActivated = false;
-
+		
 		public enum LEDColor {
 			OFF(0), RED(1), YELLOW(2), GREEN(3);
-
+			
 			private final int color;
-
+			
 			LEDColor(int color) {
 				this.color = color;
 			}
@@ -86,9 +86,8 @@ public class MidiController {
 		}
 
 		public boolean isFader() {
-			if (this.equalsMIDIKey(FADER1) || this.equalsMIDIKey(FADER2) || this.equalsMIDIKey(FADER3)
-					|| this.equalsMIDIKey(FADER4) || this.equalsMIDIKey(FADER5) || this.equalsMIDIKey(FADER6)
-					|| this.equalsMIDIKey(FADER7) || this.equalsMIDIKey(FADER8)) {
+			if (this.equalsMIDIKey(FADER1) || this.equalsMIDIKey(FADER2) || this.equalsMIDIKey(FADER3) || this.equalsMIDIKey(FADER4)
+					|| this.equalsMIDIKey(FADER5) || this.equalsMIDIKey(FADER6) || this.equalsMIDIKey(FADER7) || this.equalsMIDIKey(FADER8)) {
 				return true;
 			} else {
 				return false;
@@ -97,56 +96,50 @@ public class MidiController {
 
 		public void setLedActivated(boolean ledActivated, LEDColor ledColor) {
 			ShortMessage myMsg = new ShortMessage();
-
+			
 			if (ledActivated && !this.ledActivated) {
 				if (ledColor == LEDColor.RED) {
 					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 15);
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 15); // 144/145
 					} catch (InvalidMidiDataException e) {
 						e.printStackTrace();
 					}
 				} else if (ledColor == LEDColor.YELLOW) {
 					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 62);
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 62); // 144/145
 					} catch (InvalidMidiDataException e) {
 						e.printStackTrace();
 					}
 				} else if (ledColor == LEDColor.GREEN) {
 					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 60);
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 60); // 144/145
 					} catch (InvalidMidiDataException e) {
 						e.printStackTrace();
 					}
 				} else if (ledColor == LEDColor.OFF) {
 					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12);
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12); // 144/145
 					} catch (InvalidMidiDataException e) {
 						e.printStackTrace();
 					}
 				}
-
+				
 				try {
 					midiDeviceOutput.getReceiver().send(myMsg, -1);
 				} catch (MidiUnavailableException e) {
 					e.printStackTrace();
 				}
 			} else if (!ledActivated && this.ledActivated) {
-				try {
-					myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12);
-					midiDeviceOutput.getReceiver().send(myMsg, -1);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				} catch (MidiUnavailableException e) {
-					e.printStackTrace();
-				}
+				// led ausstellen
 			}
-
+			
+			
 		}
 
 		public boolean isLedActivated() {
 			return ledActivated;
 		}
-
+		
 		public boolean equalsMIDIKey(MIDIKey midikey) {
 			if (midikey.getChannel() == this.getChannel() && midikey.getNote_cc() == this.getNote_cc()) {
 				return true;
@@ -168,7 +161,7 @@ public class MidiController {
 		}
 
 		// INPUT
-
+		
 		String midiDeviceChoosenString = (String) JOptionPane.showInputDialog(null, "Select the Midi Input Device",
 				"Midi Device", JOptionPane.QUESTION_MESSAGE, null, midiDevicesString, 0);
 
@@ -191,9 +184,9 @@ public class MidiController {
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED");
 		}
-
-		// OUTPUT
-
+		
+		//OUTPUT
+		
 		midiDeviceChoosenString = (String) JOptionPane.showInputDialog(null, "Select the Midi Output Device",
 				"Midi Device", JOptionPane.QUESTION_MESSAGE, null, midiDevicesString, 0);
 
@@ -216,7 +209,7 @@ public class MidiController {
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED");
 		}
-
+		
 		Thread ledUpdaterThread = new Thread(new ledUpdater());
 		ledUpdaterThread.start();
 	}
@@ -325,7 +318,7 @@ public class MidiController {
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN1)) {
 				if (velocity == 127) {
 					MixingDesk.getInstance().toggleSpeakingActive(1);
-
+					
 					if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_ONAIR);
 					} else {
@@ -335,7 +328,7 @@ public class MidiController {
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN2)) {
 				if (velocity == 127) {
 					MixingDesk.getInstance().toggleSpeakingActive(2);
-
+					
 					if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_ONAIR);
 					} else {
@@ -578,11 +571,11 @@ public class MidiController {
 								.setTimestampEOF2(MidiController.getInstance().getCurrentTimestamp());
 					}
 				}
-
+				
 				if (MixingDesk.getInstance().isCartwallActive()) {
-					MIDIKey.BUTTONDOWN5.setLedActivated(true, MIDIKey.LEDColor.YELLOW); // gelb
+					MIDIKey.BUTTONDOWN5.setLedActivated(true, MIDIKey.LEDColor.YELLOW); //gelb
 				} else {
-					MIDIKey.BUTTONDOWN5.setLedActivated(true, MIDIKey.LEDColor.GREEN); // grün
+					MIDIKey.BUTTONDOWN5.setLedActivated(true, MIDIKey.LEDColor.GREEN); //grün
 				}
 
 				if (MairlistPFLSource.PLAYER1.isPFLActive()) {
@@ -650,7 +643,7 @@ public class MidiController {
 				} else {
 					MIDIKey.BUTTONMUTE.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
 				}
-
+				
 				if (MixingDesk.getInstance().isPhonesStdWiedergabe()) {
 					MIDIKey.BUTTONDOWN7.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
 					MIDIKey.BUTTONUP7.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
