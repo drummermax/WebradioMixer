@@ -116,7 +116,7 @@ public class MidiHandler {
 			}
 
 			try {
-				myMsg.setMessage(ShortMessage.NOTE_ON, 8, 41, 12); // 0x98
+				myMsg.setMessage(ShortMessage.NOTE_ON, 8, 41, 60); // 0x98
 																	// //128/129
 			} catch (InvalidMidiDataException e) {
 				e.printStackTrace();
