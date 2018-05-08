@@ -227,23 +227,28 @@ public class MidiHandler {
 
 		while (true) {
 
-			MIDIKey.BUTTONUP1.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP2.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP3.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP4.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP5.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP6.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP7.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP8.setLedActivated(true, MIDIKey.LEDColor.RED);
+			try {
+				myMsg.setMessage(ShortMessage.NOTE_ON, 8, 41, 15); // 144/145
+			} catch (InvalidMidiDataException e) {
+				e.printStackTrace();
+			}
 
-			MIDIKey.BUTTONDOWN1.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN2.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN3.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN4.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN5.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN6.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN7.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN8.setLedActivated(true, MIDIKey.LEDColor.GREEN);
+			outputDevice.getReceiver().send(myMsg, -1);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				myMsg.setMessage(ShortMessage.NOTE_ON, 8, 41, 12); // 0x98
+																	// //128/129
+			} catch (InvalidMidiDataException e) {
+				e.printStackTrace();
+			}
+
+			outputDevice.getReceiver().send(myMsg, -1);
 
 			try {
 				Thread.sleep(500);

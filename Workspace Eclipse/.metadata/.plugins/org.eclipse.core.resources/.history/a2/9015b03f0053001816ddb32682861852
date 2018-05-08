@@ -236,15 +236,6 @@ public class MidiHandler {
 			MIDIKey.BUTTONUP7.setLedActivated(true, MIDIKey.LEDColor.RED);
 			MIDIKey.BUTTONUP8.setLedActivated(true, MIDIKey.LEDColor.RED);
 
-			MIDIKey.BUTTONDOWN1.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN2.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN3.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN4.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN5.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN6.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN7.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN8.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {

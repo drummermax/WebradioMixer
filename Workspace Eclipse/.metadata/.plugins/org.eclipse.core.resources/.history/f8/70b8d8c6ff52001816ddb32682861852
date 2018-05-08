@@ -1,142 +1,16 @@
 import javax.sound.midi.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.*;
 
 public class MidiHandler {
-	
-
-	public MidiDevice inputDevice = null;
-	public static MidiDevice outputDevice = null;
-	
-	
-	public static class MIDIKey {
-		public static MIDIKey FADER1 = new MIDIKey(-72, 77), BUTTONUP1 = new MIDIKey(-104, 41),
-				BUTTONDOWN1 = new MIDIKey(-104, 73), FADER2 = new MIDIKey(-72, 78), BUTTONUP2 = new MIDIKey(-104, 42),
-				BUTTONDOWN2 = new MIDIKey(-104, 74), FADER3 = new MIDIKey(-72, 79), BUTTONUP3 = new MIDIKey(-104, 43),
-				BUTTONDOWN3 = new MIDIKey(-104, 75), FADER4 = new MIDIKey(-72, 80), BUTTONUP4 = new MIDIKey(-104, 44),
-				BUTTONDOWN4 = new MIDIKey(-104, 76), FADER5 = new MIDIKey(-72, 81), BUTTONUP5 = new MIDIKey(-104, 57),
-				BUTTONDOWN5 = new MIDIKey(-104, 89), FADER6 = new MIDIKey(-72, 82), BUTTONUP6 = new MIDIKey(-104, 58),
-				BUTTONDOWN6 = new MIDIKey(-104, 90), FADER7 = new MIDIKey(-72, 83), BUTTONUP7 = new MIDIKey(-104, 59),
-				BUTTONDOWN7 = new MIDIKey(-104, 91), FADER8 = new MIDIKey(-72, 84), BUTTONUP8 = new MIDIKey(-104, 60),
-				BUTTONDOWN8 = new MIDIKey(-104, 92), BUTTONMUTE = new MIDIKey(-104, 106),
-				BUTTONSOLO = new MIDIKey(-104, 107), BUTTONSELECTUP = new MIDIKey(-72, 104),
-				BUTTONSELECTDOWN = new MIDIKey(-72, 105), BUTTONSELECTLEFT = new MIDIKey(-72, 106),
-				BUTTONSELECTRIGHT = new MIDIKey(-72, 107);
-
-		private int channel = 0, note_cc = 0;
-		private boolean ledActivated = false;
-
-		public enum LEDColor {
-			OFF(0), RED(1), YELLOW(2), GREEN(3);
-
-			private final int color;
-
-			LEDColor(int color) {
-				this.color = color;
-			}
-
-			public int getState() {
-				return color;
-			}
-		}
-
-		public MIDIKey(int channel, int note_cc) {
-			this.channel = channel;
-			this.note_cc = note_cc;
-		}
-
-		public int getChannel() {
-			return channel;
-		}
-
-		public void setChannel(int channel) {
-			this.channel = channel;
-		}
-
-		public int getNote_cc() {
-			return note_cc;
-		}
-
-		public void setNote_cc(int note_cc) {
-			this.note_cc = note_cc;
-		}
-
-		public boolean isFader() {
-			if (this.equalsMIDIKey(FADER1) || this.equalsMIDIKey(FADER2) || this.equalsMIDIKey(FADER3)
-					|| this.equalsMIDIKey(FADER4) || this.equalsMIDIKey(FADER5) || this.equalsMIDIKey(FADER6)
-					|| this.equalsMIDIKey(FADER7) || this.equalsMIDIKey(FADER8)) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-
-		public void setLedActivated(boolean ledActivated, LEDColor ledColor) {
-			ShortMessage myMsg = new ShortMessage();
-
-			if (ledActivated && !this.ledActivated) {
-				if (ledColor == LEDColor.RED) {
-					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 15);
-					} catch (InvalidMidiDataException e) {
-						e.printStackTrace();
-					}
-				} else if (ledColor == LEDColor.YELLOW) {
-					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 62);
-					} catch (InvalidMidiDataException e) {
-						e.printStackTrace();
-					}
-				} else if (ledColor == LEDColor.GREEN) {
-					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 60);
-					} catch (InvalidMidiDataException e) {
-						e.printStackTrace();
-					}
-				} else if (ledColor == LEDColor.OFF) {
-					try {
-						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12);
-					} catch (InvalidMidiDataException e) {
-						e.printStackTrace();
-					}
-				}
-
-				try {
-					outputDevice.getReceiver().send(myMsg, -1);
-				} catch (MidiUnavailableException e) {
-					e.printStackTrace();
-				}
-			} else if (!ledActivated && this.ledActivated) {
-				try {
-					myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12);
-					outputDevice.getReceiver().send(myMsg, -1);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				} catch (MidiUnavailableException e) {
-					e.printStackTrace();
-				}
-			}
-
-		}
-
-		public boolean isLedActivated() {
-			return ledActivated;
-		}
-
-		public boolean equalsMIDIKey(MIDIKey midikey) {
-			if (midikey.getChannel() == this.getChannel() && midikey.getNote_cc() == this.getNote_cc()) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-	
 
 	public static void main(String[] args) throws MidiUnavailableException {
 		MyMidiDevice myDevice = new MyMidiDevice();
 
+		MidiDevice inputDevice = null, outputDevice = null;
 		MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
 
 		for (int i = 0; i < infos.length; i++) {
@@ -227,23 +101,28 @@ public class MidiHandler {
 
 		while (true) {
 
-			MIDIKey.BUTTONUP1.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP2.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP3.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP4.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP5.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP6.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP7.setLedActivated(true, MIDIKey.LEDColor.RED);
-			MIDIKey.BUTTONUP8.setLedActivated(true, MIDIKey.LEDColor.RED);
+			try {
+				myMsg.setMessage(ShortMessage.NOTE_ON, 8, 41, 15); // 144/145
+			} catch (InvalidMidiDataException e) {
+				e.printStackTrace();
+			}
 
-			MIDIKey.BUTTONDOWN1.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN2.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN3.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN4.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN5.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN6.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN7.setLedActivated(true, MIDIKey.LEDColor.GREEN);
-			MIDIKey.BUTTONDOWN8.setLedActivated(true, MIDIKey.LEDColor.GREEN);
+			outputDevice.getReceiver().send(myMsg, -1);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				myMsg.setMessage(ShortMessage.NOTE_ON, 8, 41, 12); // 0x98
+																	// //128/129
+			} catch (InvalidMidiDataException e) {
+				e.printStackTrace();
+			}
+
+			outputDevice.getReceiver().send(myMsg, -1);
 
 			try {
 				Thread.sleep(500);
