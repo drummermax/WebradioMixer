@@ -92,7 +92,7 @@ public class MidiController {
 			}
 		}
 
-		public void setLedActivated(boolean ledActivated, LEDColor ledColor) {
+		public void setLedActivated(boolean ledActivated, int color) {
 			if (ledActivated && !this.ledActivated) {
 				// color anstellen
 			} else if (!ledActivated && this.ledActivated) {
@@ -466,20 +466,20 @@ public class MidiController {
 		public void run() {
 			while (true) {
 				if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.EMPTY) {
-					MIDIKey.BUTTONDOWN3.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONDOWN3.setLedActivated(false, 0); // aus
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.LOADED) {
-					MIDIKey.BUTTONDOWN3.setLedActivated(true, MIDIKey.LEDColor.GREEN); // grün
+					MIDIKey.BUTTONDOWN3.setLedActivated(true, 0); // grün
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.PLAYING) {
-					MIDIKey.BUTTONDOWN3.setLedActivated(true, MIDIKey.LEDColor.YELLOW); // gelb
+					MIDIKey.BUTTONDOWN3.setLedActivated(true, 0); // gelb
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.STOPPED) {
-					MIDIKey.BUTTONDOWN3.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONDOWN3.setLedActivated(false, 0); // aus
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.EOF) {
 					if (MidiController.getInstance().getCurrentTimestamp()
 							- MidiController.getInstance().getTimestampEOF1() > 500) {
 						if (MIDIKey.BUTTONDOWN3.isLedActivated()) {
-							MIDIKey.BUTTONDOWN3.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+							MIDIKey.BUTTONDOWN3.setLedActivated(false, 0); // aus
 						} else {
-							MIDIKey.BUTTONDOWN3.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
+							MIDIKey.BUTTONDOWN3.setLedActivated(true, 0); // rot
 						}
 
 						MidiController.getInstance()
@@ -488,20 +488,20 @@ public class MidiController {
 				}
 
 				if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.EMPTY) {
-					MIDIKey.BUTTONDOWN4.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONDOWN4.setLedActivated(false, 0); // aus
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.LOADED) {
-					MIDIKey.BUTTONDOWN4.setLedActivated(true, MIDIKey.LEDColor.GREEN);
+					MIDIKey.BUTTONDOWN4.setLedActivated(true, 0);
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.PLAYING) {
-					MIDIKey.BUTTONDOWN4.setLedActivated(true, MIDIKey.LEDColor.YELLOW);
+					MIDIKey.BUTTONDOWN4.setLedActivated(true, 0);
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.STOPPED) {
-					MIDIKey.BUTTONDOWN4.setLedActivated(false, MIDIKey.LEDColor.OFF);
+					MIDIKey.BUTTONDOWN4.setLedActivated(false, 0);
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.EOF) {
 					if (MidiController.getInstance().getCurrentTimestamp()
 							- MidiController.getInstance().getTimestampEOF2() > 500) {
 						if (MIDIKey.BUTTONDOWN4.isLedActivated()) {
-							MIDIKey.BUTTONDOWN4.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+							MIDIKey.BUTTONDOWN4.setLedActivated(false, 0); // aus
 						} else {
-							MIDIKey.BUTTONDOWN4.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
+							MIDIKey.BUTTONDOWN4.setLedActivated(true, 0); // rot
 						}
 
 						MidiController.getInstance()
@@ -510,46 +510,46 @@ public class MidiController {
 				}
 				
 				if (MixingDesk.getInstance().isCartwallActive()) {
-					MIDIKey.BUTTONDOWN5.setLedActivated(true, MIDIKey.LEDColor.YELLOW); //gelb
+					MIDIKey.BUTTONDOWN5.setLedActivated(true, 0); //gelb
 				} else {
-					MIDIKey.BUTTONDOWN5.setLedActivated(true, MIDIKey.LEDColor.GREEN); //grün
+					MIDIKey.BUTTONDOWN5.setLedActivated(true, 0); //grün
 				}
 
 				if (MairlistPFLSource.PLAYER1.isPFLActive()) {
-					MIDIKey.BUTTONUP3.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
+					MIDIKey.BUTTONUP3.setLedActivated(true, 0); // rot
 					MixingDesk.getInstance().setPflActive(true);
 				} else {
-					MIDIKey.BUTTONUP3.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONUP3.setLedActivated(false, 0); // aus
 					if (!MairlistPFLSource.PLAYER2.isPFLActive() && !MairlistPFLSource.CARTWALL.isPFLActive()
 							&& !MairlistPFLSource.EXTRA.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
 						MixingDesk.getInstance().setPflActive(false);
 				}
 
 				if (MairlistPFLSource.PLAYER2.isPFLActive()) {
-					MIDIKey.BUTTONUP4.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
+					MIDIKey.BUTTONUP4.setLedActivated(true, 0); // rot
 					MixingDesk.getInstance().setPflActive(true);
 				} else {
-					MIDIKey.BUTTONUP4.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONUP4.setLedActivated(false, 0); // aus
 					if (!MairlistPFLSource.PLAYER1.isPFLActive() && !MairlistPFLSource.CARTWALL.isPFLActive()
 							&& !MairlistPFLSource.EXTRA.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
 						MixingDesk.getInstance().setPflActive(false);
 				}
 
 				if (MairlistPFLSource.CARTWALL.isPFLActive()) {
-					MIDIKey.BUTTONUP5.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
+					MIDIKey.BUTTONUP5.setLedActivated(true, 0); // rot
 					MixingDesk.getInstance().setPflActive(true);
 				} else {
-					MIDIKey.BUTTONUP5.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONUP5.setLedActivated(false, 0); // aus
 					if (!MairlistPFLSource.PLAYER1.isPFLActive() && !MairlistPFLSource.PLAYER2.isPFLActive()
 							&& !MairlistPFLSource.EXTRA.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
 						MixingDesk.getInstance().setPflActive(false);
 				}
 
 				if (MairlistPFLSource.EXTRA.isPFLActive()) {
-					MIDIKey.BUTTONSOLO.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
+					MIDIKey.BUTTONSOLO.setLedActivated(true, 0); // rot
 					MixingDesk.getInstance().setPflActive(true);
 				} else {
-					MIDIKey.BUTTONSOLO.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONSOLO.setLedActivated(false, 0); // aus
 					if (!MairlistPFLSource.PLAYER1.isPFLActive() && !MairlistPFLSource.PLAYER2.isPFLActive()
 							&& !MairlistPFLSource.CARTWALL.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
 						MixingDesk.getInstance().setPflActive(false);
@@ -564,29 +564,29 @@ public class MidiController {
 				}
 
 				if (MixingDesk.getInstance().isSpeakingActive1()) {
-					MIDIKey.BUTTONUP1.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
+					MIDIKey.BUTTONUP1.setLedActivated(true, 0); // rot
 				} else {
-					MIDIKey.BUTTONUP1.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONUP1.setLedActivated(false, 0); // aus
 				}
 
 				if (MixingDesk.getInstance().isSpeakingActive2()) {
-					MIDIKey.BUTTONUP2.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
+					MIDIKey.BUTTONUP2.setLedActivated(true, 0); // rot
 				} else {
-					MIDIKey.BUTTONUP2.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONUP2.setLedActivated(false, 0); // aus
 				}
 
 				if (MixingDesk.getInstance().isMonitorMuted()) {
-					MIDIKey.BUTTONMUTE.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
+					MIDIKey.BUTTONMUTE.setLedActivated(true, 0); // rot
 				} else {
-					MIDIKey.BUTTONMUTE.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONMUTE.setLedActivated(false, 0); // aus
 				}
 				
 				if (MixingDesk.getInstance().isPhonesStdWiedergabe()) {
-					MIDIKey.BUTTONDOWN7.setLedActivated(true, MIDIKey.LEDColor.RED); // rot
-					MIDIKey.BUTTONUP7.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONDOWN7.setLedActivated(true, 0); // rot
+					MIDIKey.BUTTONUP7.setLedActivated(false, 0); // aus
 				} else {
-					MIDIKey.BUTTONDOWN7.setLedActivated(false, MIDIKey.LEDColor.RED); // rot
-					MIDIKey.BUTTONUP7.setLedActivated(true, MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONDOWN7.setLedActivated(false, 0); // rot
+					MIDIKey.BUTTONUP7.setLedActivated(true, 0); // aus
 				}
 
 				try {
