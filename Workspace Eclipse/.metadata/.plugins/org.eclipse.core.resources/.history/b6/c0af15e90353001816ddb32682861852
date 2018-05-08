@@ -198,7 +198,6 @@ public class Mairlist {
 	}
 
 	private void sendText(String text) {
-		System.out.println("TCP Command: " + text);
 		out.println(text);
 	}
 
