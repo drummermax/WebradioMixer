@@ -538,8 +538,6 @@ public class MidiController {
 		@Override
 		public void run() {
 			while (true) {
-				System.out.println("LED UPDATE");
-				
 				if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.EMPTY) {
 					MIDIKey.BUTTONDOWN3.setLedActivated(false, MIDIKey.LEDColor.OFF); // aus
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.LOADED) {
