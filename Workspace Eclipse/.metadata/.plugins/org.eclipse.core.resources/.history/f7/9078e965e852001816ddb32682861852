@@ -87,7 +87,7 @@ public class MixingDesk {
 		mairlistMaster = new OutputCombined(audioFormat,
 				(int) Filemanager.getInstance().variables.get("mairlist master"), mairlistMasterInputs, mairlistMasterInputsLatencyCompensation);
 		mairlistMaster.setVolume(1);
-		mairlistMasterRecord.setVolume(0.8); //avoid clipping in master channel
+		mairlistMasterRecord.setVolume(0.8);
 		
 		monitor = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("monitor"),
 				monitorInputs, monitorInputsLatencyCompensation);
