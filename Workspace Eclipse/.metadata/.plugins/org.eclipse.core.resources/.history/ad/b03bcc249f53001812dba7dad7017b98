@@ -101,7 +101,11 @@ public class MidiHandler {
 					}
 				}
 
-				myDevice.getReceiver().send(myMsg, -1);
+				try {
+					outputDevice.getReceiver().send(myMsg, -1);
+				} catch (MidiUnavailableException e) {
+					e.printStackTrace();
+				}
 			}
 
 			this.ledColor = ledColor;
@@ -326,6 +330,7 @@ public class MidiHandler {
 
 		@Override
 		public Receiver getReceiver() {
+			System.out.println("get");
 			return this.receiver;
 		}
 

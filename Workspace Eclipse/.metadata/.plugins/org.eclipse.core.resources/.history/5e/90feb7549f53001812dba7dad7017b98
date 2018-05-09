@@ -326,6 +326,7 @@ public class MidiHandler {
 
 		@Override
 		public Receiver getReceiver() {
+			System.out.println("get");
 			return this.receiver;
 		}
 

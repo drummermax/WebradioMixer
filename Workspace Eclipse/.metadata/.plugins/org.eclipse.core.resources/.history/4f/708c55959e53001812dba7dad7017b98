@@ -5,9 +5,8 @@ import java.util.Scanner;
 
 public class MidiHandler {
 
-	public static MidiDevice inputDevice = null;
+	public MidiDevice inputDevice = null;
 	public static MidiDevice outputDevice = null;
-	public static MyMidiDevice myDevice = null;
 
 	public static class MIDIKey {
 		public static MIDIKey FADER1 = new MIDIKey(-72, 77), BUTTONUP1 = new MIDIKey(-104, 41),
@@ -101,7 +100,11 @@ public class MidiHandler {
 					}
 				}
 
-				myDevice.getReceiver().send(myMsg, -1);
+				try {
+					outputDevice.getReceiver().send(myMsg, -1);
+				} catch (MidiUnavailableException e) {
+					e.printStackTrace();
+				}
 			}
 
 			this.ledColor = ledColor;
@@ -117,7 +120,7 @@ public class MidiHandler {
 	}
 
 	public static void main(String[] args) throws MidiUnavailableException {
-		myDevice = new MyMidiDevice();
+		MyMidiDevice myDevice = new MyMidiDevice();
 
 		MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
 
@@ -159,12 +162,6 @@ public class MidiHandler {
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED pre");
 		}
-		
-		
-		inputDevice.getTransmitter().setReceiver(myDevice);
-		myDevice.setReceiver(outputDevice.getReceiver());
-		
-		
 		try {
 			outputDevice.open();
 
@@ -326,6 +323,7 @@ public class MidiHandler {
 
 		@Override
 		public Receiver getReceiver() {
+			System.out.println("get");
 			return this.receiver;
 		}
 
