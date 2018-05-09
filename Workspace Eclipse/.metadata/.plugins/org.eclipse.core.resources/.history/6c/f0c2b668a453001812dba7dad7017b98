@@ -213,11 +213,8 @@ public class MidiController {
 		}
 
 		System.out.println(midiDeviceOutput == null);
-		Receiver r = null;
 		try {
 			System.out.println(midiDeviceOutput.getReceiver() == null);
-			r = midiDeviceOutput.getReceiver();
-			System.out.println(r == null);
 		} catch (MidiUnavailableException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -225,7 +222,7 @@ public class MidiController {
 		
 		try {
 			midiDeviceInput.getTransmitter().setReceiver(midiInputReceiverTransmitter);
-			midiInputReceiverTransmitter.setReceiver(r);
+			midiInputReceiverTransmitter.setReceiver(midiDeviceOutput.getReceiver());
 		} catch (MidiUnavailableException e) {
 			e.printStackTrace();
 		}

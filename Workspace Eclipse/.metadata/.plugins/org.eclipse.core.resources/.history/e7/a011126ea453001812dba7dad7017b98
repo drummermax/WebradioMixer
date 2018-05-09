@@ -217,7 +217,6 @@ public class MidiController {
 		try {
 			System.out.println(midiDeviceOutput.getReceiver() == null);
 			r = midiDeviceOutput.getReceiver();
-			System.out.println(r == null);
 		} catch (MidiUnavailableException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
