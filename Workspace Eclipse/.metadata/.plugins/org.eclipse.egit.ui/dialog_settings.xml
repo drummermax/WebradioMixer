@@ -2,12 +2,12 @@
 <section name="Workbench">
 	<item value="true" key="CommitDialog.showUntracked"/>
 	<list key="CommitDialog.authorValues">
-		<item value="Max Willers &lt;max.willers@web.de&gt;"/>
 		<item value="Maximilian Willers &lt;mw791679@fh-muenster.de&gt;"/>
+		<item value="Max Willers &lt;max.willers@web.de&gt;"/>
 	</list>
 	<list key="CommitDialog.committerValues">
-		<item value="Max Willers &lt;max.willers@web.de&gt;"/>
 		<item value="Maximilian Willers &lt;mw791679@fh-muenster.de&gt;"/>
+		<item value="Max Willers &lt;max.willers@web.de&gt;"/>
 	</list>
 	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
 		<item value="666" key="DIALOG_WIDTH"/>
@@ -31,9 +31,16 @@
 		<item value="750" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="641" key="DIALOG_HEIGHT"/>
-		<item value="774" key="DIALOG_X_ORIGIN"/>
-		<item value="121" key="DIALOG_Y_ORIGIN"/>
+		<item value="663" key="DIALOG_X_ORIGIN"/>
+		<item value="127" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="GitCommitMessageComponent">
+	</section>
+	<section name="org.eclipse.egit.ui.internal.fetch.FetchResultDialog.dialogBounds">
+		<item value="616" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="458" key="DIALOG_HEIGHT"/>
+		<item value="500" key="DIALOG_X_ORIGIN"/>
+		<item value="133" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

@@ -269,8 +269,6 @@ public class MidiController {
 				velocity = msg.getMessage()[2];
 
 			MIDIKey midikey = new MIDIKey(channel, note_cc);
-			
-			System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
 
 			if (midikey.isFader()) {
 				if (MidiController.getInstance().getCurrentTimestamp()
