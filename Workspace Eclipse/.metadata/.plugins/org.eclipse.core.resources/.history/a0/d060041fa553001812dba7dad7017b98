@@ -195,9 +195,9 @@ public class MidiController {
 		try {
 			midiDeviceOutput = MidiSystem.getMidiDevice(midiDeviceInfos[midiDeviceIndex]);
 
-			/*
 			List<Transmitter> transmitters = midiDeviceOutput.getTransmitters();
 
+			/*
 			for (int j = 0; j < transmitters.size(); j++) {
 				transmitters.get(j).setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
 			}

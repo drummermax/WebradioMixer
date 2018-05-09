@@ -195,9 +195,9 @@ public class MidiController {
 		try {
 			midiDeviceOutput = MidiSystem.getMidiDevice(midiDeviceInfos[midiDeviceIndex]);
 
-			/*
 			List<Transmitter> transmitters = midiDeviceOutput.getTransmitters();
 
+			/*
 			for (int j = 0; j < transmitters.size(); j++) {
 				transmitters.get(j).setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
 			}
@@ -207,17 +207,31 @@ public class MidiController {
 				trans.setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
 			}
 			*/
-			midiDeviceOutput.open();
 			
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED");
 		}
-		
-		midiInputReceiverTransmitter = new MidiInputReceiverTransmitter();
+
+		System.out.println(midiDeviceOutput == null);
+		Receiver r = null;
+		try {
+			System.out.println(midiDeviceOutput.getReceiver() == null);
+			r = midiDeviceOutput.getReceiver();
+			System.out.println(r == null);
+		} catch (MidiUnavailableException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		try {
 			midiDeviceInput.getTransmitter().setReceiver(midiInputReceiverTransmitter);
-			midiInputReceiverTransmitter.setReceiver(midiDeviceOutput.getReceiver());
+			midiInputReceiverTransmitter.setReceiver(r);
+		} catch (MidiUnavailableException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			midiDeviceOutput.open();
 		} catch (MidiUnavailableException e) {
 			e.printStackTrace();
 		}
@@ -266,6 +280,8 @@ public class MidiController {
 	}
 
 	private static class MidiInputReceiverTransmitter implements Transmitter, Receiver {
+		public String name;
+		
 		private Receiver receiver;
 
 		@Override
@@ -281,6 +297,11 @@ public class MidiController {
 		@Override
 		public void close() {
 		}
+
+		public MidiInputReceiverTransmitter(String name) {
+			this.name = name;
+		}
+
 		public void send(MidiMessage msg, long timeStamp) {
 			int channel = msg.getMessage()[0];
 			int note_cc = msg.getMessage()[1];
