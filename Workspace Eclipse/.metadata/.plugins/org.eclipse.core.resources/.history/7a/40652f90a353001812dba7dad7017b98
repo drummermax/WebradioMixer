@@ -196,12 +196,12 @@ public class MidiController {
 			List<Transmitter> transmitters = midiDeviceOutput.getTransmitters();
 
 			for (int j = 0; j < transmitters.size(); j++) {
-				transmitters.get(j).setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
+				transmitters.get(j).setReceiver(new MidiInputReceiverTransmitter(midiDeviceOutput.getDeviceInfo().toString()));
 			}
 
 			if (transmitters.size() != 0) {
 				Transmitter trans = midiDeviceOutput.getTransmitter();
-				trans.setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
+				trans.setReceiver(new MidiInputReceiverTransmitter(midiDeviceOutput.getDeviceInfo().toString()));
 			}
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED");
@@ -701,25 +701,6 @@ public class MidiController {
 					e.printStackTrace();
 				}
 			}
-		}
-	}
-	
-	
-	
-	
-	
-	
-	public static class MidiInputReceiver implements Receiver {
-		public String name;
-
-		public MidiInputReceiver(String name) {
-			this.name = name;
-		}
-
-		public void send(MidiMessage msg, long timeStamp) {
-		}
-
-		public void close() {
 		}
 	}
 }
