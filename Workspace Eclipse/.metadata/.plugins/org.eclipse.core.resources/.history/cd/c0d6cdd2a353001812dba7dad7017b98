@@ -190,14 +190,11 @@ public class MidiController {
 
 		midiDeviceIndex = Integer.parseInt(midiDeviceChoosenString.split(":")[0]);
 
-		System.out.println("choosen midi out: " + midiDeviceIndex);
-		
 		try {
 			midiDeviceOutput = MidiSystem.getMidiDevice(midiDeviceInfos[midiDeviceIndex]);
 
 			List<Transmitter> transmitters = midiDeviceOutput.getTransmitters();
 
-			/*
 			for (int j = 0; j < transmitters.size(); j++) {
 				transmitters.get(j).setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
 			}
@@ -206,8 +203,6 @@ public class MidiController {
 				Transmitter trans = midiDeviceOutput.getTransmitter();
 				trans.setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
 			}
-			*/
-			
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED");
 		}
