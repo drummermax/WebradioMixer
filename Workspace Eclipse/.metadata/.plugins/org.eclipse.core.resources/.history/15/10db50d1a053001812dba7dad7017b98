@@ -340,7 +340,8 @@ public class MidiHandler {
 
 		@Override
 		public void send(MidiMessage message, long timeStamp) {
-			System.out.println(message);
+			System.out.println(message); // computations
+			this.getReceiver().send(message, timeStamp);
 		}
 	}
 

@@ -128,7 +128,11 @@ public class MidiController {
 					}
 				}
 
-				midiInputReceiverTransmitter.getReceiver().send(myMsg, -1);
+				try {
+					midiDeviceOutput.getReceiver().send(myMsg, -1);
+				} catch (MidiUnavailableException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			this.ledColor = ledColor;
@@ -210,12 +214,8 @@ public class MidiController {
 			System.out.println("FAILED");
 		}
 		
-		try {
-			midiDeviceInput.getTransmitter().setReceiver(midiInputReceiverTransmitter);
-			midiInputReceiverTransmitter.setReceiver(midiDeviceOutput.getReceiver());
-		} catch (MidiUnavailableException e) {
-			e.printStackTrace();
-		}
+		midiDeviceInput.getTransmitter().setReceiver(midiInputReceiverTransmitter);
+		midiInputReceiverTransmitter.setReceiver(midiDeviceOutput.getReceiver());
 
 		Thread ledUpdaterThread = new Thread(new ledUpdater());
 		ledUpdaterThread.start();
@@ -293,7 +293,7 @@ public class MidiController {
 
 			MIDIKey midikey = new MIDIKey(channel, note_cc);
 			
-			//System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
+			System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
 
 			if (midikey.isFader()) {
 				if (MidiController.getInstance().getCurrentTimestamp()

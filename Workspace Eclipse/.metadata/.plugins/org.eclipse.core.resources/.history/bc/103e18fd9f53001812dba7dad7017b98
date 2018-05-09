@@ -20,7 +20,6 @@ public class MidiController {
 	private static MidiController instance;
 
 	private static MidiDevice midiDeviceInput, midiDeviceOutput;
-	private static MidiInputReceiverTransmitter midiInputReceiverTransmitter;
 	private static MidiDevice.Info[] midiDeviceInfos;
 
 	private static int[] timestamp;
@@ -128,7 +127,11 @@ public class MidiController {
 					}
 				}
 
-				midiInputReceiverTransmitter.getReceiver().send(myMsg, -1);
+				try {
+					midiDeviceOutput.getReceiver().send(myMsg, -1);
+				} catch (MidiUnavailableException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			this.ledColor = ledColor;
@@ -164,19 +167,16 @@ public class MidiController {
 		try {
 			midiDeviceInput = MidiSystem.getMidiDevice(midiDeviceInfos[midiDeviceIndex]);
 
-			/* @ https://stackoverflow.com/questions/37377869/how-can-i-intercept-midi-messages
 			List<Transmitter> transmitters = midiDeviceInput.getTransmitters();
 
 			for (int j = 0; j < transmitters.size(); j++) {
-				transmitters.get(j).setReceiver(new MidiInputReceiverTransmitter(midiDeviceInput.getDeviceInfo().toString()));
+				transmitters.get(j).setReceiver(new MidiInputReceiver(midiDeviceInput.getDeviceInfo().toString()));
 			}
 
 			if (transmitters.size() != 0) {
 				Transmitter trans = midiDeviceInput.getTransmitter();
-				trans.setReceiver(new MidiInputReceiverTransmitter(midiDeviceInput.getDeviceInfo().toString()));
+				trans.setReceiver(new MidiInputReceiver(midiDeviceInput.getDeviceInfo().toString()));
 			}
-			*/
-			
 			midiDeviceInput.open();
 
 		} catch (MidiUnavailableException e) {
@@ -196,25 +196,18 @@ public class MidiController {
 			List<Transmitter> transmitters = midiDeviceOutput.getTransmitters();
 
 			for (int j = 0; j < transmitters.size(); j++) {
-				transmitters.get(j).setReceiver(new MidiInputReceiverTransmitter(midiDeviceOutput.getDeviceInfo().toString()));
+				transmitters.get(j).setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
 			}
 
 			if (transmitters.size() != 0) {
 				Transmitter trans = midiDeviceOutput.getTransmitter();
-				trans.setReceiver(new MidiInputReceiverTransmitter(midiDeviceOutput.getDeviceInfo().toString()));
+				trans.setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
 			}
 
 			midiDeviceOutput.open();
 
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED");
-		}
-		
-		try {
-			midiDeviceInput.getTransmitter().setReceiver(midiInputReceiverTransmitter);
-			midiInputReceiverTransmitter.setReceiver(midiDeviceOutput.getReceiver());
-		} catch (MidiUnavailableException e) {
-			e.printStackTrace();
 		}
 
 		Thread ledUpdaterThread = new Thread(new ledUpdater());
@@ -260,26 +253,10 @@ public class MidiController {
 		return instance;
 	}
 
-	private static class MidiInputReceiverTransmitter implements Transmitter, Receiver {
+	private static class MidiInputReceiver implements Receiver {
 		public String name;
-		
-		private Receiver receiver;
 
-		@Override
-		public Receiver getReceiver() {
-			return this.receiver;
-		}
-
-		@Override
-		public void setReceiver(Receiver receiver) {
-			this.receiver = receiver;
-		}
-
-		@Override
-		public void close() {
-		}
-
-		public MidiInputReceiverTransmitter(String name) {
+		public MidiInputReceiver(String name) {
 			this.name = name;
 		}
 
@@ -293,7 +270,7 @@ public class MidiController {
 
 			MIDIKey midikey = new MIDIKey(channel, note_cc);
 			
-			//System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
+			System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
 
 			if (midikey.isFader()) {
 				if (MidiController.getInstance().getCurrentTimestamp()
@@ -538,6 +515,9 @@ public class MidiController {
 			 * Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.
 			 * CARTWALL_NEXTPAGE); return; } }
 			 */
+		}
+
+		public void close() {
 		}
 	}
 
