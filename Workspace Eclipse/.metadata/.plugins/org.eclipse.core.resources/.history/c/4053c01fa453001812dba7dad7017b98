@@ -211,14 +211,8 @@ public class MidiController {
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED");
 		}
-
+		
 		System.out.println(midiDeviceOutput == null);
-		try {
-			System.out.println(midiDeviceOutput.getReceiver() == null);
-		} catch (MidiUnavailableException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		
 		try {
 			midiDeviceInput.getTransmitter().setReceiver(midiInputReceiverTransmitter);
