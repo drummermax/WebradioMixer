@@ -42,7 +42,7 @@ public class MidiController {
 				BUTTONDOWN6 = new MIDIKey(-104, 90), FADER7 = new MIDIKey(-72, 83), BUTTONUP7 = new MIDIKey(-104, 59),
 				BUTTONDOWN7 = new MIDIKey(-104, 91), FADER8 = new MIDIKey(-72, 84), BUTTONUP8 = new MIDIKey(-104, 60),
 				BUTTONDOWN8 = new MIDIKey(-104, 92), BUTTONMUTE = new MIDIKey(-104, 106),
-				BUTTONSOLO = new MIDIKey(-104, 107), BUTTONRECORD = new MIDIKey(-104, 121), BUTTONSELECTUP = new MIDIKey(-72, 104),
+				BUTTONSOLO = new MIDIKey(-104, 107), BUTTONSELECTUP = new MIDIKey(-72, 104),
 				BUTTONSELECTDOWN = new MIDIKey(-72, 105), BUTTONSELECTLEFT = new MIDIKey(-72, 106),
 				BUTTONSELECTRIGHT = new MIDIKey(-72, 107);
 
@@ -437,14 +437,6 @@ public class MidiController {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_EXTRAPFL);
 					Mairlist.getInstance().setMairlistPFLSource(MairlistPFLSource.EXTRA);
 				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONRECORD)) {
-				if (velocity == 127) {
-					if (!MixingDesk.getInstance().isSetRecording()) {
-						MixingDesk.getInstance().setSetRecording(true);
-					} else {
-						MixingDesk.getInstance().setSetRecording(false);
-					}
-				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTUP)) {
 		        midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
 				if (velocity == 127) {
@@ -700,12 +692,6 @@ public class MidiController {
 				} else {
 					MIDIKey.BUTTONUP7.setLEDColor(MIDIKey.LEDColor.YELLOW); // rot
 					MIDIKey.BUTTONDOWN7.setLEDColor(MIDIKey.LEDColor.OFF); // aus
-				}
-				
-				if (MixingDesk.getInstance().isSetRecording()) {
-					MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.RED);
-				} else {
-					MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.OFF);
 				}
 
 				try {

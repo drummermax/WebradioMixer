@@ -406,10 +406,6 @@ public class MixingDesk {
 	public void setSetRecording(boolean setRecording) {
 		MixingDesk.setRecording = setRecording;
 	}
-	
-	public boolean isSetRecording() {
-		return setRecording;
-	}
 
 	public boolean isSpeakingActive1() {
 		return speakingActive1;

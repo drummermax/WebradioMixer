@@ -701,12 +701,6 @@ public class MidiController {
 					MIDIKey.BUTTONUP7.setLEDColor(MIDIKey.LEDColor.YELLOW); // rot
 					MIDIKey.BUTTONDOWN7.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				}
-				
-				if (MixingDesk.getInstance().isSetRecording()) {
-					MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.RED);
-				} else {
-					MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.OFF);
-				}
 
 				try {
 					Thread.sleep(100);
