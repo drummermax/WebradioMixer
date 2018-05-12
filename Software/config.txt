@@ -20,3 +20,7 @@ monitor
 3
 phones
 4
+midi in
+1
+midi out
+5
