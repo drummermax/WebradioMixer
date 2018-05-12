@@ -686,6 +686,7 @@ public class MidiController {
 					MIDIKey.BUTTONMUTE.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				}
 
+				/*
 				if (MixingDesk.getInstance().isPhonesStdWiedergabe()) {
 					MIDIKey.BUTTONUP7.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 					MIDIKey.BUTTONDOWN7.setLEDColor(MIDIKey.LEDColor.YELLOW); // rot
@@ -693,6 +694,7 @@ public class MidiController {
 					MIDIKey.BUTTONUP7.setLEDColor(MIDIKey.LEDColor.YELLOW); // rot
 					MIDIKey.BUTTONDOWN7.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				}
+				*/
 
 				try {
 					Thread.sleep(100);
