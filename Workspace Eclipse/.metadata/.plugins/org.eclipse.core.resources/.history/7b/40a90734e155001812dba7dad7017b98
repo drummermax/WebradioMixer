@@ -1,5 +1,6 @@
 import javax.sound.midi.*;
 
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -74,38 +75,34 @@ public class MidiHandler {
 		public void setLEDColor(LEDColor ledColor) {
 			ShortMessage myMsg = new ShortMessage();
 
-			for (int i = 0; i < 16; i++) {
-				System.out.println("channel " + i);
-
-				if (ledColor != this.ledColor) {
-					if (ledColor == LEDColor.RED) {
-						try {
-							myMsg.setMessage(ShortMessage.NOTE_ON, i, this.note_cc, 15);
-						} catch (InvalidMidiDataException e) {
-							e.printStackTrace();
-						}
-					} else if (ledColor == LEDColor.YELLOW) {
-						try {
-							myMsg.setMessage(ShortMessage.NOTE_ON, i, this.note_cc, 62);
-						} catch (InvalidMidiDataException e) {
-							e.printStackTrace();
-						}
-					} else if (ledColor == LEDColor.GREEN) {
-						try {
-							myMsg.setMessage(ShortMessage.NOTE_ON, i, this.note_cc, 60);
-						} catch (InvalidMidiDataException e) {
-							e.printStackTrace();
-						}
-					} else if (ledColor == LEDColor.OFF) {
-						try {
-							myMsg.setMessage(ShortMessage.NOTE_ON, i, this.note_cc, 12);
-						} catch (InvalidMidiDataException e) {
-							e.printStackTrace();
-						}
+			if (ledColor != this.ledColor) {
+				if (ledColor == LEDColor.RED) {
+					try {
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 15);
+					} catch (InvalidMidiDataException e) {
+						e.printStackTrace();
 					}
-
-					myDevice.getReceiver().send(myMsg, -1);
+				} else if (ledColor == LEDColor.YELLOW) {
+					try {
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 62);
+					} catch (InvalidMidiDataException e) {
+						e.printStackTrace();
+					}
+				} else if (ledColor == LEDColor.GREEN) {
+					try {
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 60);
+					} catch (InvalidMidiDataException e) {
+						e.printStackTrace();
+					}
+				} else if (ledColor == LEDColor.OFF) {
+					try {
+						myMsg.setMessage(ShortMessage.NOTE_ON, 8, this.note_cc, 12);
+					} catch (InvalidMidiDataException e) {
+						e.printStackTrace();
+					}
 				}
+
+				myDevice.getReceiver().send(myMsg, -1);
 			}
 
 			this.ledColor = ledColor;
@@ -163,10 +160,12 @@ public class MidiHandler {
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED pre");
 		}
-
+		
+		
 		inputDevice.getTransmitter().setReceiver(myDevice);
 		myDevice.setReceiver(outputDevice.getReceiver());
-
+		
+		
 		try {
 			outputDevice.open();
 
@@ -219,23 +218,23 @@ public class MidiHandler {
 			MIDIKey.BUTTONMUTE.setLEDColor(MIDIKey.LEDColor.OFF);
 			MIDIKey.BUTTONSOLO.setLEDColor(MIDIKey.LEDColor.OFF);
 			MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONUP2.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONUP3.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONUP4.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONUP5.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONUP6.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONUP7.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONUP8.setLEDColor(MIDIKey.LEDColor.OFF);
-			//
-			// MIDIKey.BUTTONDOWN1.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONDOWN5.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONDOWN6.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONDOWN7.setLEDColor(MIDIKey.LEDColor.OFF);
-			// MIDIKey.BUTTONDOWN8.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONUP2.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONUP3.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONUP4.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONUP5.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONUP6.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONUP7.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONUP8.setLEDColor(MIDIKey.LEDColor.OFF);
+//
+//			MIDIKey.BUTTONDOWN1.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONDOWN5.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONDOWN6.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONDOWN7.setLEDColor(MIDIKey.LEDColor.OFF);
+//			MIDIKey.BUTTONDOWN8.setLEDColor(MIDIKey.LEDColor.OFF);
 
 			try {
 				Thread.sleep(500);
@@ -243,27 +242,28 @@ public class MidiHandler {
 				e.printStackTrace();
 			}
 
+
 			MIDIKey.BUTTONMUTE.setLEDColor(MIDIKey.LEDColor.RED);
 			MIDIKey.BUTTONSOLO.setLEDColor(MIDIKey.LEDColor.RED);
 			MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.RED);
-
-			// MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONUP2.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONUP3.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONUP4.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONUP5.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONUP6.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONUP7.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONUP8.setLEDColor(MIDIKey.LEDColor.RED);
-			//
-			// MIDIKey.BUTTONDOWN1.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONDOWN5.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONDOWN6.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONDOWN7.setLEDColor(MIDIKey.LEDColor.RED);
-			// MIDIKey.BUTTONDOWN8.setLEDColor(MIDIKey.LEDColor.RED);
+			
+//			MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONUP2.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONUP3.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONUP4.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONUP5.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONUP6.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONUP7.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONUP8.setLEDColor(MIDIKey.LEDColor.RED);
+//
+//			MIDIKey.BUTTONDOWN1.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONDOWN5.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONDOWN6.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONDOWN7.setLEDColor(MIDIKey.LEDColor.RED);
+//			MIDIKey.BUTTONDOWN8.setLEDColor(MIDIKey.LEDColor.RED);
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
