@@ -1,5 +1,8 @@
 import javax.sound.midi.*;
 
+import midi.MidiController;
+import midi.MidiController.MIDIKey;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -364,27 +367,15 @@ public class MidiHandler {
 
 			if (midikey.equalsMIDIKey(MIDIKey.BUTTONMUTE)) {
 				if (velocity == 127) {
-					if (!b1)
-						this.getReceiver().send(msg, timeStamp);
-				} else {
-					if (b1)
-						this.getReceiver().send(msg, timeStamp);
+					
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSOLO)) {
 				if (velocity == 127) {
-					if (!b2)
-						this.getReceiver().send(msg, timeStamp);
-				} else {
-					if (b2)
-						this.getReceiver().send(msg, timeStamp);
+
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONRECORD)) {
 				if (velocity == 127) {
-					if (!b3)
-						this.getReceiver().send(msg, timeStamp);
-				} else {
-					if (b3)
-						this.getReceiver().send(msg, timeStamp);
+
 				}
 			}
 		}

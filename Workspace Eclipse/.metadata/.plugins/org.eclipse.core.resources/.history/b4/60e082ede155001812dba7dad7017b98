@@ -216,9 +216,9 @@ public class MidiHandler {
 
 		while (true) {
 
-//			MIDIKey.BUTTONMUTE.setLEDColor(MIDIKey.LEDColor.OFF);
-//			MIDIKey.BUTTONSOLO.setLEDColor(MIDIKey.LEDColor.OFF);
-//			MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.OFF);
+			MIDIKey.BUTTONMUTE.setLEDColor(MIDIKey.LEDColor.OFF);
+			MIDIKey.BUTTONSOLO.setLEDColor(MIDIKey.LEDColor.OFF);
+			MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.OFF);
 			// MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.OFF);
 			// MIDIKey.BUTTONUP2.setLEDColor(MIDIKey.LEDColor.OFF);
 			// MIDIKey.BUTTONUP3.setLEDColor(MIDIKey.LEDColor.OFF);
@@ -243,9 +243,9 @@ public class MidiHandler {
 				e.printStackTrace();
 			}
 
-//			MIDIKey.BUTTONMUTE.setLEDColor(MIDIKey.LEDColor.RED);
-//			MIDIKey.BUTTONSOLO.setLEDColor(MIDIKey.LEDColor.RED);
-//			MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.RED);
+			MIDIKey.BUTTONMUTE.setLEDColor(MIDIKey.LEDColor.RED);
+			MIDIKey.BUTTONSOLO.setLEDColor(MIDIKey.LEDColor.RED);
+			MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.RED);
 
 			// MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.RED);
 			// MIDIKey.BUTTONUP2.setLEDColor(MIDIKey.LEDColor.RED);
@@ -332,7 +332,6 @@ public class MidiHandler {
 	public static class MyMidiDevice implements Transmitter, Receiver {
 
 		private Receiver receiver;
-		private boolean b1 = false, b2 = false, b3 = false;
 
 		@Override
 		public Receiver getReceiver() {
@@ -349,44 +348,8 @@ public class MidiHandler {
 		}
 
 		@Override
-		public void send(MidiMessage msg, long timeStamp) {
-			int channel = msg.getMessage()[0];
-			int note_cc = msg.getMessage()[1];
-			double velocity = 0;
-
-			if (msg.getMessage().length > 2)
-				velocity = msg.getMessage()[2];
-
-			MIDIKey midikey = new MIDIKey(channel, note_cc);
-
-			// System.out.println("MIDI: Channel = " + channel + " note_cc = " +
-			// note_cc + " velocity = " + velocity);
-
-			if (midikey.equalsMIDIKey(MIDIKey.BUTTONMUTE)) {
-				if (velocity == 127) {
-					if (!b1)
-						this.getReceiver().send(msg, timeStamp);
-				} else {
-					if (b1)
-						this.getReceiver().send(msg, timeStamp);
-				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSOLO)) {
-				if (velocity == 127) {
-					if (!b2)
-						this.getReceiver().send(msg, timeStamp);
-				} else {
-					if (b2)
-						this.getReceiver().send(msg, timeStamp);
-				}
-			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONRECORD)) {
-				if (velocity == 127) {
-					if (!b3)
-						this.getReceiver().send(msg, timeStamp);
-				} else {
-					if (b3)
-						this.getReceiver().send(msg, timeStamp);
-				}
-			}
+		public void send(MidiMessage message, long timeStamp) {
+			System.out.println(message);
 		}
 	}
 
