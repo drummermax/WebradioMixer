@@ -114,13 +114,11 @@ public class Output {
 	}
 
 	public void mute() {
-		System.out.println("muted.");
 		muted = true;
 		setVolume(volume);
 	}
 
 	public void unmute() {
-		System.out.println("unmuted.");
 		muted = false;
 		setVolume(volume);
 	}

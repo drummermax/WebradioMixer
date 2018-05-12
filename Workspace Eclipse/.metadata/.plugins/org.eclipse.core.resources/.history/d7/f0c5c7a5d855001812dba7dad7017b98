@@ -120,7 +120,6 @@ public class Output {
 	}
 
 	public void unmute() {
-		System.out.println("unmuted.");
 		muted = false;
 		setVolume(volume);
 	}

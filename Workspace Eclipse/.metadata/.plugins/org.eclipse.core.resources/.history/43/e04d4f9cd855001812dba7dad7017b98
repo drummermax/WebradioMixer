@@ -65,14 +65,10 @@ public class OutputCombined {
 
 	public void muteSingle(int input) {
 		outputs[input].mute();
-		
-		System.out.println(input + " muted.");
 	}
 
 	public void unmuteSingle(int input) {
 		outputs[input].unmute();
-		
-		System.out.println(input + " unmuted.");
 	}
 	
 	public void updateInputData() {
