@@ -366,37 +366,27 @@ public class MidiHandler {
 				if (velocity == 127) {
 					if (!b1) {
 						this.getReceiver().send(msg, timeStamp);
-						b1 = true;
 					}
 				} else {
 					if (b1) {
 						this.getReceiver().send(msg, timeStamp);
-						b1 = false;
 					}
 				}
 			} else if (note_cc == MIDIKey.BUTTONSOLO.getNote_cc()) {
 				if (velocity == 127) {
-					if (!b2) {
+					if (!b2)
 						this.getReceiver().send(msg, timeStamp);
-						b2 = true;
-					}
 				} else {
-					if (b2) {
+					if (b2)
 						this.getReceiver().send(msg, timeStamp);
-						b2 = false;
-					}
 				}
 			} else if (note_cc == MIDIKey.BUTTONRECORD.getNote_cc()) {
 				if (velocity == 127) {
-					if (!b3) {
+					if (!b3)
 						this.getReceiver().send(msg, timeStamp);
-						b3 = true;
-					}
 				} else {
-					if (b3) {
+					if (b3)
 						this.getReceiver().send(msg, timeStamp);
-						b3 = false;
-					}
 				}
 			}
 		}
