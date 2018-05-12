@@ -1,2 +1,3 @@
 1525810935962	Rename field 'midiDevice'
 1525880868160	Rename type 'MidiInputReceiver'
+1526126226316	Encapsulate field 'cartwallPFLActivated'

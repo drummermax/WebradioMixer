@@ -230,20 +230,6 @@ public class Mairlist {
 		Mairlist.mairlistPFLSource = mairlistPFLSource;
 	}
 
-	public boolean isCartwallPFLActivated() {
-		return cartwallPFLActivated;
-	}
-
-	public void setCartwallPFLActivated(boolean cartwallPFLActivated) {
-		this.cartwallPFLActivated = cartwallPFLActivated;
-		
-		if (cartwallPFLActivated) {
-			Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEPFL);
-		} else {
-			Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEONAIR);
-		}
-	}
-
 	class mairlistListener extends Thread {
 
 		Socket myclientSocket = null;

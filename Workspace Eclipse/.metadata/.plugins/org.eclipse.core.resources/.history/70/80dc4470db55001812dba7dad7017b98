@@ -23,8 +23,6 @@ public class Mairlist {
 	private ServerSocket mairlistListenerServer = null;
 	
 	private boolean firstMessageOffAirResponse = false;
-	
-	private boolean cartwallPFLActivated = false;
 
 	private static MairlistPlayerState mairlistPlayerStatePlayer1 = MairlistPlayerState.EMPTY,
 			mairlistPlayerStatePlayer2 = MairlistPlayerState.EMPTY;
@@ -80,8 +78,7 @@ public class Mairlist {
 																"CARTWALL 1 START"), CARTWALL_STOP(
 																		"CARTWALL 1 STOP"), CARTWALL_STARTSTOP(
 																				"CARTWALL 1 START/STOP"), CARTWALL_MODEPFL(
-																						"CARTWALL MODE PFL"), CARTWALL_MODEONAIR(
-																								"CARTWALL MODE ON AIR"), CARTWALL_PREVPAGE(
+																						"CARTWALL MODE PFL"), CARTWALL_PREVPAGE(
 																								"CARTWALL PREVIOUS PAGE"), CARTWALL_NEXTPAGE(
 																										"CARTWALL NEXT PAGE"), PLAYLIST_CURSORUP(
 																												"PLAYLIST 1 CURSOR UP"), PLAYLIST_CURSORDOWN(
@@ -228,20 +225,6 @@ public class Mairlist {
 
 	public void setMairlistPFLSource(MairlistPFLSource mairlistPFLSource) {
 		Mairlist.mairlistPFLSource = mairlistPFLSource;
-	}
-
-	public boolean isCartwallPFLActivated() {
-		return cartwallPFLActivated;
-	}
-
-	public void setCartwallPFLActivated(boolean cartwallPFLActivated) {
-		this.cartwallPFLActivated = cartwallPFLActivated;
-		
-		if (cartwallPFLActivated) {
-			Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEPFL);
-		} else {
-			Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEONAIR);
-		}
 	}
 
 	class mairlistListener extends Thread {

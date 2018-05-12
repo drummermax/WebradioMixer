@@ -240,7 +240,7 @@ public class Mairlist {
 		if (cartwallPFLActivated) {
 			Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEPFL);
 		} else {
-			Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEONAIR);
+			Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEPFL);
 		}
 	}
 

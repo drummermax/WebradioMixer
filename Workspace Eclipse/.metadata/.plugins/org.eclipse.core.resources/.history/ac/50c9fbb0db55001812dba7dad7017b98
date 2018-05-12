@@ -236,12 +236,6 @@ public class Mairlist {
 
 	public void setCartwallPFLActivated(boolean cartwallPFLActivated) {
 		this.cartwallPFLActivated = cartwallPFLActivated;
-		
-		if (cartwallPFLActivated) {
-			Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEPFL);
-		} else {
-			Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEONAIR);
-		}
 	}
 
 	class mairlistListener extends Thread {
