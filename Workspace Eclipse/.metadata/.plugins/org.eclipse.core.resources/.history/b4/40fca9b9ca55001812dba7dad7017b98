@@ -567,11 +567,11 @@ public class MidiController {
 			
 			while (true) {
 				if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.EMPTY) {
-					MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.RED); // aus
+					MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.LOADED) {
-					MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.YELLOW); // grün
+					MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.GREEN); // grün
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.PLAYING) {
-					MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.GREEN); // gelb
+					MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.YELLOW); // gelb
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.STOPPED) {
 					MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.EOF) {
@@ -589,11 +589,11 @@ public class MidiController {
 				}
 
 				if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.EMPTY) {
-					MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.RED); // aus
+					MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.LOADED) {
-					MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.YELLOW);
-				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.PLAYING) {
 					MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.GREEN);
+				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.PLAYING) {
+					MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.YELLOW);
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.STOPPED) {
 					MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.OFF);
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.EOF) {
