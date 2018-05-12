@@ -2,12 +2,10 @@ procedure OnLoad;
 begin
 end;
 
-//procedure OnPlayerEOFWarning(PlaylistIndex: integer; PlayerIndex: integer; Item: IPlaylistItem);
-procedure OnPlayerEOFWarning(PlayerControl: IPlayerControl; Item: IPlaylistItem);
+procedure OnPlayerEOFWarning(PlaylistIndex: integer; PlayerIndex: integer; Item: IPlaylistItem);
 var text: string;
 begin
-	//text := '"EOF ' + IntToStr(PlayerIndex) + '"';
-	text := '"EOF"';
+	text := '"EOF ' + IntToStr(PlayerIndex) + '"';
 	ShellExecuteHidden('cmd.exe', '/c D: && cd D:\Desktop\WebradioMixer\Software && java -jar WebradioMixerPackageTransmitter.jar ' + text);
 end;
 
