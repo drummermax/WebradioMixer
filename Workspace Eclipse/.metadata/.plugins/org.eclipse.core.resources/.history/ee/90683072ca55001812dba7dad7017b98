@@ -665,15 +665,15 @@ public class MidiController {
 				}
 
 				if (MixingDesk.getInstance().isSpeakingActive1()) {
-					MIDIKey.BUTTONDOWN1.setLEDColor(MIDIKey.LEDColor.RED); // rot
+					MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.RED); // rot
 				} else {
-					MIDIKey.BUTTONDOWN1.setLEDColor(MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				}
 
 				if (MixingDesk.getInstance().isSpeakingActive2()) {
-					MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.RED); // rot
+					MIDIKey.BUTTONUP2.setLEDColor(MIDIKey.LEDColor.RED); // rot
 				} else {
-					MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.OFF); // aus
+					MIDIKey.BUTTONUP2.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				}
 
 				if (MixingDesk.getInstance().isMonitorMuted()) {
