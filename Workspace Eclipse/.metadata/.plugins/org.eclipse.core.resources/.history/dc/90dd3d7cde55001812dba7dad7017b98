@@ -404,8 +404,6 @@ public class MixingDesk {
 	}
 
 	public void setSetRecording(boolean setRecording) {
-		System.out.println("SET RECORDING " + setRecording);
-		
 		MixingDesk.setRecording = setRecording;
 	}
 	
