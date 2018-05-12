@@ -245,8 +245,6 @@ public class MixingDesk {
 	}
 	
 	private void activatePhonesStdWiedergabe() {
-		System.out.println("STD activated");
-		
 		phones.muteSingle(0);
 		phones.muteSingle(1);
 		phones.muteSingle(2);
@@ -255,7 +253,6 @@ public class MixingDesk {
 	}
 	
 	private void activatePhonesNormal() {
-		System.out.println("STD deactivated");
 		phones.unmuteSingle(0);
 		phones.unmuteSingle(1);
 		phones.unmuteSingle(2);
