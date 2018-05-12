@@ -362,7 +362,7 @@ public class MidiHandler {
 			// System.out.println("MIDI: Channel = " + channel + " note_cc = " +
 			// note_cc + " velocity = " + velocity);
 
-			if (note_cc == MIDIKey.BUTTONMUTE.getNote_cc()) {
+			if (note_cc == (MIDIKey.BUTTONMUTE.getNote_cc())) {
 				if (velocity == 127) {
 					if (!b1)
 						this.getReceiver().send(msg, timeStamp);
@@ -370,7 +370,7 @@ public class MidiHandler {
 					if (b1)
 						this.getReceiver().send(msg, timeStamp);
 				}
-			} else if (note_cc == MIDIKey.BUTTONSOLO.getNote_cc()) {
+			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSOLO)) {
 				if (velocity == 127) {
 					if (!b2)
 						this.getReceiver().send(msg, timeStamp);
@@ -378,7 +378,7 @@ public class MidiHandler {
 					if (b2)
 						this.getReceiver().send(msg, timeStamp);
 				}
-			} else if (note_cc == MIDIKey.BUTTONRECORD.getNote_cc()) {
+			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONRECORD)) {
 				if (velocity == 127) {
 					if (!b3)
 						this.getReceiver().send(msg, timeStamp);
