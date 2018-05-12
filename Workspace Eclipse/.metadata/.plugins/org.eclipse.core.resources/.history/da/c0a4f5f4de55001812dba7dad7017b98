@@ -403,7 +403,9 @@ public class MixingDesk {
 		return mairlistMaster;
 	}
 
-	public void setSetRecording(boolean setRecording) {		
+	public void setSetRecording(boolean setRecording) {
+		System.out.println("SET RECORDING " + setRecording);
+		
 		MixingDesk.setRecording = setRecording;
 	}
 	

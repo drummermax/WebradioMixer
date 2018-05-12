@@ -42,7 +42,7 @@ public class MidiController {
 				BUTTONDOWN6 = new MIDIKey(-104, 90), FADER7 = new MIDIKey(-72, 83), BUTTONUP7 = new MIDIKey(-104, 59),
 				BUTTONDOWN7 = new MIDIKey(-104, 91), FADER8 = new MIDIKey(-72, 84), BUTTONUP8 = new MIDIKey(-104, 60),
 				BUTTONDOWN8 = new MIDIKey(-104, 92), BUTTONMUTE = new MIDIKey(-104, 106),
-				BUTTONSOLO = new MIDIKey(-104, 107), BUTTONRECORD = new MIDIKey(-104, 108), BUTTONSELECTUP = new MIDIKey(-72, 104),
+				BUTTONSOLO = new MIDIKey(-104, 107), BUTTONRECORD = new MIDIKey(-104, 121), BUTTONSELECTUP = new MIDIKey(-72, 104),
 				BUTTONSELECTDOWN = new MIDIKey(-72, 105), BUTTONSELECTLEFT = new MIDIKey(-72, 106),
 				BUTTONSELECTRIGHT = new MIDIKey(-72, 107);
 
@@ -291,7 +291,7 @@ public class MidiController {
 
 			MIDIKey midikey = new MIDIKey(channel, note_cc);
 			
-			//System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
+			System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
 
 			if (midikey.isFader()) {
 				if (MidiController.getInstance().getCurrentTimestamp()
