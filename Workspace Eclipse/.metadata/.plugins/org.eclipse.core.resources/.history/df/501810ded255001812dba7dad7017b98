@@ -438,22 +438,18 @@ public class MidiController {
 					Mairlist.getInstance().setMairlistPFLSource(MairlistPFLSource.EXTRA);
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTUP)) {
-		        midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_CURSORUP);
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTDOWN)) {
-		        midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_CURSORDOWN);
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTLEFT)) {
-		        midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_PREVPAGE);
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTRIGHT)) {
-		        midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_NEXTPAGE);
 				}
