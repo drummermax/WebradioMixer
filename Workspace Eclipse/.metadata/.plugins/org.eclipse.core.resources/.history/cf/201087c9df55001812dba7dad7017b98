@@ -201,7 +201,9 @@ public class MidiController {
 
 		// midiDeviceIndex =
 		// Integer.parseInt(midiDeviceChoosenString.split(":")[0]);
-		midiDeviceIndex = (int) Filemanager.getInstance().variables.get("midi out");
+		midiDeviceIndex = (int) Filemanager.getInstance().variables.get("midi in");
+
+		System.out.println("choosen midi out: " + midiDeviceIndex);
 
 		try {
 			midiDeviceOutput = MidiSystem.getMidiDevice(midiDeviceInfos[midiDeviceIndex]);

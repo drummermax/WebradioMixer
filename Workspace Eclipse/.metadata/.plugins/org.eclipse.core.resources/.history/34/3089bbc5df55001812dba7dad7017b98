@@ -43,9 +43,9 @@ public class MidiController {
 				BUTTONDOWN6 = new MIDIKey(-104, 90), FADER7 = new MIDIKey(-72, 83), BUTTONUP7 = new MIDIKey(-104, 59),
 				BUTTONDOWN7 = new MIDIKey(-104, 91), FADER8 = new MIDIKey(-72, 84), BUTTONUP8 = new MIDIKey(-104, 60),
 				BUTTONDOWN8 = new MIDIKey(-104, 92), BUTTONMUTE = new MIDIKey(-104, 106),
-				BUTTONSOLO = new MIDIKey(-104, 107), BUTTONRECORD = new MIDIKey(-104, 108),
-				BUTTONSELECTUP = new MIDIKey(-72, 104), BUTTONSELECTDOWN = new MIDIKey(-72, 105),
-				BUTTONSELECTLEFT = new MIDIKey(-72, 106), BUTTONSELECTRIGHT = new MIDIKey(-72, 107);
+				BUTTONSOLO = new MIDIKey(-104, 107), BUTTONRECORD = new MIDIKey(-104, 108), BUTTONSELECTUP = new MIDIKey(-72, 104),
+				BUTTONSELECTDOWN = new MIDIKey(-72, 105), BUTTONSELECTLEFT = new MIDIKey(-72, 106),
+				BUTTONSELECTRIGHT = new MIDIKey(-72, 107);
 
 		private int channel = 0, note_cc = 0;
 		private LEDColor ledColor = LEDColor.OFF;
@@ -131,7 +131,7 @@ public class MidiController {
 
 				midiInputReceiverTransmitter.getReceiver().send(myMsg, -1);
 			}
-
+			
 			this.ledColor = ledColor;
 		}
 
@@ -157,35 +157,28 @@ public class MidiController {
 
 		// INPUT
 
-		// String midiDeviceChoosenString = (String)
-		// JOptionPane.showInputDialog(null, "Select the Midi Input Device",
-		// "Midi Device", JOptionPane.QUESTION_MESSAGE, null, midiDevicesString,
-		// 0);
+		//String midiDeviceChoosenString = (String) JOptionPane.showInputDialog(null, "Select the Midi Input Device",
+		//		"Midi Device", JOptionPane.QUESTION_MESSAGE, null, midiDevicesString, 0);
 
-		// int midiDeviceIndex =
-		// Integer.parseInt(midiDeviceChoosenString.split(":")[0]);
+		//int midiDeviceIndex = Integer.parseInt(midiDeviceChoosenString.split(":")[0]);
 		int midiDeviceIndex = (int) Filemanager.getInstance().variables.get("midi in");
-
+		
 		try {
 			midiDeviceInput = MidiSystem.getMidiDevice(midiDeviceInfos[midiDeviceIndex]);
 
-			/*
-			 * @
-			 * https://stackoverflow.com/questions/37377869/how-can-i-intercept-
-			 * midi-messages List<Transmitter> transmitters =
-			 * midiDeviceInput.getTransmitters();
-			 * 
-			 * for (int j = 0; j < transmitters.size(); j++) {
-			 * transmitters.get(j).setReceiver(new
-			 * MidiInputReceiverTransmitter(midiDeviceInput.getDeviceInfo().
-			 * toString())); }
-			 * 
-			 * if (transmitters.size() != 0) { Transmitter trans =
-			 * midiDeviceInput.getTransmitter(); trans.setReceiver(new
-			 * MidiInputReceiverTransmitter(midiDeviceInput.getDeviceInfo().
-			 * toString())); }
-			 */
+			/* @ https://stackoverflow.com/questions/37377869/how-can-i-intercept-midi-messages
+			List<Transmitter> transmitters = midiDeviceInput.getTransmitters();
 
+			for (int j = 0; j < transmitters.size(); j++) {
+				transmitters.get(j).setReceiver(new MidiInputReceiverTransmitter(midiDeviceInput.getDeviceInfo().toString()));
+			}
+
+			if (transmitters.size() != 0) {
+				Transmitter trans = midiDeviceInput.getTransmitter();
+				trans.setReceiver(new MidiInputReceiverTransmitter(midiDeviceInput.getDeviceInfo().toString()));
+			}
+			*/
+			
 			midiDeviceInput.open();
 
 		} catch (MidiUnavailableException e) {
@@ -194,40 +187,37 @@ public class MidiController {
 
 		// OUTPUT
 
-		// midiDeviceChoosenString = (String) JOptionPane.showInputDialog(null,
-		// "Select the Midi Output Device",
-		// "Midi Device", JOptionPane.QUESTION_MESSAGE, null, midiDevicesString,
-		// 0);
+		//midiDeviceChoosenString = (String) JOptionPane.showInputDialog(null, "Select the Midi Output Device",
+		//		"Midi Device", JOptionPane.QUESTION_MESSAGE, null, midiDevicesString, 0);
 
-		// midiDeviceIndex =
-		// Integer.parseInt(midiDeviceChoosenString.split(":")[0]);
-		midiDeviceIndex = (int) Filemanager.getInstance().variables.get("midi out");
+		//midiDeviceIndex = Integer.parseInt(midiDeviceChoosenString.split(":")[0]);
+		midiDeviceIndex = (int) Filemanager.getInstance().variables.get("midi in");
 
+		System.out.println("choosen midi out: " + midiDeviceIndex);
+		
 		try {
 			midiDeviceOutput = MidiSystem.getMidiDevice(midiDeviceInfos[midiDeviceIndex]);
 
 			/*
-			 * List<Transmitter> transmitters =
-			 * midiDeviceOutput.getTransmitters();
-			 * 
-			 * for (int j = 0; j < transmitters.size(); j++) {
-			 * transmitters.get(j).setReceiver(new
-			 * MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
-			 * }
-			 * 
-			 * if (transmitters.size() != 0) { Transmitter trans =
-			 * midiDeviceOutput.getTransmitter(); trans.setReceiver(new
-			 * MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
-			 * }
-			 */
-			midiDeviceOutput.open();
+			List<Transmitter> transmitters = midiDeviceOutput.getTransmitters();
 
+			for (int j = 0; j < transmitters.size(); j++) {
+				transmitters.get(j).setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
+			}
+
+			if (transmitters.size() != 0) {
+				Transmitter trans = midiDeviceOutput.getTransmitter();
+				trans.setReceiver(new MidiInputReceiver(midiDeviceOutput.getDeviceInfo().toString()));
+			}
+			*/
+			midiDeviceOutput.open();
+			
 		} catch (MidiUnavailableException e) {
 			System.out.println("FAILED");
 		}
-
+		
 		midiInputReceiverTransmitter = new MidiInputReceiverTransmitter();
-
+		
 		try {
 			midiDeviceInput.getTransmitter().setReceiver(midiInputReceiverTransmitter);
 			midiInputReceiverTransmitter.setReceiver(midiDeviceOutput.getReceiver());
@@ -294,7 +284,6 @@ public class MidiController {
 		@Override
 		public void close() {
 		}
-
 		public void send(MidiMessage msg, long timeStamp) {
 			int channel = msg.getMessage()[0];
 			int note_cc = msg.getMessage()[1];
@@ -304,9 +293,8 @@ public class MidiController {
 				velocity = msg.getMessage()[2];
 
 			MIDIKey midikey = new MIDIKey(channel, note_cc);
-
-			// System.out.println("MIDI: Channel = " + channel + " note_cc = " +
-			// note_cc + " velocity = " + velocity);
+			
+			//System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
 
 			if (midikey.isFader()) {
 				if (MidiController.getInstance().getCurrentTimestamp()
@@ -461,22 +449,22 @@ public class MidiController {
 					}
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTUP)) {
-				midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
+		        midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_CURSORUP);
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTDOWN)) {
-				midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
+		        midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.PLAYLIST_CURSORDOWN);
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTLEFT)) {
-				midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
+		        midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_PREVPAGE);
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONSELECTRIGHT)) {
-				midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
+		        midiInputReceiverTransmitter.getReceiver().send(msg, timeStamp);
 				if (velocity == 127) {
 					Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_NEXTPAGE);
 				}
@@ -591,7 +579,7 @@ public class MidiController {
 			MIDIKey.BUTTONDOWN6.setLEDColor(MIDIKey.LEDColor.OFF);
 			MIDIKey.BUTTONDOWN7.setLEDColor(MIDIKey.LEDColor.OFF);
 			MIDIKey.BUTTONDOWN8.setLEDColor(MIDIKey.LEDColor.OFF);
-
+			
 			while (true) {
 				if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.EMPTY) {
 					MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.RED); // aus
@@ -716,7 +704,7 @@ public class MidiController {
 					MIDIKey.BUTTONUP7.setLEDColor(MIDIKey.LEDColor.YELLOW); // rot
 					MIDIKey.BUTTONDOWN7.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				}
-
+				
 				if (MixingDesk.getInstance().isSetRecording()) {
 					MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.RED);
 				} else {
@@ -731,7 +719,12 @@ public class MidiController {
 			}
 		}
 	}
-
+	
+	
+	
+	
+	
+	
 	public static class MidiInputReceiver implements Receiver {
 		public String name;
 
