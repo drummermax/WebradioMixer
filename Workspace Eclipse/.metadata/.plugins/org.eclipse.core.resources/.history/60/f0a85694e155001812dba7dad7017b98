@@ -80,25 +80,25 @@ public class MidiHandler {
 				if (ledColor != this.ledColor) {
 					if (ledColor == LEDColor.RED) {
 						try {
-							myMsg.setMessage(ShortMessage.NOTE_OFF, i, this.note_cc, 15);
+							myMsg.setMessage(ShortMessage.NOTE_ON, i, this.note_cc, 15);
 						} catch (InvalidMidiDataException e) {
 							e.printStackTrace();
 						}
 					} else if (ledColor == LEDColor.YELLOW) {
 						try {
-							myMsg.setMessage(ShortMessage.NOTE_OFF, i, this.note_cc, 62);
+							myMsg.setMessage(ShortMessage.NOTE_ON, i, this.note_cc, 62);
 						} catch (InvalidMidiDataException e) {
 							e.printStackTrace();
 						}
 					} else if (ledColor == LEDColor.GREEN) {
 						try {
-							myMsg.setMessage(ShortMessage.NOTE_OFF, i, this.note_cc, 60);
+							myMsg.setMessage(ShortMessage.NOTE_ON, i, this.note_cc, 60);
 						} catch (InvalidMidiDataException e) {
 							e.printStackTrace();
 						}
 					} else if (ledColor == LEDColor.OFF) {
 						try {
-							myMsg.setMessage(ShortMessage.NOTE_OFF, i, this.note_cc, 12);
+							myMsg.setMessage(ShortMessage.NOTE_ON, i, this.note_cc, 12);
 						} catch (InvalidMidiDataException e) {
 							e.printStackTrace();
 						}
