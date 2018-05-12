@@ -245,6 +245,8 @@ public class MixingDesk {
 	}
 	
 	private void activatePhonesStdWiedergabe() {
+		System.out.println("STD activated");
+		
 		phones.muteSingle(0);
 		phones.muteSingle(1);
 		phones.muteSingle(2);

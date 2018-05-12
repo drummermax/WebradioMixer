@@ -17,12 +17,6 @@ public class Main {
 		
 		MixingDesk.getInstance();
 		
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
 		MidiController.getInstance();
 		
 		GUI gui = new GUI();
