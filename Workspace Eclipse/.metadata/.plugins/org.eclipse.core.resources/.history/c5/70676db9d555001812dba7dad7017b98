@@ -580,7 +580,7 @@ public class MidiController {
 					MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.EOF) {
 					if (MidiController.getInstance().getCurrentTimestamp()
-							- MidiController.getInstance().getTimestampEOF1() > 350) {
+							- MidiController.getInstance().getTimestampEOF1() > 500) {
 						if (MIDIKey.BUTTONDOWN3.getLedColor() != MIDIKey.LEDColor.OFF) {
 							MIDIKey.BUTTONDOWN3.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 						} else {
@@ -602,7 +602,7 @@ public class MidiController {
 					MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.OFF);
 				} else if (Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.EOF) {
 					if (MidiController.getInstance().getCurrentTimestamp()
-							- MidiController.getInstance().getTimestampEOF2() > 350) {
+							- MidiController.getInstance().getTimestampEOF2() > 500) {
 						if (MIDIKey.BUTTONDOWN4.getLedColor() != MIDIKey.LEDColor.OFF) {
 							MIDIKey.BUTTONDOWN4.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 						} else {
