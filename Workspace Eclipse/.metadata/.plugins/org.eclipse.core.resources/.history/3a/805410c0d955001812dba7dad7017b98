@@ -333,7 +333,6 @@ public class MidiController {
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP7)) {
 				if (velocity == 127) {
 					MixingDesk.getInstance().setPhonesStdWiedergabe(false);
-					
 					System.out.println("PRESSED FALSE");
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP8)) {

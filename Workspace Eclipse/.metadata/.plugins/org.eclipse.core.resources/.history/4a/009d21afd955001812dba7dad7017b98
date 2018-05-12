@@ -39,6 +39,8 @@ public class MixingDesk {
 	public static MixingDesk getInstance() {
 		if (instance == null) {
 			instance = new MixingDesk();
+
+			System.out.println("instance");
 			
 			instance.setSpeakingAktive(1, false);
 			instance.setSpeakingAktive(2, false);
