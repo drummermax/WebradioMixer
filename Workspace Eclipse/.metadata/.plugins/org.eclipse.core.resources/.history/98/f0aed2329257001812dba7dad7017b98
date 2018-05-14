@@ -236,13 +236,12 @@ public class MixingDesk {
 	}
 	
 	public void setPhonesStdWiedergabe(boolean phonesStdWiedergabe) {
-		if (phonesStdWiedergabe && !MixingDesk.phonesStdWiedergabe) {
+		MixingDesk.phonesStdWiedergabe = phonesStdWiedergabe;
+		if (phonesStdWiedergabe) {
 			activatePhonesStdWiedergabe();
-		} else if (!phonesStdWiedergabe && MixingDesk.phonesStdWiedergabe){
+		} else {
 			activatePhonesNormal();
 		}
-
-		MixingDesk.phonesStdWiedergabe = phonesStdWiedergabe;
 	}
 	
 	private void activatePhonesStdWiedergabe() {
@@ -273,27 +272,27 @@ public class MixingDesk {
 
 	public void setSpeakingAktive(int microphoneNumber, boolean speakingActive) {
 		if (microphoneNumber == 1) {
-			if (speakingActive && !speakingActive1) {
-				activateMicrophone(microphoneNumber);
-				setSetRecording(true);
-			} else if (!speakingActive && speakingActive1){
-				deactivateMicrophone(microphoneNumber);
-				if (!speakingActive1 && !speakingActive2)
-					setSetRecording(false);
-			}
-
 			speakingActive1 = speakingActive;
-		} else if (microphoneNumber == 2) {			
-			if (speakingActive && !speakingActive2) {
+			
+			if (speakingActive) {
 				activateMicrophone(microphoneNumber);
 				setSetRecording(true);
-			} else if (!speakingActive && speakingActive2){
+			} else {
 				deactivateMicrophone(microphoneNumber);
 				if (!speakingActive1 && !speakingActive2)
 					setSetRecording(false);
 			}
-
+		} else if (microphoneNumber == 2) {
 			speakingActive2 = speakingActive;
+			
+			if (speakingActive) {
+				activateMicrophone(microphoneNumber);
+				setSetRecording(true);
+			} else {
+				deactivateMicrophone(microphoneNumber);
+				if (!speakingActive1 && !speakingActive2)
+					setSetRecording(false);
+			}
 		}
 	}
 
