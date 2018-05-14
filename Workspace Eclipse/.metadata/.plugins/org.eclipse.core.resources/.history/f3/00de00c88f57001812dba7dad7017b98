@@ -638,9 +638,9 @@ public class MidiController {
 				}
 
 				if (MixingDesk.getInstance().isCartwallActive()) {
-					MIDIKey.BUTTONDOWN5.setLEDColor(MIDIKey.LEDColor.GREEN); // grün
-				} else {
 					MIDIKey.BUTTONDOWN5.setLEDColor(MIDIKey.LEDColor.YELLOW); // gelb
+				} else {
+					MIDIKey.BUTTONDOWN5.setLEDColor(MIDIKey.LEDColor.GREEN); // grün
 				}
 
 				if (MairlistPFLSource.PLAYER1.isPFLActive()) {

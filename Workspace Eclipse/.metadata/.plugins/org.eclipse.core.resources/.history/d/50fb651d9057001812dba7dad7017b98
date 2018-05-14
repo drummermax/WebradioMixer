@@ -302,9 +302,6 @@ public class MixingDesk {
 
 	public void setPflActive(boolean pflActive) {
 		MixingDesk.pflActive = pflActive;
-		
-		System.out.println("SET PFL: " + pflActive);
-		
 		if (pflActive) {
 			activatePhonesPFL();
 		} else {
