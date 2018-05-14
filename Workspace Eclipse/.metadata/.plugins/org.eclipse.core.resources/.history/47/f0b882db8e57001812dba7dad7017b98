@@ -301,8 +301,9 @@ public class Mairlist {
 					if (data.split(" ")[1].equals("OFF")) {
 						mairlistPFLSource.setPFLActive(false);
 						
-						if (mairlistPFLSource.name().equals("UNKNOWN"))
+						if (mairlistPFLSource.name().equals("UNKNOWN")) {
 							mairlistPFLSource.CARTWALL.setPFLActive(false);
+						}
 						
 						mairlistPFLSource = MairlistPFLSource.UNKNOWN;
 					} else if (data.split(" ")[1].equals("ON")) {

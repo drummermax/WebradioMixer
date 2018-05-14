@@ -648,7 +648,9 @@ public class MidiController {
 					MixingDesk.getInstance().setPflActive(true);
 				} else {
 					MIDIKey.BUTTONUP3.setLEDColor(MIDIKey.LEDColor.OFF); // aus
-					MixingDesk.getInstance().setPflActive(false);
+					if (!MairlistPFLSource.PLAYER2.isPFLActive() && !MairlistPFLSource.CARTWALL.isPFLActive()
+							&& !MairlistPFLSource.EXTRA.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
+						MixingDesk.getInstance().setPflActive(false);
 				}
 
 				if (MairlistPFLSource.PLAYER2.isPFLActive()) {
@@ -656,7 +658,9 @@ public class MidiController {
 					MixingDesk.getInstance().setPflActive(true);
 				} else {
 					MIDIKey.BUTTONUP4.setLEDColor(MIDIKey.LEDColor.OFF); // aus
-					MixingDesk.getInstance().setPflActive(false);
+					if (!MairlistPFLSource.PLAYER1.isPFLActive() && !MairlistPFLSource.CARTWALL.isPFLActive()
+							&& !MairlistPFLSource.EXTRA.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
+						MixingDesk.getInstance().setPflActive(false);
 				}
 
 				if (MairlistPFLSource.CARTWALL.isPFLActive()) {
@@ -664,7 +668,9 @@ public class MidiController {
 					MixingDesk.getInstance().setPflActive(true);
 				} else {
 					MIDIKey.BUTTONUP5.setLEDColor(MIDIKey.LEDColor.OFF); // aus
-					MixingDesk.getInstance().setPflActive(false);
+					if (!MairlistPFLSource.PLAYER1.isPFLActive() && !MairlistPFLSource.PLAYER2.isPFLActive()
+							&& !MairlistPFLSource.EXTRA.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
+						MixingDesk.getInstance().setPflActive(false);
 				}
 
 				if (MairlistPFLSource.EXTRA.isPFLActive()) {
@@ -672,13 +678,17 @@ public class MidiController {
 					MixingDesk.getInstance().setPflActive(true);
 				} else {
 					MIDIKey.BUTTONSOLO.setLEDColor(MIDIKey.LEDColor.OFF); // aus
-					MixingDesk.getInstance().setPflActive(false);
+					if (!MairlistPFLSource.PLAYER1.isPFLActive() && !MairlistPFLSource.PLAYER2.isPFLActive()
+							&& !MairlistPFLSource.CARTWALL.isPFLActive() && !MairlistPFLSource.UNKNOWN.isPFLActive())
+						MixingDesk.getInstance().setPflActive(false);
 				}
 
 				if (MairlistPFLSource.UNKNOWN.isPFLActive()) {
 					MixingDesk.getInstance().setPflActive(true);
 				} else {
-					MixingDesk.getInstance().setPflActive(false);
+					if (!MairlistPFLSource.PLAYER1.isPFLActive() && !MairlistPFLSource.PLAYER2.isPFLActive()
+							&& !MairlistPFLSource.CARTWALL.isPFLActive() && !MairlistPFLSource.EXTRA.isPFLActive())
+						MixingDesk.getInstance().setPflActive(false);
 				}
 
 				if (MixingDesk.getInstance().isSpeakingActive1()) {
