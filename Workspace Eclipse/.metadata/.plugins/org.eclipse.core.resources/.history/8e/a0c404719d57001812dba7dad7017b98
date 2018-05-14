@@ -275,42 +275,6 @@ public class MidiHandler {
 				myDevice.getReceiver().send(myMsg, -1);
 
 				System.out.println("start channel " + channel + " note " + cc);
-
-				myMsg = new ShortMessage();
-
-				try {
-					myMsg.setMessage(ShortMessage.STOP, channel, cc, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
-
-				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("stop channel " + channel + " note " + cc);
-
-				myMsg = new ShortMessage();
-
-				try {
-					myMsg.setMessage(ShortMessage.CHANNEL_PRESSURE, channel, cc, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
-
-				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("channel pressure channel " + channel + " note " + cc);
-
-				myMsg = new ShortMessage();
-
-				try {
-					myMsg.setMessage(ShortMessage.CONTINUE, channel, cc, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
-
-				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("continue channel " + channel + " note " + cc);
 			}
 		}
 

@@ -214,34 +214,10 @@ public class MidiHandler {
 		// e1.printStackTrace();
 		// }
 
-		for (int cc = 0; cc < 129; cc++) {
+		for (int cc = 0; cc < 128; cc++) {
 			for (int channel = 0; channel < 16; channel++) {
 				myMsg = new ShortMessage();
-
-				try {
-					myMsg.setMessage(ShortMessage.NOTE_ON, channel, cc, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
-
-				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("note on channel " + channel + " note " + cc);
-
-				myMsg = new ShortMessage();
-
-				try {
-					myMsg.setMessage(ShortMessage.NOTE_OFF, channel, cc, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
-
-				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("note off channel " + channel + " note " + cc);
-
-				myMsg = new ShortMessage();
-
+				
 				try {
 					myMsg.setMessage(ShortMessage.CONTROL_CHANGE, channel, cc, 15);
 				} catch (InvalidMidiDataException e) {
@@ -249,70 +225,12 @@ public class MidiHandler {
 				}
 
 				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("control change channel " + channel + " note " + cc);
-
-				myMsg = new ShortMessage();
-
-				try {
-					myMsg.setMessage(ShortMessage.PITCH_BEND, channel, cc, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
-
-				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("pitch bend channel " + channel + " note " + cc);
-
-				myMsg = new ShortMessage();
-
-				try {
-					myMsg.setMessage(ShortMessage.START, channel, cc, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
-
-				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("start channel " + channel + " note " + cc);
-
-				myMsg = new ShortMessage();
-
-				try {
-					myMsg.setMessage(ShortMessage.STOP, channel, cc, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
-
-				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("stop channel " + channel + " note " + cc);
-
-				myMsg = new ShortMessage();
-
-				try {
-					myMsg.setMessage(ShortMessage.CHANNEL_PRESSURE, channel, cc, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
-
-				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("channel pressure channel " + channel + " note " + cc);
-
-				myMsg = new ShortMessage();
-
-				try {
-					myMsg.setMessage(ShortMessage.CONTINUE, channel, cc, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
-
-				myDevice.getReceiver().send(myMsg, -1);
-
-				System.out.println("continue channel " + channel + " note " + cc);
+				
+				System.out.println("channel " + channel + " note " + cc);
 			}
 		}
+		
+		
 
 		while (true) {
 
