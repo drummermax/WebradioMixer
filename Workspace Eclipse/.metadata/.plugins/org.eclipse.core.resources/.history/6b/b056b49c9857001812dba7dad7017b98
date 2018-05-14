@@ -336,7 +336,7 @@ public class MixingDesk {
 				setSetRecording_microphones(true);
 			} else if (!speakingActive && speakingActive1) {
 				deactivateMicrophone(microphoneNumber);
-				if (!speakingActive2)
+				if (!speakingActive1 && !speakingActive2)
 					setSetRecording_microphones(false);
 			}
 
@@ -347,7 +347,7 @@ public class MixingDesk {
 				setSetRecording_microphones(true);
 			} else if (!speakingActive && speakingActive2) {
 				deactivateMicrophone(microphoneNumber);
-				if (!speakingActive1)
+				if (!speakingActive1 && !speakingActive2)
 					setSetRecording_microphones(false);
 			}
 
