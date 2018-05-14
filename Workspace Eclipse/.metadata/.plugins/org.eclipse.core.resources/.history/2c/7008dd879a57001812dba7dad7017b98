@@ -33,7 +33,7 @@ public class MixingDesk {
 	private static boolean speakingActive1 = false, speakingActive2 = false, pflActive = false, cartwallActive = false,
 			monitorMuted = false, phonesStdWiedergabe = false;
 	private static AudioInputStream aircheck_microphones, aircheck_manually;
-	private static File aircheckFile_microphones, aircheckFile_manually;
+	private static File aircheckFile;
 	private static AudioFileFormat.Type aircheckFileType = AudioFileFormat.Type.WAVE;
 
 	private static Thread recorderThread;
@@ -155,13 +155,13 @@ public class MixingDesk {
 				if (aircheckFilePath.contains("\\workspace\\WebradioMixer"))
 					aircheckFilePath = aircheckFilePath.replace("\\workspace\\WebradioMixer", "");
 
-				aircheckFile_microphones = new File(aircheckFilePath);
+				aircheckFile = new File(aircheckFilePath);
 
 				recorderThread = new Thread(new Runnable() {
 					@Override
 					public void run() {
 						try {
-							AudioSystem.write(aircheck_microphones, aircheckFileType, aircheckFile_microphones);
+							AudioSystem.write(aircheck_microphones, aircheckFileType, aircheckFile);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -208,13 +208,13 @@ public class MixingDesk {
 				if (aircheckFilePath.contains("\\workspace\\WebradioMixer"))
 					aircheckFilePath = aircheckFilePath.replace("\\workspace\\WebradioMixer", "");
 
-				aircheckFile_manually = new File(aircheckFilePath);
+				aircheckFile = new File(aircheckFilePath);
 
 				recorderThread = new Thread(new Runnable() {
 					@Override
 					public void run() {
 						try {
-							AudioSystem.write(aircheck_manually, aircheckFileType, aircheckFile_manually);
+							AudioSystem.write(aircheck_manually, aircheckFileType, aircheckFile);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}

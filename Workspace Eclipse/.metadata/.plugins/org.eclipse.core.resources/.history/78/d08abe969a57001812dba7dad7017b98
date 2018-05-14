@@ -155,13 +155,13 @@ public class MixingDesk {
 				if (aircheckFilePath.contains("\\workspace\\WebradioMixer"))
 					aircheckFilePath = aircheckFilePath.replace("\\workspace\\WebradioMixer", "");
 
-				aircheckFile_microphones = new File(aircheckFilePath);
+				aircheckFile = new File(aircheckFilePath);
 
 				recorderThread = new Thread(new Runnable() {
 					@Override
 					public void run() {
 						try {
-							AudioSystem.write(aircheck_microphones, aircheckFileType, aircheckFile_microphones);
+							AudioSystem.write(aircheck_microphones, aircheckFileType, aircheckFile);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -208,13 +208,13 @@ public class MixingDesk {
 				if (aircheckFilePath.contains("\\workspace\\WebradioMixer"))
 					aircheckFilePath = aircheckFilePath.replace("\\workspace\\WebradioMixer", "");
 
-				aircheckFile_manually = new File(aircheckFilePath);
+				aircheckFile = new File(aircheckFilePath);
 
 				recorderThread = new Thread(new Runnable() {
 					@Override
 					public void run() {
 						try {
-							AudioSystem.write(aircheck_manually, aircheckFileType, aircheckFile_manually);
+							AudioSystem.write(aircheck_manually, aircheckFileType, aircheckFile);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
