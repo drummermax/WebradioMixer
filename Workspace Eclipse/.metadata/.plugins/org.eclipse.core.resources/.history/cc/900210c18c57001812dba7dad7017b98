@@ -299,7 +299,6 @@ public class Mairlist {
 					}
 				} else if (data.contains("PFL")) {
 					if (data.split(" ")[1].equals("OFF")) {
-						System.out.println("PFL DEAKTIVATED: " + mairlistPFLSource.name());
 						mairlistPFLSource.setPFLActive(false);
 						mairlistPFLSource = MairlistPFLSource.UNKNOWN;
 					} else if (data.split(" ")[1].equals("ON")) {
