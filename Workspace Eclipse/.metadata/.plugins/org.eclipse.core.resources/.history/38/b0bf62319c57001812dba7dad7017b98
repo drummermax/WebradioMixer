@@ -216,8 +216,6 @@ public class MidiHandler {
 
 		for (int cc = 0; cc < 128; cc++) {
 			for (int channel = 0; channel < 16; channel++) {
-				myMsg = new ShortMessage();
-				
 				try {
 					myMsg.setMessage(ShortMessage.NOTE_ON, channel, cc, 15);
 				} catch (InvalidMidiDataException e) {
@@ -225,8 +223,6 @@ public class MidiHandler {
 				}
 
 				myDevice.getReceiver().send(myMsg, -1);
-				
-				System.out.println("channel " + channel + " note " + cc);
 			}
 		}
 		

@@ -216,17 +216,13 @@ public class MidiHandler {
 
 		for (int cc = 0; cc < 128; cc++) {
 			for (int channel = 0; channel < 16; channel++) {
-				myMsg = new ShortMessage();
-				
 				try {
-					myMsg.setMessage(ShortMessage.NOTE_ON, channel, cc, 15);
+					myMsg.setMessage(ShortMessage.NOTE_OFF, channel, cc, 12);
 				} catch (InvalidMidiDataException e) {
 					e.printStackTrace();
 				}
 
 				myDevice.getReceiver().send(myMsg, -1);
-				
-				System.out.println("channel " + channel + " note " + cc);
 			}
 		}
 		

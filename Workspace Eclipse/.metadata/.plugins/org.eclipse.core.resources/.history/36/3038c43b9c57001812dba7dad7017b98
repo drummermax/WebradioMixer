@@ -225,8 +225,6 @@ public class MidiHandler {
 				}
 
 				myDevice.getReceiver().send(myMsg, -1);
-				
-				System.out.println("channel " + channel + " note " + cc);
 			}
 		}
 		
