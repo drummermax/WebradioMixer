@@ -260,8 +260,6 @@ public class Mairlist {
 
 				String data = reader.readLine();
 				
-				System.out.println("RETURN DATA: " + data);
-				
 				if (!firstMessageOffAirResponse) {
 					sendCommandTCP(CommandTCP.GUI_OFFAIR);
 					firstMessageOffAirResponse = true;
