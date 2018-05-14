@@ -323,9 +323,11 @@ public class MixingDesk {
 
 	public void toggleSpeakingActive(int microphoneNumber) {
 		if (microphoneNumber == 1) {
-			setSpeakingAktive(microphoneNumber, !speakingActive1);
+			speakingActive1 = !speakingActive1;
+			setSpeakingAktive(microphoneNumber, speakingActive1);
 		} else if (microphoneNumber == 2) {
-			setSpeakingAktive(microphoneNumber, !speakingActive2);
+			speakingActive2 = !speakingActive2;
+			setSpeakingAktive(microphoneNumber, speakingActive2);
 		}
 	}
 
