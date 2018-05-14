@@ -301,13 +301,13 @@ public class MixingDesk {
 		setPflActive(!pflActive);
 	}
 
-	public void setPflActive(boolean pflActive) {		
+	public void setPflActive(boolean pflActive) {
+		System.out.println("SET PFL: " + pflActive);
+		
 		if (pflActive && !MixingDesk.pflActive) {
 			activatePhonesPFL();
-			System.out.println("SET PFL: " + pflActive);
 		} else if (!pflActive && MixingDesk.pflActive){
 			deactivatePhonesPFL();
-			System.out.println("SET PFL: " + pflActive);
 		}
 		
 		MixingDesk.pflActive = pflActive;
