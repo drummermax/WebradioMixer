@@ -338,8 +338,8 @@ public class MidiController {
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP5)) {
 				if (velocity == 127) {
-					Mairlist.getInstance().setMairlistPFLSource(MairlistPFLSource.CARTWALL);
 					Mairlist.getInstance().setCartwallPFLActivated(!Mairlist.getInstance().isCartwallPFLActivated());
+					Mairlist.getInstance().setMairlistPFLSource(MairlistPFLSource.CARTWALL);
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP6)) {
 				if (velocity == 127) {
