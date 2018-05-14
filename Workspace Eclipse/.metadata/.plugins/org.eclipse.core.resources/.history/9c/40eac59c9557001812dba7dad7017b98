@@ -28,11 +28,9 @@ public class MixingDesk {
 
 	private static String nircmdPath;
 
-	private static boolean setRecording_microphones = false, setRecording_manually = false,
-			isRecording_microphones = false, isRecording_manually = false;
-	private static boolean speakingActive1 = false, speakingActive2 = false, pflActive = false, cartwallActive = false,
-			monitorMuted = false, phonesStdWiedergabe = false;
-	private static AudioInputStream aircheck_microphones, aircheck_manually;
+	private static boolean setRecording = false, isRecording = false;
+	private static boolean speakingActive1 = false, speakingActive2 = false, pflActive = false, cartwallActive = false, monitorMuted = false, phonesStdWiedergabe = false;
+	private static AudioInputStream aircheck;
 	private static File aircheckFile;
 	private static AudioFileFormat.Type aircheckFileType = AudioFileFormat.Type.WAVE;
 
@@ -41,7 +39,7 @@ public class MixingDesk {
 	public static MixingDesk getInstance() {
 		if (instance == null) {
 			instance = new MixingDesk();
-
+			
 			instance.setSpeakingAktive(1, false);
 			instance.setSpeakingAktive(2, false);
 			instance.setPflActive(false);
@@ -88,18 +86,15 @@ public class MixingDesk {
 		boolean[] phonesInputsLatencyCompensation = { false, false, false, false, false };
 
 		mairlistMaster = new OutputCombined(audioFormat,
-				(int) Filemanager.getInstance().variables.get("mairlist master"), mairlistMasterInputs,
-				mairlistMasterInputsLatencyCompensation);
+				(int) Filemanager.getInstance().variables.get("mairlist master"), mairlistMasterInputs, mairlistMasterInputsLatencyCompensation);
 		mairlistMaster.setVolume(1);
-		// mairlistMasterRecord.setVolume(0.8); //avoid clipping in master
-		// channel
-
+		//mairlistMasterRecord.setVolume(0.8); //avoid clipping in master channel
+		
 		monitor = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("monitor"),
 				monitorInputs, monitorInputsLatencyCompensation);
 		monitor.setVolume(1);
-
-		phones = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("phones"), phonesInputs,
-				phonesInputsLatencyCompensation);
+		
+		phones = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("phones"), phonesInputs, phonesInputsLatencyCompensation);
 		phones.setVolume(1);
 	}
 
@@ -135,22 +130,21 @@ public class MixingDesk {
 		monitor.updateInputData();
 		phones.updateInputData();
 
-		if (setRecording_microphones) {
-			if (!isRecording_microphones) {
-				isRecording_microphones = true;
+		if (setRecording) {
+			if (!isRecording) {
+				isRecording = true;
 
-				System.out.println("started recording microphones");
+				System.out.println("recording");
 
-				if (!isRecording_manually)
-					mairlistMasterRecord.open();
+				mairlistMasterRecord.open();
 
-				aircheck_microphones = new AudioInputStream(mairlistMasterRecord.getTargetDataLine());
+				aircheck = new AudioInputStream(mairlistMasterRecord.getTargetDataLine());
 
 				SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 				Date now = new Date();
 				String strDate = sdfDate.format(now);
 
-				String aircheckFilePath = System.getProperty("user.dir") + "\\aircheck\\aircheck_" + strDate + ".wav";
+				String aircheckFilePath = System.getProperty("user.dir") + "\\aircheck\\" + strDate + ".wav";
 
 				if (aircheckFilePath.contains("\\workspace\\WebradioMixer"))
 					aircheckFilePath = aircheckFilePath.replace("\\workspace\\WebradioMixer", "");
@@ -161,7 +155,7 @@ public class MixingDesk {
 					@Override
 					public void run() {
 						try {
-							AudioSystem.write(aircheck_microphones, aircheckFileType, aircheckFile);
+							AudioSystem.write(aircheck, aircheckFileType, aircheckFile);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -172,66 +166,12 @@ public class MixingDesk {
 				recorderThread.start();
 			}
 		} else {
-			if (isRecording_microphones) {
-				isRecording_microphones = false;
+			if (isRecording) {
+				isRecording = false;
 
-				if (!isRecording_manually)
-					mairlistMasterRecord.close();
+				mairlistMasterRecord.close();
 
-				System.out.println("finished recording microphones");
-
-				// try {
-				// aircheck.close();
-				// } catch (IOException e) {
-				// e.printStackTrace();
-				// }
-			}
-		}
-
-		if (setRecording_manually) {
-			if (!isRecording_manually) {
-				isRecording_manually = true;
-
-				System.out.println("started recording manually");
-
-				if (!isRecording_microphones)
-					mairlistMasterRecord.open();
-
-				aircheck_manually = new AudioInputStream(mairlistMasterRecord.getTargetDataLine());
-
-				SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-				Date now = new Date();
-				String strDate = sdfDate.format(now);
-
-				String aircheckFilePath = System.getProperty("user.dir") + "\\aircheck\\record_" + strDate + ".wav";
-
-				if (aircheckFilePath.contains("\\workspace\\WebradioMixer"))
-					aircheckFilePath = aircheckFilePath.replace("\\workspace\\WebradioMixer", "");
-
-				aircheckFile = new File(aircheckFilePath);
-
-				recorderThread = new Thread(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							AudioSystem.write(aircheck_manually, aircheckFileType, aircheckFile);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
-						recorderThread = null;
-					}
-				});
-				recorderThread.start();
-			}
-		} else {
-			if (isRecording_manually) {
-				isRecording_manually = false;
-
-				if (!isRecording_microphones)
-					mairlistMasterRecord.close();
-
-				System.out.println("finished recording manually");
+				System.out.println("finished recording");
 
 				// try {
 				// aircheck.close();
@@ -294,17 +234,17 @@ public class MixingDesk {
 		monitor.muteSingle(2);
 		phones.muteSingle(3);
 	}
-
+	
 	public void setPhonesStdWiedergabe(boolean phonesStdWiedergabe) {
 		if (phonesStdWiedergabe && !MixingDesk.phonesStdWiedergabe) {
 			activatePhonesStdWiedergabe();
-		} else if (!phonesStdWiedergabe && MixingDesk.phonesStdWiedergabe) {
+		} else if (!phonesStdWiedergabe && MixingDesk.phonesStdWiedergabe){
 			activatePhonesNormal();
 		}
 
 		MixingDesk.phonesStdWiedergabe = phonesStdWiedergabe;
 	}
-
+	
 	private void activatePhonesStdWiedergabe() {
 		phones.muteSingle(0);
 		phones.muteSingle(1);
@@ -312,7 +252,7 @@ public class MixingDesk {
 		phones.muteSingle(3);
 		phones.unmuteSingle(4);
 	}
-
+	
 	private void activatePhonesNormal() {
 		phones.unmuteSingle(0);
 		phones.unmuteSingle(1);
@@ -335,22 +275,22 @@ public class MixingDesk {
 		if (microphoneNumber == 1) {
 			if (speakingActive && !speakingActive1) {
 				activateMicrophone(microphoneNumber);
-				setSetRecording_microphones(true);
-			} else if (!speakingActive && speakingActive1) {
+				setSetRecording(true);
+			} else if (!speakingActive && speakingActive1){
 				deactivateMicrophone(microphoneNumber);
 				if (!speakingActive1 && !speakingActive2)
-					setSetRecording_microphones(false);
+					setSetRecording(false);
 			}
 
 			speakingActive1 = speakingActive;
-		} else if (microphoneNumber == 2) {
+		} else if (microphoneNumber == 2) {			
 			if (speakingActive && !speakingActive2) {
 				activateMicrophone(microphoneNumber);
-				setSetRecording_microphones(true);
-			} else if (!speakingActive && speakingActive2) {
+				setSetRecording(true);
+			} else if (!speakingActive && speakingActive2){
 				deactivateMicrophone(microphoneNumber);
 				if (!speakingActive1 && !speakingActive2)
-					setSetRecording_microphones(false);
+					setSetRecording(false);
 			}
 
 			speakingActive2 = speakingActive;
@@ -361,15 +301,15 @@ public class MixingDesk {
 		setPflActive(!pflActive);
 	}
 
-	public void setPflActive(boolean pflActive) {
+	public void setPflActive(boolean pflActive) {		
 		if (pflActive && !MixingDesk.pflActive) {
 			activatePhonesPFL();
 			System.out.println("SET PFL: " + pflActive);
-		} else if (!pflActive && MixingDesk.pflActive) {
+		} else if (!pflActive && MixingDesk.pflActive){
 			deactivatePhonesPFL();
 			System.out.println("SET PFL: " + pflActive);
 		}
-
+		
 		MixingDesk.pflActive = pflActive;
 	}
 
@@ -380,13 +320,13 @@ public class MixingDesk {
 	public void setCartwallActive(boolean cartwallActive) {
 		if (cartwallActive && !MixingDesk.cartwallActive) {
 			activateCartwall();
-		} else if (!cartwallActive && MixingDesk.cartwallActive) {
+		} else if (!cartwallActive && MixingDesk.cartwallActive){
 			deactivateCartwall();
 		}
 
 		MixingDesk.cartwallActive = cartwallActive;
 	}
-
+	
 	public void toggleMonitorMuted() {
 		setMonitorMuted(!monitorMuted);
 	}
@@ -400,7 +340,7 @@ public class MixingDesk {
 
 		MixingDesk.monitorMuted = monitorMuted;
 	}
-
+	
 	public AudioFormat getAudioFormat() {
 		return audioFormat;
 	}
@@ -469,20 +409,12 @@ public class MixingDesk {
 		return mairlistMaster;
 	}
 
-	public void setSetRecording_microphones(boolean setRecording_microphones) {
-		MixingDesk.setRecording_microphones = setRecording_microphones;
+	public void setSetRecording(boolean setRecording) {		
+		MixingDesk.setRecording = setRecording;
 	}
-
-	public boolean isSetRecording_microphones() {
-		return setRecording_microphones;
-	}
-
-	public void setSetRecording_manually(boolean setRecording_manually) {
-		MixingDesk.setRecording_manually = setRecording_manually;
-	}
-
-	public boolean isSetRecording_manually() {
-		return setRecording_manually;
+	
+	public boolean isSetRecording() {
+		return setRecording;
 	}
 
 	public boolean isSpeakingActive1() {

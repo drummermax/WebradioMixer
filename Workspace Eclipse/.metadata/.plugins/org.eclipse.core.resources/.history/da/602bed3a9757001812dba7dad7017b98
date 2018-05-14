@@ -335,22 +335,22 @@ public class MixingDesk {
 		if (microphoneNumber == 1) {
 			if (speakingActive && !speakingActive1) {
 				activateMicrophone(microphoneNumber);
-				setSetRecording_microphones(true);
+				setSetRecording(true);
 			} else if (!speakingActive && speakingActive1) {
 				deactivateMicrophone(microphoneNumber);
 				if (!speakingActive1 && !speakingActive2)
-					setSetRecording_microphones(false);
+					setSetRecording(false);
 			}
 
 			speakingActive1 = speakingActive;
 		} else if (microphoneNumber == 2) {
 			if (speakingActive && !speakingActive2) {
 				activateMicrophone(microphoneNumber);
-				setSetRecording_microphones(true);
+				setSetRecording(true);
 			} else if (!speakingActive && speakingActive2) {
 				deactivateMicrophone(microphoneNumber);
 				if (!speakingActive1 && !speakingActive2)
-					setSetRecording_microphones(false);
+					setSetRecording(false);
 			}
 
 			speakingActive2 = speakingActive;

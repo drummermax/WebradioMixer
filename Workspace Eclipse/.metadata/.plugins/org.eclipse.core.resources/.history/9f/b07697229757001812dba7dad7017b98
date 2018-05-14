@@ -335,22 +335,22 @@ public class MixingDesk {
 		if (microphoneNumber == 1) {
 			if (speakingActive && !speakingActive1) {
 				activateMicrophone(microphoneNumber);
-				setSetRecording_microphones(true);
+				setSetRecording(true);
 			} else if (!speakingActive && speakingActive1) {
 				deactivateMicrophone(microphoneNumber);
 				if (!speakingActive1 && !speakingActive2)
-					setSetRecording_microphones(false);
+					setSetRecording(false);
 			}
 
 			speakingActive1 = speakingActive;
 		} else if (microphoneNumber == 2) {
 			if (speakingActive && !speakingActive2) {
 				activateMicrophone(microphoneNumber);
-				setSetRecording_microphones(true);
+				setSetRecording(true);
 			} else if (!speakingActive && speakingActive2) {
 				deactivateMicrophone(microphoneNumber);
 				if (!speakingActive1 && !speakingActive2)
-					setSetRecording_microphones(false);
+					setSetRecording(false);
 			}
 
 			speakingActive2 = speakingActive;
@@ -469,20 +469,12 @@ public class MixingDesk {
 		return mairlistMaster;
 	}
 
-	public void setSetRecording_microphones(boolean setRecording_microphones) {
-		MixingDesk.setRecording_microphones = setRecording_microphones;
+	public void setSetRecording(boolean setRecording) {
+		MixingDesk.setRecording = setRecording;
 	}
 
-	public boolean isSetRecording_microphones() {
-		return setRecording_microphones;
-	}
-
-	public void setSetRecording_manually(boolean setRecording_manually) {
-		MixingDesk.setRecording_manually = setRecording_manually;
-	}
-
-	public boolean isSetRecording_manually() {
-		return setRecording_manually;
+	public boolean isSetRecording() {
+		return setRecording;
 	}
 
 	public boolean isSpeakingActive1() {
