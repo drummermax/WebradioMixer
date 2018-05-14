@@ -219,7 +219,7 @@ public class MidiHandler {
 				myMsg = new ShortMessage();
 				
 				try {
-					myMsg.setMessage(ShortMessage.NOTE_OFF, channel, cc, 15);
+					myMsg.setMessage(ShortMessage.NOTE_ON, channel, cc, 15);
 				} catch (InvalidMidiDataException e) {
 					e.printStackTrace();
 				}
