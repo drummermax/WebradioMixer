@@ -139,10 +139,10 @@ public class MixingDesk {
 			if (!isRecording_microphones) {
 				isRecording_microphones = true;
 
-				if (setRecording_manually)
+				if (setRecording_manually) {
 					setRecording_manually = false;
+				}
 				
-				while (isRecording_manually);
 				
 				System.out.println("started recording microphones");
 
@@ -178,10 +178,10 @@ public class MixingDesk {
 			}
 		} else {
 			if (isRecording_microphones) {
+				isRecording_microphones = false;
+
 				if (!isRecording_manually)
 					mairlistMasterRecord.close();
-
-				isRecording_microphones = false;
 
 				System.out.println("finished recording microphones");
 
@@ -200,8 +200,6 @@ public class MixingDesk {
 				if (setRecording_microphones) {
 					setRecording_microphones = false;
 				}
-
-				while (isRecording_manually);
 
 				System.out.println("started recording manually");
 
@@ -237,11 +235,11 @@ public class MixingDesk {
 			}
 		} else {
 			if (isRecording_manually) {
+				isRecording_manually = false;
+
 				if (!isRecording_microphones)
 					mairlistMasterRecord.close();
 
-				isRecording_manually = false;
-				
 				System.out.println("finished recording manually");
 
 				// try {

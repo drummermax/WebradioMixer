@@ -237,11 +237,11 @@ public class MixingDesk {
 			}
 		} else {
 			if (isRecording_manually) {
+				isRecording_manually = false;
+
 				if (!isRecording_microphones)
 					mairlistMasterRecord.close();
 
-				isRecording_manually = false;
-				
 				System.out.println("finished recording manually");
 
 				// try {

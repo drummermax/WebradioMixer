@@ -139,10 +139,10 @@ public class MixingDesk {
 			if (!isRecording_microphones) {
 				isRecording_microphones = true;
 
-				if (setRecording_manually)
+				if (setRecording_manually) {
 					setRecording_manually = false;
+				}
 				
-				while (isRecording_manually);
 				
 				System.out.println("started recording microphones");
 
@@ -162,7 +162,7 @@ public class MixingDesk {
 
 				aircheckFile_microphones = new File(aircheckFilePath);
 
-				recorderThread_microphones = new Thread(new Runnable() {
+				recorderThread = new Thread(new Runnable() {
 					@Override
 					public void run() {
 						try {
@@ -171,17 +171,17 @@ public class MixingDesk {
 							e.printStackTrace();
 						}
 
-						recorderThread_microphones = null;
+						recorderThread = null;
 					}
 				});
-				recorderThread_microphones.start();
+				recorderThread.start();
 			}
 		} else {
 			if (isRecording_microphones) {
+				isRecording_microphones = false;
+
 				if (!isRecording_manually)
 					mairlistMasterRecord.close();
-
-				isRecording_microphones = false;
 
 				System.out.println("finished recording microphones");
 
@@ -201,8 +201,6 @@ public class MixingDesk {
 					setRecording_microphones = false;
 				}
 
-				while (isRecording_manually);
-
 				System.out.println("started recording manually");
 
 				if (!isRecording_microphones)
@@ -221,7 +219,7 @@ public class MixingDesk {
 
 				aircheckFile_manually = new File(aircheckFilePath);
 
-				recorderThread_manually = new Thread(new Runnable() {
+				recorderThread = new Thread(new Runnable() {
 					@Override
 					public void run() {
 						try {
@@ -230,18 +228,18 @@ public class MixingDesk {
 							e.printStackTrace();
 						}
 
-						recorderThread_manually = null;
+						recorderThread = null;
 					}
 				});
-				recorderThread_manually.start();
+				recorderThread.start();
 			}
 		} else {
 			if (isRecording_manually) {
+				isRecording_manually = false;
+
 				if (!isRecording_microphones)
 					mairlistMasterRecord.close();
 
-				isRecording_manually = false;
-				
 				System.out.println("finished recording manually");
 
 				// try {
