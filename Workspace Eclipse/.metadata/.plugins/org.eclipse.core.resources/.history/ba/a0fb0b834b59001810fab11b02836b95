@@ -198,12 +198,12 @@ public class MixingDesk {
 
 				if (setRecording_microphones) {
 					setRecording_microphones = false;
-					mairlistMasterRecord.close();
 				}
 
 				System.out.println("started recording manually");
 
-				mairlistMasterRecord.open();
+				if (!isRecording_microphones)
+					mairlistMasterRecord.open();
 
 				aircheck_manually = new AudioInputStream(mairlistMasterRecord.getTargetDataLine());
 
