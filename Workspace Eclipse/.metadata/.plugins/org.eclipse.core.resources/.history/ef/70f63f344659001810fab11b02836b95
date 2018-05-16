@@ -34,18 +34,18 @@ public class MidiController {
 	}
 
 	public static class MIDIKey {
-		public static MIDIKey FADER1 = new MIDIKey(-65, 77), BUTTONUP1 = new MIDIKey(-113, 41),
-				BUTTONDOWN1 = new MIDIKey(-113, 73), FADER2 = new MIDIKey(-65, 78), BUTTONUP2 = new MIDIKey(-113, 42),
-				BUTTONDOWN2 = new MIDIKey(-113, 74), FADER3 = new MIDIKey(-65, 79), BUTTONUP3 = new MIDIKey(-113, 43),
-				BUTTONDOWN3 = new MIDIKey(-113, 75), FADER4 = new MIDIKey(-65, 80), BUTTONUP4 = new MIDIKey(-113, 44),
-				BUTTONDOWN4 = new MIDIKey(-113, 76), FADER5 = new MIDIKey(-65, 81), BUTTONUP5 = new MIDIKey(-113, 57),
-				BUTTONDOWN5 = new MIDIKey(-113, 89), FADER6 = new MIDIKey(-65, 82), BUTTONUP6 = new MIDIKey(-113, 58),
-				BUTTONDOWN6 = new MIDIKey(-113, 90), FADER7 = new MIDIKey(-65, 83), BUTTONUP7 = new MIDIKey(-113, 59),
-				BUTTONDOWN7 = new MIDIKey(-113, 91), FADER8 = new MIDIKey(-65, 84), BUTTONUP8 = new MIDIKey(-113, 60),
-				BUTTONDOWN8 = new MIDIKey(-113, 92), BUTTONMUTE = new MIDIKey(-113, 106),
-				BUTTONSOLO = new MIDIKey(-113, 107), BUTTONRECORD = new MIDIKey(-113, 108),
-				BUTTONSELECTUP = new MIDIKey(-65, 104), BUTTONSELECTDOWN = new MIDIKey(-65, 105),
-				BUTTONSELECTLEFT = new MIDIKey(-65, 106), BUTTONSELECTRIGHT = new MIDIKey(-65, 107);
+		public static MIDIKey FADER1 = new MIDIKey(-72, 77), BUTTONUP1 = new MIDIKey(-104, 41),
+				BUTTONDOWN1 = new MIDIKey(-104, 73), FADER2 = new MIDIKey(-72, 78), BUTTONUP2 = new MIDIKey(-104, 42),
+				BUTTONDOWN2 = new MIDIKey(-104, 74), FADER3 = new MIDIKey(-72, 79), BUTTONUP3 = new MIDIKey(-104, 43),
+				BUTTONDOWN3 = new MIDIKey(-104, 75), FADER4 = new MIDIKey(-72, 80), BUTTONUP4 = new MIDIKey(-104, 44),
+				BUTTONDOWN4 = new MIDIKey(-104, 76), FADER5 = new MIDIKey(-72, 81), BUTTONUP5 = new MIDIKey(-104, 57),
+				BUTTONDOWN5 = new MIDIKey(-104, 89), FADER6 = new MIDIKey(-72, 82), BUTTONUP6 = new MIDIKey(-104, 58),
+				BUTTONDOWN6 = new MIDIKey(-104, 90), FADER7 = new MIDIKey(-72, 83), BUTTONUP7 = new MIDIKey(-104, 59),
+				BUTTONDOWN7 = new MIDIKey(-104, 91), FADER8 = new MIDIKey(-72, 84), BUTTONUP8 = new MIDIKey(-104, 60),
+				BUTTONDOWN8 = new MIDIKey(-104, 92), BUTTONMUTE = new MIDIKey(-104, 106),
+				BUTTONSOLO = new MIDIKey(-104, 107), BUTTONRECORD = new MIDIKey(-104, 108),
+				BUTTONSELECTUP = new MIDIKey(-72, 104), BUTTONSELECTDOWN = new MIDIKey(-72, 105),
+				BUTTONSELECTLEFT = new MIDIKey(-72, 106), BUTTONSELECTRIGHT = new MIDIKey(-72, 107);
 
 		private int channel = 0, note_cc = 0;
 		private LEDColor ledColor = LEDColor.OFF;
@@ -305,7 +305,7 @@ public class MidiController {
 
 			MIDIKey midikey = new MIDIKey(channel, note_cc);
 
-			//System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
+			System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
 
 			if (midikey.isFader()) {
 				if (MidiController.getInstance().getCurrentTimestamp()
