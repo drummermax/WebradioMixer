@@ -227,12 +227,7 @@ public class MidiHandler {
 				myDevice.getReceiver().send(myMsg, -1);
 
 				System.out.println("note on channel " + channel + " note " + 41);
-				
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+
 //				myMsg = new ShortMessage();
 //
 //				try {
