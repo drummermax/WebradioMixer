@@ -142,6 +142,8 @@ public class MixingDesk {
 				if (setRecording_manually)
 					setRecording_manually = false;
 				
+				while (isRecording_manually);
+				
 				System.out.println("started recording microphones");
 
 				if (!isRecording_manually)
@@ -198,6 +200,8 @@ public class MixingDesk {
 				if (setRecording_microphones) {
 					setRecording_microphones = false;
 				}
+
+				while (isRecording_manually);
 
 				System.out.println("started recording manually");
 
