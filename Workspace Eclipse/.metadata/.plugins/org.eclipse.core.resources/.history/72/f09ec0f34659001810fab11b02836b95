@@ -34,16 +34,16 @@ public class MidiController {
 	}
 
 	public static class MIDIKey {
-		public static MIDIKey FADER1 = new MIDIKey(-65, 77), BUTTONUP1 = new MIDIKey(-97, 41),
-				BUTTONDOWN1 = new MIDIKey(-97, 73), FADER2 = new MIDIKey(-65, 78), BUTTONUP2 = new MIDIKey(-97, 42),
-				BUTTONDOWN2 = new MIDIKey(-97, 74), FADER3 = new MIDIKey(-65, 79), BUTTONUP3 = new MIDIKey(-97, 43),
-				BUTTONDOWN3 = new MIDIKey(-97, 75), FADER4 = new MIDIKey(-65, 80), BUTTONUP4 = new MIDIKey(-97, 44),
-				BUTTONDOWN4 = new MIDIKey(-97, 76), FADER5 = new MIDIKey(-65, 81), BUTTONUP5 = new MIDIKey(-97, 57),
-				BUTTONDOWN5 = new MIDIKey(-97, 89), FADER6 = new MIDIKey(-65, 82), BUTTONUP6 = new MIDIKey(-97, 58),
-				BUTTONDOWN6 = new MIDIKey(-97, 90), FADER7 = new MIDIKey(-65, 83), BUTTONUP7 = new MIDIKey(-97, 59),
-				BUTTONDOWN7 = new MIDIKey(-97, 91), FADER8 = new MIDIKey(-65, 84), BUTTONUP8 = new MIDIKey(-97, 60),
-				BUTTONDOWN8 = new MIDIKey(-97, 92), BUTTONMUTE = new MIDIKey(-97, 106),
-				BUTTONSOLO = new MIDIKey(-97, 107), BUTTONRECORD = new MIDIKey(-97, 108),
+		public static MIDIKey FADER1 = new MIDIKey(-65, 77), BUTTONUP1 = new MIDIKey(-113, 41),
+				BUTTONDOWN1 = new MIDIKey(-113, 73), FADER2 = new MIDIKey(-65, 78), BUTTONUP2 = new MIDIKey(-113, 42),
+				BUTTONDOWN2 = new MIDIKey(-113, 74), FADER3 = new MIDIKey(-65, 79), BUTTONUP3 = new MIDIKey(-113, 43),
+				BUTTONDOWN3 = new MIDIKey(-113, 75), FADER4 = new MIDIKey(-65, 80), BUTTONUP4 = new MIDIKey(-113, 44),
+				BUTTONDOWN4 = new MIDIKey(-113, 76), FADER5 = new MIDIKey(-65, 81), BUTTONUP5 = new MIDIKey(-113, 57),
+				BUTTONDOWN5 = new MIDIKey(-113, 89), FADER6 = new MIDIKey(-65, 82), BUTTONUP6 = new MIDIKey(-113, 58),
+				BUTTONDOWN6 = new MIDIKey(-113, 90), FADER7 = new MIDIKey(-65, 83), BUTTONUP7 = new MIDIKey(-113, 59),
+				BUTTONDOWN7 = new MIDIKey(-113, 91), FADER8 = new MIDIKey(-65, 84), BUTTONUP8 = new MIDIKey(-113, 60),
+				BUTTONDOWN8 = new MIDIKey(-113, 92), BUTTONMUTE = new MIDIKey(-113, 106),
+				BUTTONSOLO = new MIDIKey(-113, 107), BUTTONRECORD = new MIDIKey(-113, 108),
 				BUTTONSELECTUP = new MIDIKey(-65, 104), BUTTONSELECTDOWN = new MIDIKey(-65, 105),
 				BUTTONSELECTLEFT = new MIDIKey(-65, 106), BUTTONSELECTRIGHT = new MIDIKey(-65, 107);
 
