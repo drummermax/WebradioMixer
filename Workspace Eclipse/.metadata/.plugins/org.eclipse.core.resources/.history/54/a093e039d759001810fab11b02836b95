@@ -224,119 +224,113 @@ public class MidiHandler {
 		// for (int cc = 0; cc < 129; cc++) {
 		for (int channel = 0; channel < 16; channel++) {
 			for (int midiTypeIndex = 0; midiTypeIndex < midiTypes.length; midiTypeIndex++) {
+				
+			
+			myMsg = new ShortMessage();
 
-				myMsg = new ShortMessage();
+			try {
+				myMsg.setMessage(midiTypes[midiTypeIndex], channel, 106, 15);
+			} catch (InvalidMidiDataException e) {
+				e.printStackTrace();
+			}
 
-				try {
-					myMsg.setMessage(midiTypes[midiTypeIndex], channel, 106, 15);
-				} catch (InvalidMidiDataException e) {
-					e.printStackTrace();
-				}
+			myDevice.getReceiver().send(myMsg, -1);
 
-				myDevice.getReceiver().send(myMsg, -1);
+			System.out.println("note on channel " + channel + " note " + 106);
 
-				System.out.println("note on channel " + channel + " midiTypeIndex " + midiTypeIndex);
-
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.NOTE_OFF, channel, cc, 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("note off channel " + channel + " note " +
-				// cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.CONTROL_CHANGE, channel, cc,
-				// 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("control change channel " + channel + "
-				// note "
-				// + cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.PITCH_BEND, channel, cc, 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("pitch bend channel " + channel + " note "
-				// +
-				// cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.START, channel, cc, 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("start channel " + channel + " note " +
-				// cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.STOP, channel, cc, 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("stop channel " + channel + " note " +
-				// cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.CHANNEL_PRESSURE, channel, cc,
-				// 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("channel pressure channel " + channel + "
-				// note
-				// " + cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.CONTINUE, channel, cc, 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("continue channel " + channel + " note " +
-				// cc);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			// myMsg = new ShortMessage();
+			//
+			// try {
+			// myMsg.setMessage(ShortMessage.NOTE_OFF, channel, cc, 15);
+			// } catch (InvalidMidiDataException e) {
+			// e.printStackTrace();
+			// }
+			//
+			// myDevice.getReceiver().send(myMsg, -1);
+			//
+			// System.out.println("note off channel " + channel + " note " +
+			// cc);
+			//
+			// myMsg = new ShortMessage();
+			//
+			// try {
+			// myMsg.setMessage(ShortMessage.CONTROL_CHANGE, channel, cc, 15);
+			// } catch (InvalidMidiDataException e) {
+			// e.printStackTrace();
+			// }
+			//
+			// myDevice.getReceiver().send(myMsg, -1);
+			//
+			// System.out.println("control change channel " + channel + " note "
+			// + cc);
+			//
+			// myMsg = new ShortMessage();
+			//
+			// try {
+			// myMsg.setMessage(ShortMessage.PITCH_BEND, channel, cc, 15);
+			// } catch (InvalidMidiDataException e) {
+			// e.printStackTrace();
+			// }
+			//
+			// myDevice.getReceiver().send(myMsg, -1);
+			//
+			// System.out.println("pitch bend channel " + channel + " note " +
+			// cc);
+			//
+			// myMsg = new ShortMessage();
+			//
+			// try {
+			// myMsg.setMessage(ShortMessage.START, channel, cc, 15);
+			// } catch (InvalidMidiDataException e) {
+			// e.printStackTrace();
+			// }
+			//
+			// myDevice.getReceiver().send(myMsg, -1);
+			//
+			// System.out.println("start channel " + channel + " note " + cc);
+			//
+			// myMsg = new ShortMessage();
+			//
+			// try {
+			// myMsg.setMessage(ShortMessage.STOP, channel, cc, 15);
+			// } catch (InvalidMidiDataException e) {
+			// e.printStackTrace();
+			// }
+			//
+			// myDevice.getReceiver().send(myMsg, -1);
+			//
+			// System.out.println("stop channel " + channel + " note " + cc);
+			//
+			// myMsg = new ShortMessage();
+			//
+			// try {
+			// myMsg.setMessage(ShortMessage.CHANNEL_PRESSURE, channel, cc, 15);
+			// } catch (InvalidMidiDataException e) {
+			// e.printStackTrace();
+			// }
+			//
+			// myDevice.getReceiver().send(myMsg, -1);
+			//
+			// System.out.println("channel pressure channel " + channel + " note
+			// " + cc);
+			//
+			// myMsg = new ShortMessage();
+			//
+			// try {
+			// myMsg.setMessage(ShortMessage.CONTINUE, channel, cc, 15);
+			// } catch (InvalidMidiDataException e) {
+			// e.printStackTrace();
+			// }
+			//
+			// myDevice.getReceiver().send(myMsg, -1);
+			//
+			// System.out.println("continue channel " + channel + " note " +
+			// cc);
 			}
 		}
 		// }

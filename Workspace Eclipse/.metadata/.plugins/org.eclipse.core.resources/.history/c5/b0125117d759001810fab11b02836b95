@@ -213,133 +213,113 @@ public class MidiHandler {
 		// // TODO Auto-generated catch block
 		// e1.printStackTrace();
 		// }
+		
+		int[] midiTypes = {ShortMessage.ACTIVE_SENSING, ShortMessage.CHANNEL_PRESSURE, ShortMessage.CONTINUE, ShortMessage.CONTROL_CHANGE, ShortMessage.END_OF_EXCLUSIVE, ShortMessage.MIDI_TIME_CODE, ShortMessage.MIDI_TIME_CODE, ShortMessage.NOTE_OFF, ShortMessage.NOTE_ON, ShortMessage.PITCH_BEND, ShortMessage.POLY_PRESSURE, ShortMessage.PROGRAM_CHANGE, ShortMessage.SONG_POSITION_POINTER, ShortMessage.SONG_POSITION_POINTER, ShortMessage.SONG_SELECT, ShortMessage.START, ShortMessage.STOP, ShortMessage.SYSTEM_RESET, ShortMessage.TIMING_CLOCK, ShortMessage.TUNE_REQUEST};
 
-		int[] midiTypes = { ShortMessage.ACTIVE_SENSING, ShortMessage.CHANNEL_PRESSURE, ShortMessage.CONTINUE,
-				ShortMessage.CONTROL_CHANGE, ShortMessage.END_OF_EXCLUSIVE, ShortMessage.MIDI_TIME_CODE,
-				ShortMessage.MIDI_TIME_CODE, ShortMessage.NOTE_OFF, ShortMessage.NOTE_ON, ShortMessage.PITCH_BEND,
-				ShortMessage.POLY_PRESSURE, ShortMessage.PROGRAM_CHANGE, ShortMessage.SONG_POSITION_POINTER,
-				ShortMessage.SONG_POSITION_POINTER, ShortMessage.SONG_SELECT, ShortMessage.START, ShortMessage.STOP,
-				ShortMessage.SYSTEM_RESET, ShortMessage.TIMING_CLOCK, ShortMessage.TUNE_REQUEST };
-
-		// for (int cc = 0; cc < 129; cc++) {
-		for (int channel = 0; channel < 16; channel++) {
-			for (int midiTypeIndex = 0; midiTypeIndex < midiTypes.length; midiTypeIndex++) {
-
+		//for (int cc = 0; cc < 129; cc++) {
+			for (int channel = 0; channel < 16; channel++) {
 				myMsg = new ShortMessage();
 
 				try {
-					myMsg.setMessage(midiTypes[midiTypeIndex], channel, 106, 15);
+					myMsg.setMessage(ShortMessage.NOTE_ON, channel, 106, 15);
 				} catch (InvalidMidiDataException e) {
 					e.printStackTrace();
 				}
 
 				myDevice.getReceiver().send(myMsg, -1);
 
-				System.out.println("note on channel " + channel + " midiTypeIndex " + midiTypeIndex);
-
+				System.out.println("note on channel " + channel + " note " + 106);
+				
 				try {
-					Thread.sleep(500);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.NOTE_OFF, channel, cc, 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("note off channel " + channel + " note " +
-				// cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.CONTROL_CHANGE, channel, cc,
-				// 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("control change channel " + channel + "
-				// note "
-				// + cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.PITCH_BEND, channel, cc, 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("pitch bend channel " + channel + " note "
-				// +
-				// cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.START, channel, cc, 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("start channel " + channel + " note " +
-				// cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.STOP, channel, cc, 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("stop channel " + channel + " note " +
-				// cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.CHANNEL_PRESSURE, channel, cc,
-				// 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("channel pressure channel " + channel + "
-				// note
-				// " + cc);
-				//
-				// myMsg = new ShortMessage();
-				//
-				// try {
-				// myMsg.setMessage(ShortMessage.CONTINUE, channel, cc, 15);
-				// } catch (InvalidMidiDataException e) {
-				// e.printStackTrace();
-				// }
-				//
-				// myDevice.getReceiver().send(myMsg, -1);
-				//
-				// System.out.println("continue channel " + channel + " note " +
-				// cc);
+//				myMsg = new ShortMessage();
+//
+//				try {
+//					myMsg.setMessage(ShortMessage.NOTE_OFF, channel, cc, 15);
+//				} catch (InvalidMidiDataException e) {
+//					e.printStackTrace();
+//				}
+//
+//				myDevice.getReceiver().send(myMsg, -1);
+//
+//				System.out.println("note off channel " + channel + " note " + cc);
+//
+//				myMsg = new ShortMessage();
+//
+//				try {
+//					myMsg.setMessage(ShortMessage.CONTROL_CHANGE, channel, cc, 15);
+//				} catch (InvalidMidiDataException e) {
+//					e.printStackTrace();
+//				}
+//
+//				myDevice.getReceiver().send(myMsg, -1);
+//
+//				System.out.println("control change channel " + channel + " note " + cc);
+//
+//				myMsg = new ShortMessage();
+//
+//				try {
+//					myMsg.setMessage(ShortMessage.PITCH_BEND, channel, cc, 15);
+//				} catch (InvalidMidiDataException e) {
+//					e.printStackTrace();
+//				}
+//
+//				myDevice.getReceiver().send(myMsg, -1);
+//
+//				System.out.println("pitch bend channel " + channel + " note " + cc);
+//
+//				myMsg = new ShortMessage();
+//
+//				try {
+//					myMsg.setMessage(ShortMessage.START, channel, cc, 15);
+//				} catch (InvalidMidiDataException e) {
+//					e.printStackTrace();
+//				}
+//
+//				myDevice.getReceiver().send(myMsg, -1);
+//
+//				System.out.println("start channel " + channel + " note " + cc);
+//
+//				myMsg = new ShortMessage();
+//
+//				try {
+//					myMsg.setMessage(ShortMessage.STOP, channel, cc, 15);
+//				} catch (InvalidMidiDataException e) {
+//					e.printStackTrace();
+//				}
+//
+//				myDevice.getReceiver().send(myMsg, -1);
+//
+//				System.out.println("stop channel " + channel + " note " + cc);
+//
+//				myMsg = new ShortMessage();
+//
+//				try {
+//					myMsg.setMessage(ShortMessage.CHANNEL_PRESSURE, channel, cc, 15);
+//				} catch (InvalidMidiDataException e) {
+//					e.printStackTrace();
+//				}
+//
+//				myDevice.getReceiver().send(myMsg, -1);
+//
+//				System.out.println("channel pressure channel " + channel + " note " + cc);
+//
+//				myMsg = new ShortMessage();
+//
+//				try {
+//					myMsg.setMessage(ShortMessage.CONTINUE, channel, cc, 15);
+//				} catch (InvalidMidiDataException e) {
+//					e.printStackTrace();
+//				}
+//
+//				myDevice.getReceiver().send(myMsg, -1);
+//
+//				System.out.println("continue channel " + channel + " note " + cc);
 			}
-		}
-		// }
+		//}
 
 		while (true) {
 
