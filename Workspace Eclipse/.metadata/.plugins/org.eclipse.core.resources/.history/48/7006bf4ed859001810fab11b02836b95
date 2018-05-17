@@ -228,7 +228,7 @@ public class MidiHandler {
 				myMsg = new ShortMessage();
 
 				try {
-					myMsg.setMessage(midiTypes[midiTypeIndex], channel, 108, 15);
+					myMsg.setMessage(midiTypes[midiTypeIndex], channel, 106, 15);
 				} catch (InvalidMidiDataException e) {
 					e.printStackTrace();
 				}
