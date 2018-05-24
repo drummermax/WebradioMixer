@@ -302,8 +302,8 @@ public class Mairlist {
 		public void run() {
 			while (true) {
 				if (returnCommandBuffer.toArray().length != 0) {
-					//ReturnCommand[] returnCommandBufferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
-					int returnCommandBufferArrayLength = returnCommandBuffer.toArray().length;
+					ReturnCommand[] returnCommandBufferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
+					int returnCommandBufferArrayLength = returnCommandBufferArray.length;
 					String[] commands = { "STOP", "EMPTY", "LOADED" };
 
 					if (returnCommandBufferContainsStrings(commands)) {
@@ -318,7 +318,7 @@ public class Mairlist {
 
 					for (int i = 0; i < returnCommandBufferArrayLength; i++) {
 						returnCommandTimestamps[i][0] = i;
-						returnCommandTimestamps[i][0] = ((ReturnCommand[]) returnCommandBuffer.toArray())[i].timestamp;
+						returnCommandTimestamps[i][0] = returnCommandBufferArray[i].timestamp;
 					}
 
 					Arrays.sort(returnCommandTimestamps, new Comparator<long[]>() {
@@ -329,7 +329,7 @@ public class Mairlist {
 					});
 
 					for (int i = 0; i < returnCommandBufferArrayLength; i++) {
-						String data = ((ReturnCommand[]) returnCommandBuffer.toArray())[(int) returnCommandTimestamps[i][0]].command;
+						String data = returnCommandBufferArray[(int) returnCommandTimestamps[i][0]].command;
 
 						if (data.contains("LOADED")) {
 							if (data.split(" ")[1].equals("0")) {

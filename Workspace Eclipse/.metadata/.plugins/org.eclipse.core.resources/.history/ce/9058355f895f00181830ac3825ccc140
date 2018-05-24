@@ -329,7 +329,7 @@ public class Mairlist {
 					});
 
 					for (int i = 0; i < returnCommandBufferArrayLength; i++) {
-						String data = ((ReturnCommand[]) returnCommandBuffer.toArray())[(int) returnCommandTimestamps[i][0]].command;
+						String data = returnCommandBufferArray[(int) returnCommandTimestamps[i][0]].command;
 
 						if (data.contains("LOADED")) {
 							if (data.split(" ")[1].equals("0")) {
