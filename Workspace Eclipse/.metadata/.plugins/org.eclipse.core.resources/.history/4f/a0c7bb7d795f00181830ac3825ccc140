@@ -309,14 +309,10 @@ public class MidiController {
 			// note_cc + " velocity = " + velocity);
 
 			if (midikey.isFader()) {
-				int currentTimestamp = MidiController.getInstance().getCurrentTimestamp();
-				int faderTimestamp = MidiController.getInstance().getTimestamp()[note_cc - 77];
-				
-				if (currentTimestamp - faderTimestamp < (1000 / faderSampleFrequency)) {
-					System.out.println("time return with " + (currentTimestamp - faderTimestamp));
-					
-					System.out.println("current: " + currentTimestamp);
-					System.out.println("fader: " + faderTimestamp);
+				if (MidiController.getInstance().getCurrentTimestamp()
+						- MidiController.getInstance().getTimestamp()[note_cc - 77] < (1000 / faderSampleFrequency)) {
+					System.out.println("time return with " + (MidiController.getInstance().getCurrentTimestamp()
+							- MidiController.getInstance().getTimestamp()[note_cc - 77]));
 					return;
 				} else {
 					MidiController.getInstance().setTimestamp(note_cc - 77,

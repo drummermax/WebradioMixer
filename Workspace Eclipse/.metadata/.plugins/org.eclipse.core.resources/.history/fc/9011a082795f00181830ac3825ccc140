@@ -310,7 +310,7 @@ public class MidiController {
 
 			if (midikey.isFader()) {
 				int currentTimestamp = MidiController.getInstance().getCurrentTimestamp();
-				int faderTimestamp = MidiController.getInstance().getTimestamp()[note_cc - 77];
+				int faderTimestamp = MidiController.getInstance().getTimestamp()[note_cc - 77]
 				
 				if (currentTimestamp - faderTimestamp < (1000 / faderSampleFrequency)) {
 					System.out.println("time return with " + (currentTimestamp - faderTimestamp));
