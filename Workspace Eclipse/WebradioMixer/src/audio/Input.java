@@ -104,6 +104,8 @@ public class Input {
 	}
 
 	public void setVolume(double volume) {
+		System.out.println("Channel vol=" + volume);
+		
 		this.setVolume = volume;
 		
 		if (!phonesActivated) {
