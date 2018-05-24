@@ -103,7 +103,9 @@ public class Input {
 		return setVolume;
 	}
 
-	public void setVolume(double volume) {		
+	public void setVolume(double volume) {
+		System.out.println("Channel vol=" + volume);
+		
 		this.setVolume = volume;
 		
 		if (!phonesActivated) {

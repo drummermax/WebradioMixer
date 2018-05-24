@@ -313,14 +313,15 @@ public class MidiController {
 				long faderTimestamp = MidiController.getInstance().getTimestamp()[note_cc - 77];
 				
 				if (currentTimestamp - faderTimestamp < (1000 / faderSampleFrequency)) {
-					//System.out.println("time return with " + (currentTimestamp - faderTimestamp));
-					//System.out.println("current: " + currentTimestamp);
-					//System.out.println("fader: " + faderTimestamp);
+					System.out.println("time return with " + (currentTimestamp - faderTimestamp));
+					
+					System.out.println("current: " + currentTimestamp);
+					System.out.println("fader: " + faderTimestamp);
 					return;
 				} else {
 					MidiController.getInstance().setTimestamp(note_cc - 77,
 							MidiController.getInstance().getCurrentTimestamp());
-					//System.out.println("no time return");
+					System.out.println("no time return");
 				}
 			}
 
@@ -425,6 +426,8 @@ public class MidiController {
 				} else if (velocity >= 109) {
 					velocity = 127;
 				}
+
+				System.out.println("Fader 3 vel=" + velocity);
 
 				MixingDesk.getInstance().getMairlistChannel1().setVolume(velocity / 127);
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER4)) {

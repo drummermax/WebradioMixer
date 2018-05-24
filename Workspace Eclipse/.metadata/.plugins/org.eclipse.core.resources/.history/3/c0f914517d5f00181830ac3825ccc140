@@ -426,6 +426,8 @@ public class MidiController {
 					velocity = 127;
 				}
 
+				System.out.println("Fader 3 vel=" + velocity);
+
 				MixingDesk.getInstance().getMairlistChannel1().setVolume(velocity / 127);
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER4)) {
 				if (velocity < 10) {
