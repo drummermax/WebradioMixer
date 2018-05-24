@@ -377,6 +377,7 @@ public class Mairlist {
 
 						for (int k = 0; i < returnCommandBufferArrayLength; i++)
 							returnCommandBuffer.poll();
+
 					}
 
 					try {

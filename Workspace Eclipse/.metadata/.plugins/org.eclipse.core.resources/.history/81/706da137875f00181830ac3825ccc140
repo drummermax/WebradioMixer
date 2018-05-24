@@ -25,15 +25,15 @@ public class Mairlist {
 	private PrintWriter out = null;
 
 	private ServerSocket mairlistListenerServer = null;
-
+	
 	private boolean firstMessageOffAirResponse = false;
-
+	
 	private boolean cartwallPFLActivated = false;
 
 	private static MairlistPlayerState mairlistPlayerStatePlayer1 = MairlistPlayerState.EMPTY,
 			mairlistPlayerStatePlayer2 = MairlistPlayerState.EMPTY;
 	private static MairlistPFLSource mairlistPFLSource = MairlistPFLSource.UNKNOWN;
-
+	
 	private BlockingQueue<ReturnCommand> returnCommandBuffer;
 
 	public enum CommandShortcut {
@@ -88,14 +88,14 @@ public class Mairlist {
 																				"CARTWALL 1 START/STOP"), CARTWALL_MODEPFL(
 																						"CARTWALL MODE PFL"), CARTWALL_MODEONAIR(
 																								"CARTWALL MODE ON AIR"), CARTWALL_PREVPAGE(
-																										"CARTWALL PREVIOUS PAGE"), CARTWALL_NEXTPAGE(
-																												"CARTWALL NEXT PAGE"), PLAYLIST_CURSORUP(
-																														"PLAYLIST 1 CURSOR UP"), PLAYLIST_CURSORDOWN(
-																																"PLAYLIST 1 CURSOR DOWN"), PLAYLIST_EXTRAPFL(
-																																		"PLAYLIST 1 EXTRAPFL ON/OFF"), GUI_ONAIR(
-																																				"ON AIR"), GUI_OFFAIR(
-																																						"OFF AIR"), GUI_ONOFFAIR(
-																																								"ON/OFF AIR");
+																								"CARTWALL PREVIOUS PAGE"), CARTWALL_NEXTPAGE(
+																										"CARTWALL NEXT PAGE"), PLAYLIST_CURSORUP(
+																												"PLAYLIST 1 CURSOR UP"), PLAYLIST_CURSORDOWN(
+																														"PLAYLIST 1 CURSOR DOWN"), PLAYLIST_EXTRAPFL(
+																																"PLAYLIST 1 EXTRAPFL ON/OFF"), GUI_ONAIR(
+																																		"ON AIR"), GUI_OFFAIR(
+																																				"OFF AIR"), GUI_ONOFFAIR(
+																																						"ON/OFF AIR");
 
 		private final String text;
 
@@ -145,11 +145,11 @@ public class Mairlist {
 			this.PFLActive = PFLActive;
 		}
 	}
-
+	
 	private class ReturnCommand {
 		public String command;
 		public long timestamp;
-
+		
 		public ReturnCommand(String command, long timestamp) {
 			this.command = command;
 			this.timestamp = timestamp;
@@ -165,7 +165,7 @@ public class Mairlist {
 
 	private Mairlist() {
 		returnCommandBuffer = new ArrayBlockingQueue<ReturnCommand>(20);
-
+		
 		try {
 			robot = new Robot();
 		} catch (AWTException e) {
@@ -200,7 +200,7 @@ public class Mairlist {
 			}
 		});
 		mairlistListenerThread.start();
-
+		
 		Thread mairlistReturnCommandHandler = new Thread(new mairlistReturnCommandHandlerRunnable());
 		mairlistReturnCommandHandler.start();
 	}
@@ -257,7 +257,7 @@ public class Mairlist {
 
 	public void setCartwallPFLActivated(boolean cartwallPFLActivated) {
 		this.cartwallPFLActivated = cartwallPFLActivated;
-
+		
 		if (cartwallPFLActivated) {
 			Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.CARTWALL_MODEPFL);
 		} else {
@@ -280,115 +280,111 @@ public class Mairlist {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(myclientSocket.getInputStream()));
 
 				String data = reader.readLine();
-
+				
 				System.out.println("RETURN DATA: " + data);
-
+				
 				if (!firstMessageOffAirResponse) {
 					sendCommandTCP(CommandTCP.GUI_OFFAIR);
 					firstMessageOffAirResponse = true;
 				}
-
+				
 				ReturnCommand returnCommand = new ReturnCommand(data.split("#")[0], Long.parseLong(data.split("#")[1]));
 
 				returnCommandBuffer.offer(returnCommand);
-
+				
 				myclientSocket.close();
 			} catch (IOException ex) {
 			}
 		}
 	}
-
+	
 	class mairlistReturnCommandHandlerRunnable implements Runnable {
 		public void run() {
-			while (true) {
-				if (returnCommandBuffer.toArray().length != 0) {
-					ReturnCommand[] returnCommandBufferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
-					int returnCommandBufferArrayLength = returnCommandBufferArray.length;
-					String[] commands = { "STOP", "EMPTY", "LOADED" };
+			ReturnCommand[] returnCommandBufferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
+			int returnCommandBufferArrayLength = returnCommandBufferArray.length;
+			String[] commands = {"STOP", "EMPTY", "LOADED"};
+			
+			if (returnCommandBufferContainsStrings(commands)) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			long[][] returnCommandTimestamps = new long[returnCommandBufferArrayLength][2];
 
-					if (returnCommandBufferContainsStrings(commands)) {
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+			for (int i = 0; i < returnCommandBufferArrayLength; i++) {
+				returnCommandTimestamps[i][0] = i;
+				returnCommandTimestamps[i][0] = returnCommandBufferArray[i].timestamp;
+			}
+			
+			Arrays.sort(returnCommandTimestamps, new Comparator<long[]>() {
+			    @Override
+			    public int compare(long[] o1, long[] o2) {
+			        return Long.compare(o2[1], o1[1]);
+			    }
+			});			
+			
+			for (int i = 0; i < returnCommandBufferArrayLength; i++) {
+				String data = returnCommandBufferArray[(int) returnCommandTimestamps[i][0]].command;
+				
+				if (data.contains("LOADED")) {
+					if (data.split(" ")[1].equals("0")) {
+						mairlistPlayerStatePlayer1 = MairlistPlayerState.LOADED;
+					} else if (data.split(" ")[1].equals("1")) {
+						mairlistPlayerStatePlayer2 = MairlistPlayerState.LOADED;
 					}
-
-					long[][] returnCommandTimestamps = new long[returnCommandBufferArrayLength][2];
-
-					for (int i = 0; i < returnCommandBufferArrayLength; i++) {
-						returnCommandTimestamps[i][0] = i;
-						returnCommandTimestamps[i][0] = returnCommandBufferArray[i].timestamp;
+				} else if (data.contains("EMPTY")) {
+					if (data.split(" ")[1].equals("0")) {
+						mairlistPlayerStatePlayer1 = MairlistPlayerState.EMPTY;
+					} else if (data.split(" ")[1].equals("1")) {
+						mairlistPlayerStatePlayer2 = MairlistPlayerState.EMPTY;
 					}
-
-					Arrays.sort(returnCommandTimestamps, new Comparator<long[]>() {
-						@Override
-						public int compare(long[] o1, long[] o2) {
-							return Long.compare(o2[1], o1[1]);
-						}
-					});
-
-					for (int i = 0; i < returnCommandBufferArrayLength; i++) {
-						String data = returnCommandBufferArray[(int) returnCommandTimestamps[i][0]].command;
-
-						if (data.contains("LOADED")) {
-							if (data.split(" ")[1].equals("0")) {
-								mairlistPlayerStatePlayer1 = MairlistPlayerState.LOADED;
-							} else if (data.split(" ")[1].equals("1")) {
-								mairlistPlayerStatePlayer2 = MairlistPlayerState.LOADED;
-							}
-						} else if (data.contains("EMPTY")) {
-							if (data.split(" ")[1].equals("0")) {
-								mairlistPlayerStatePlayer1 = MairlistPlayerState.EMPTY;
-							} else if (data.split(" ")[1].equals("1")) {
-								mairlistPlayerStatePlayer2 = MairlistPlayerState.EMPTY;
-							}
-						} else if (data.contains("PLAYING")) {
-							if (data.split(" ")[1].equals("0")) {
-								mairlistPlayerStatePlayer1 = MairlistPlayerState.PLAYING;
-							} else if (data.split(" ")[1].equals("1")) {
-								mairlistPlayerStatePlayer2 = MairlistPlayerState.PLAYING;
-							}
-						} else if (data.contains("STOP")) {
-							if (data.split(" ")[1].equals("0")) {
-								mairlistPlayerStatePlayer1 = MairlistPlayerState.STOPPED;
-							} else if (data.split(" ")[1].equals("1")) {
-								mairlistPlayerStatePlayer2 = MairlistPlayerState.STOPPED;
-							}
-						} else if (data.contains("EOF")) {
-							if (data.split(" ")[1].equals("0")) {
-								mairlistPlayerStatePlayer1 = MairlistPlayerState.EOF;
-							} else if (data.split(" ")[1].equals("1")) {
-								mairlistPlayerStatePlayer2 = MairlistPlayerState.EOF;
-							}
-						} else if (data.contains("PFL")) {
-							if (data.split(" ")[1].equals("OFF")) {
-								mairlistPFLSource.setPFLActive(false);
-
-								if (mairlistPFLSource.name().equals("UNKNOWN"))
-									mairlistPFLSource.CARTWALL.setPFLActive(false);
-
-								mairlistPFLSource = MairlistPFLSource.UNKNOWN;
-							} else if (data.split(" ")[1].equals("ON")) {
-								mairlistPFLSource.setPFLActive(true);
-								mairlistPFLSource = MairlistPFLSource.UNKNOWN;
-							}
-						}
-
-						for (int k = 0; i < returnCommandBufferArrayLength; i++)
-							returnCommandBuffer.poll();
+				} else if (data.contains("PLAYING")) {
+					if (data.split(" ")[1].equals("0")) {
+						mairlistPlayerStatePlayer1 = MairlistPlayerState.PLAYING;
+					} else if (data.split(" ")[1].equals("1")) {
+						mairlistPlayerStatePlayer2 = MairlistPlayerState.PLAYING;
 					}
-
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+				} else if (data.contains("STOP")) {
+					if (data.split(" ")[1].equals("0")) {
+						mairlistPlayerStatePlayer1 = MairlistPlayerState.STOPPED;
+					} else if (data.split(" ")[1].equals("1")) {
+						mairlistPlayerStatePlayer2 = MairlistPlayerState.STOPPED;
 					}
+				} else if (data.contains("EOF")) {
+					if (data.split(" ")[1].equals("0")) {
+						mairlistPlayerStatePlayer1 = MairlistPlayerState.EOF;
+					} else if (data.split(" ")[1].equals("1")) {
+						mairlistPlayerStatePlayer2 = MairlistPlayerState.EOF;
+					}
+				} else if (data.contains("PFL")) {
+					if (data.split(" ")[1].equals("OFF")) {
+						mairlistPFLSource.setPFLActive(false);
+						
+						if (mairlistPFLSource.name().equals("UNKNOWN"))
+							mairlistPFLSource.CARTWALL.setPFLActive(false);
+						
+						mairlistPFLSource = MairlistPFLSource.UNKNOWN;
+					} else if (data.split(" ")[1].equals("ON")) {
+						mairlistPFLSource.setPFLActive(true);
+						mairlistPFLSource = MairlistPFLSource.UNKNOWN;
+					}
+				}
+				
+				for (int k = 0; i < returnCommandBufferArrayLength; i++)
+					returnCommandBuffer.poll();
+				
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 		}
 	}
-
+	
 	private boolean returnCommandBufferContainsStrings(String[] commands) {
 		ReturnCommand[] returnCommandBuferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
 		for (int i = 0; i < returnCommandBuferArray.length; i++) {
@@ -397,7 +393,7 @@ public class Mairlist {
 					return true;
 			}
 		}
-
+		
 		return false;
 	}
 }
