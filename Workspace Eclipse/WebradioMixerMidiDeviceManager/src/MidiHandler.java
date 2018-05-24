@@ -222,7 +222,7 @@ public class MidiHandler {
 				ShortMessage.SYSTEM_RESET, ShortMessage.TIMING_CLOCK, ShortMessage.TUNE_REQUEST };
 
 		// for (int cc = 0; cc < 129; cc++) {
-		for (int channel = 0; channel < 16; channel++) {
+		/*for (int channel = 0; channel < 16; channel++) {
 			for (int midiTypeIndex = 0; midiTypeIndex < midiTypes.length; midiTypeIndex++) {
 
 				myMsg = new ShortMessage();
@@ -340,6 +340,7 @@ public class MidiHandler {
 			}
 		}
 		// }
+		 */
 
 		while (true) {
 
@@ -486,8 +487,7 @@ public class MidiHandler {
 
 			MIDIKey midikey = new MIDIKey(channel, note_cc);
 
-			// System.out.println("MIDI: Channel = " + channel + " note_cc = " +
-			// note_cc + " velocity = " + velocity);
+			System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
 		}
 	}
 

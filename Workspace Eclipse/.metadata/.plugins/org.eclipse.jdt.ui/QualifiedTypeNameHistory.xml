@@ -17,4 +17,6 @@
 <fullyQualifiedTypeName name="MidiHandler.MIDIKey.LEDColor"/>
 <fullyQualifiedTypeName name="midi.MidiController.MIDIKey"/>
 <fullyQualifiedTypeName name="midi.MidiController.MIDIKey.LEDColor"/>
+<fullyQualifiedTypeName name="javax.sound.sampled.AudioSystem"/>
+<fullyQualifiedTypeName name="javax.sound.midi.ShortMessage"/>
 </qualifiedTypeNameHistroy>
