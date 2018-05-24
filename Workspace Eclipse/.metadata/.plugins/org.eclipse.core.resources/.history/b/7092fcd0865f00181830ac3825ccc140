@@ -300,8 +300,8 @@ public class Mairlist {
 	
 	class mairlistReturnCommandHandlerRunnable implements Runnable {
 		public void run() {
-			ReturnCommand[] returnCommandBufferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
-			int returnCommandBufferArrayLength = returnCommandBufferArray.length;
+			ReturnCommand[] returnCommandBuferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
+			int returnCommandBufferArrayLength = returnCommandBuferArray.length;
 			String[] commands = {"STOP", "EMPTY", "LOADED"};
 			
 			if (returnCommandBufferContainsStrings(commands)) {
@@ -316,7 +316,7 @@ public class Mairlist {
 
 			for (int i = 0; i < returnCommandBufferArrayLength; i++) {
 				returnCommandTimestamps[i][0] = i;
-				returnCommandTimestamps[i][0] = returnCommandBufferArray[i].timestamp;
+				returnCommandTimestamps[i][0] = returnCommandBuferArray[i].timestamp;
 			}
 			
 			Arrays.sort(returnCommandTimestamps, new Comparator<long[]>() {
@@ -327,7 +327,7 @@ public class Mairlist {
 			});			
 			
 			for (int i = 0; i < returnCommandBufferArrayLength; i++) {
-				String data = returnCommandBufferArray[(int) returnCommandTimestamps[i][0]].command;
+				String data = returnCommandBuferArray[(int) returnCommandTimestamps[i][0]].command;
 				
 				if (data.contains("LOADED")) {
 					if (data.split(" ")[1].equals("0")) {

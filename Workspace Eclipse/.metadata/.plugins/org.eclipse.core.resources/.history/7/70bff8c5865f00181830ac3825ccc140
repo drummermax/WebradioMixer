@@ -300,8 +300,7 @@ public class Mairlist {
 	
 	class mairlistReturnCommandHandlerRunnable implements Runnable {
 		public void run() {
-			ReturnCommand[] returnCommandBufferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
-			int returnCommandBufferArrayLength = returnCommandBufferArray.length;
+			ReturnCommand[] returnCommandBuferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
 			String[] commands = {"STOP", "EMPTY", "LOADED"};
 			
 			if (returnCommandBufferContainsStrings(commands)) {
@@ -312,11 +311,11 @@ public class Mairlist {
 				}
 			}
 			
-			long[][] returnCommandTimestamps = new long[returnCommandBufferArrayLength][2];
+			long[][] returnCommandTimestamps = new long[returnCommandBuferArray.length][2];
 
-			for (int i = 0; i < returnCommandBufferArrayLength; i++) {
+			for (int i = 0; i < returnCommandBuferArray.length; i++) {
 				returnCommandTimestamps[i][0] = i;
-				returnCommandTimestamps[i][0] = returnCommandBufferArray[i].timestamp;
+				returnCommandTimestamps[i][0] = returnCommandBuferArray[i].timestamp;
 			}
 			
 			Arrays.sort(returnCommandTimestamps, new Comparator<long[]>() {
@@ -326,8 +325,8 @@ public class Mairlist {
 			    }
 			});			
 			
-			for (int i = 0; i < returnCommandBufferArrayLength; i++) {
-				String data = returnCommandBufferArray[(int) returnCommandTimestamps[i][0]].command;
+			for (int i = 0; i < returnCommandBuferArray.length; i++) {
+				String data = returnCommandBuferArray[(int) returnCommandTimestamps[i][0]].command;
 				
 				if (data.contains("LOADED")) {
 					if (data.split(" ")[1].equals("0")) {
@@ -372,9 +371,6 @@ public class Mairlist {
 						mairlistPFLSource = MairlistPFLSource.UNKNOWN;
 					}
 				}
-				
-				for (int k = 0; i < returnCommandBufferArrayLength; i++)
-					returnCommandBuffer.poll();
 				
 				try {
 					Thread.sleep(100);

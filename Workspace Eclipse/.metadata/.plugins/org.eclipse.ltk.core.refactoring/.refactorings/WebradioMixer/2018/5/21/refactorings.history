@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;returnCommandBuferArray&apos; in &apos;main.Mairlist.mairlistReturnCommandHandlerRunnable.run()&apos; to &apos;returnCommandBufferArray&apos;&#x0D;&#x0A;- Original project: &apos;WebradioMixer&apos;&#x0D;&#x0A;- Original element: &apos;main.Mairlist.mairlistReturnCommandHandlerRunnable.run().returnCommandBuferArray&apos;&#x0D;&#x0A;- Renamed element: &apos;returnCommandBuferArray&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;returnCommandBuferArray&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;main{Mairlist.java[Mairlist[mairlistReturnCommandHandlerRunnable~run@returnCommandBuferArray!8441!8530!8457!8479!\[QReturnCommand;!0!false" name="returnCommandBufferArray" references="true" stamp="1527189327152" version="1.0"/>
+</session>
