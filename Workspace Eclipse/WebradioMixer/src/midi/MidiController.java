@@ -305,12 +305,14 @@ public class MidiController {
 
 			MIDIKey midikey = new MIDIKey(channel, note_cc);
 
-			//System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
+			// System.out.println("MIDI: Channel = " + channel + " note_cc = " +
+			// note_cc + " velocity = " + velocity);
 
 			if (midikey.isFader()) {
 				if (MidiController.getInstance().getCurrentTimestamp()
 						- MidiController.getInstance().getTimestamp()[note_cc - 77] < (1000 / faderSampleFrequency)) {
-					System.out.println("time return");
+					System.out.println("time return with " + (MidiController.getInstance().getCurrentTimestamp()
+							- MidiController.getInstance().getTimestamp()[note_cc - 77]));
 					return;
 				} else {
 					MidiController.getInstance().setTimestamp(note_cc - 77,
@@ -420,7 +422,7 @@ public class MidiController {
 				} else if (velocity >= 109) {
 					velocity = 127;
 				}
-				
+
 				System.out.println("Fader 3 vel=" + velocity);
 
 				MixingDesk.getInstance().getMairlistChannel1().setVolume(velocity / 127);
