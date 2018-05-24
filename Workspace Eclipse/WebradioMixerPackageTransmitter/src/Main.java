@@ -15,7 +15,7 @@ public class Main {
             return;
         }
 
-        out.println(args[0] + " " + System.currentTimeMillis());
+        out.println(args[0] + "#" + System.currentTimeMillis());
         out.close();
         pingSocket.close();
 	}

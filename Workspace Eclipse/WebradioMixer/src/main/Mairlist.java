@@ -11,6 +11,9 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.concurrent.BlockingQueue;
 
 public class Mairlist {
 	private static Mairlist instance;
@@ -29,6 +32,8 @@ public class Mairlist {
 	private static MairlistPlayerState mairlistPlayerStatePlayer1 = MairlistPlayerState.EMPTY,
 			mairlistPlayerStatePlayer2 = MairlistPlayerState.EMPTY;
 	private static MairlistPFLSource mairlistPFLSource = MairlistPFLSource.UNKNOWN;
+	
+	private BlockingQueue<ReturnCommand> returnCommandBuffer;
 
 	public enum CommandShortcut {
 		PLAYER1_STARTSTOP(1), PLAYER1_PFL_ONOFF(3), PLAYER2_STARTSTOP(2), PLAYER2_PFL_ONOFF(4), CARTWALL_MODEPFL(
@@ -139,6 +144,16 @@ public class Mairlist {
 			this.PFLActive = PFLActive;
 		}
 	}
+	
+	private class ReturnCommand {
+		public String command;
+		public long timestamp;
+		
+		public ReturnCommand(String command, long timestamp) {
+			this.command = command;
+			this.timestamp = timestamp;
+		}
+	}
 
 	public static Mairlist getInstance() {
 		if (instance == null) {
@@ -182,6 +197,9 @@ public class Mairlist {
 			}
 		});
 		mairlistListenerThread.start();
+		
+		Thread mairlistReturnCommandHandler = new Thread(new mairlistReturnCommandHandlerRunnable());
+		mairlistReturnCommandHandler.start();
 	}
 
 	public void sendCommandShortcut(CommandShortcut commandShortcut) {
@@ -266,7 +284,47 @@ public class Mairlist {
 					sendCommandTCP(CommandTCP.GUI_OFFAIR);
 					firstMessageOffAirResponse = true;
 				}
+				
+				ReturnCommand returnCommand = new ReturnCommand(data.split("#")[0], Long.parseLong(data.split("#")[1]));
 
+				returnCommandBuffer.offer(returnCommand);
+				
+				myclientSocket.close();
+			} catch (IOException ex) {
+			}
+		}
+	}
+	
+	class mairlistReturnCommandHandlerRunnable implements Runnable {
+		public void run() {
+			ReturnCommand[] returnCommandBuferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
+			String[] commands = {"STOP", "EMPTY", "LOADED"};
+			
+			if (returnCommandBufferContainsStrings(commands)) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			long[][] returnCommandTimestamps = new long[returnCommandBuferArray.length][2];
+
+			for (int i = 0; i < returnCommandBuferArray.length; i++) {
+				returnCommandTimestamps[i][0] = i;
+				returnCommandTimestamps[i][0] = returnCommandBuferArray[i].timestamp;
+			}
+			
+			Arrays.sort(returnCommandTimestamps, new Comparator<long[]>() {
+			    @Override
+			    public int compare(long[] o1, long[] o2) {
+			        return Long.compare(o2[1], o1[1]);
+			    }
+			});			
+			
+			for (int i = 0; i < returnCommandBuferArray.length; i++) {
+				String data = returnCommandBuferArray[(int) returnCommandTimestamps[i][0]].command;
+				
 				if (data.contains("LOADED")) {
 					if (data.split(" ")[1].equals("0")) {
 						mairlistPlayerStatePlayer1 = MairlistPlayerState.LOADED;
@@ -310,12 +368,25 @@ public class Mairlist {
 						mairlistPFLSource = MairlistPFLSource.UNKNOWN;
 					}
 				}
-
-				myclientSocket.close();
-			} catch (IOException ex)
-
-			{
+				
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
+	}
+	
+	private boolean returnCommandBufferContainsStrings(String[] commands) {
+		ReturnCommand[] returnCommandBuferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
+		for (int i = 0; i < returnCommandBuferArray.length; i++) {
+			for (int j = 0; j < commands.length; j++) {
+				if (returnCommandBuferArray[i].command.contains(commands[j]))
+					return true;
+			}
+		}
+		
+		return false;
 	}
 }
