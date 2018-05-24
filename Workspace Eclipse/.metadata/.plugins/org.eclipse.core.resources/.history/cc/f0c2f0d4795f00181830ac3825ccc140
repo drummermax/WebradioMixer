@@ -27,7 +27,7 @@ public class MidiController {
 	private static long[] timestamp;
 	private static double faderSampleFrequency = 10;
 
-	private static long timestampEOF1 = 0, timestampEOF2 = 0;
+	private static int timestampEOF1 = 0, timestampEOF2 = 0;
 
 	public long getCurrentTimestamp() {
 		return System.currentTimeMillis();
@@ -239,7 +239,7 @@ public class MidiController {
 		ledUpdaterThread.start();
 	}
 
-	public long[] getTimestamp() {
+	public int[] getTimestamp() {
 		return timestamp;
 	}
 
@@ -255,19 +255,19 @@ public class MidiController {
 		MidiController.faderSampleFrequency = faderSampleFrequency;
 	}
 
-	public long getTimestampEOF1() {
+	public int getTimestampEOF1() {
 		return timestampEOF1;
 	}
 
-	public void setTimestampEOF1(long timestampEOF1) {
+	public void setTimestampEOF1(int timestampEOF1) {
 		MidiController.timestampEOF1 = timestampEOF1;
 	}
 
-	public long getTimestampEOF2() {
+	public int getTimestampEOF2() {
 		return timestampEOF2;
 	}
 
-	public void setTimestampEOF2(long timestampEOF2) {
+	public void setTimestampEOF2(int timestampEOF2) {
 		MidiController.timestampEOF2 = timestampEOF2;
 	}
 
