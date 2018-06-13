@@ -295,7 +295,7 @@ public class Mairlist {
 
 				String data = reader.readLine();
 
-				System.out.println("RETURN DATA: " + data);
+				//System.out.println("RETURN DATA: " + data);
 
 				if (!firstMessageOffAirResponse) {
 					sendCommandTCP(CommandTCP.GUI_OFFAIR);
@@ -351,6 +351,8 @@ public class Mairlist {
 						//String data = ((ReturnCommand[]) returnCommandBuffer
 						//		.toArray())[(int) returnCommandTimestamps[i][0]].command;
 						String data = returnCommandBuffer.poll().command;
+						
+						System.out.println("RETURN DATA SORTED: " + data);
 
 						if (data.contains("LOADED")) {
 							if (data.split(" ")[1].equals("0")) {
