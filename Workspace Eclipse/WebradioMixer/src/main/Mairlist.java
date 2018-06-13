@@ -409,12 +409,12 @@ public class Mairlist {
 	}
 
 	private boolean returnCommandBufferContainsStrings(String[] commands) {
-		if (returnCommandBuffer.toArray().length == 0)
-			return false;
-		ReturnCommand[] returnCommandBuferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
-		for (int i = 0; i < returnCommandBuferArray.length; i++) {
+		ReturnCommand[] returnCommandBufferArray = null;
+		returnCommandBufferArray = returnCommandBuffer.toArray(returnCommandBufferArray);
+		
+		for (int i = 0; i < returnCommandBufferArray.length; i++) {
 			for (int j = 0; j < commands.length; j++) {
-				if (returnCommandBuferArray[i].command.contains(commands[j]))
+				if (returnCommandBufferArray[i].command.contains(commands[j]))
 					return true;
 			}
 		}
