@@ -409,6 +409,8 @@ public class Mairlist {
 	}
 
 	private boolean returnCommandBufferContainsStrings(String[] commands) {
+		if (returnCommandBuffer.toArray().length == 0)
+			return false;
 		ReturnCommand[] returnCommandBuferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
 		for (int i = 0; i < returnCommandBuferArray.length; i++) {
 			for (int j = 0; j < commands.length; j++) {
