@@ -5,13 +5,11 @@
 <fullyQualifiedTypeName name="main.Mairlist.MairlistPFLSources"/>
 <fullyQualifiedTypeName name="java.lang.Runnable"/>
 <fullyQualifiedTypeName name="main.Mairlist.MairlistPlayerState"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="midi.MidiController.ledUpdater"/>
 <fullyQualifiedTypeName name="midi.MidiController"/>
 <fullyQualifiedTypeName name="Main.MairlistPFLSource"/>
 <fullyQualifiedTypeName name="main.Mairlist.MairlistPFLSource"/>
 <fullyQualifiedTypeName name="audio.MixingDesk"/>
-<fullyQualifiedTypeName name="main.Mairlist"/>
 <fullyQualifiedTypeName name="main.Mairlist.CommandTCP"/>
 <fullyQualifiedTypeName name="MidiHandler.MIDIKey"/>
 <fullyQualifiedTypeName name="MidiHandler.MIDIKey.LEDColor"/>
@@ -19,4 +17,9 @@
 <fullyQualifiedTypeName name="midi.MidiController.MIDIKey.LEDColor"/>
 <fullyQualifiedTypeName name="javax.sound.sampled.AudioSystem"/>
 <fullyQualifiedTypeName name="javax.sound.midi.ShortMessage"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="main.Mairlist"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.util.Comparator"/>
+<fullyQualifiedTypeName name="main.Mairlist.ReturnCommand"/>
 </qualifiedTypeNameHistroy>

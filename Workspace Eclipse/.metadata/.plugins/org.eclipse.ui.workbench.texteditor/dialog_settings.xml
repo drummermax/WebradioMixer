@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="OFF" key="selection"/>
+		<item value="FIFO" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="fifo"/>
 			<item value="OFF"/>
 			<item value="setLedActivated(true, "/>
 			<item value="setLedActivated(false, "/>
@@ -15,7 +16,6 @@
 			<item value="setcar"/>
 			<item value="activateCartwall"/>
 			<item value="mixingd"/>
-			<item value="equals"/>
 		</list>
 		<list key="replacehistory">
 			<item value="RED"/>

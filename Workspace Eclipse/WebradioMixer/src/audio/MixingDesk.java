@@ -287,8 +287,10 @@ public class MixingDesk {
 			mairlistMaster.setVolumeOfSingleInput(1, 0);
 		}
 
-		if (!speakingActive1 && !speakingActive2)
+		if (!speakingActive1 && !speakingActive2) {
 			setMonitorMuted(false);
+			System.out.println("MONITOR UNMUTED");
+		}
 	}
 
 	private void activateCartwall() {
