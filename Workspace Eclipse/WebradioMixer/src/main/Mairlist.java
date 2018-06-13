@@ -350,9 +350,10 @@ public class Mairlist {
 					for (int i = 0; i < returnCommandBufferArrayLength; i++) {
 						//String data = ((ReturnCommand[]) returnCommandBuffer
 						//		.toArray())[(int) returnCommandTimestamps[i][0]].command;
-						String data = returnCommandBuffer.poll().command;
+						ReturnCommand returnCommand = returnCommandBuffer.poll(); 
+						String data = returnCommand.command;
 						
-						System.out.println("RETURN DATA SORTED: " + data);
+						System.out.println("RETURN DATA SORTED: " + data + " timestamp: " + returnCommand.timestamp);
 
 						if (data.contains("LOADED")) {
 							if (data.split(" ")[1].equals("0")) {
