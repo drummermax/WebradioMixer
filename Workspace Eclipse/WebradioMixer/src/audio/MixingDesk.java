@@ -359,10 +359,8 @@ public class MixingDesk {
 			speakingActive2 = speakingActive;
 		}
 
-		if (!speakingActive1 && !speakingActive2) {
+		if (!speakingActive1 && !speakingActive2)
 			setMonitorMuted(false);
-			System.out.println("MONITOR UNMUTED");
-		}
 	}
 
 	public void togglePflActive() {

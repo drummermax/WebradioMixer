@@ -13,8 +13,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.regex.Pattern;
 
 public class Mairlist {
 	private static Mairlist instance;
@@ -34,7 +36,19 @@ public class Mairlist {
 			mairlistPlayerStatePlayer2 = MairlistPlayerState.EMPTY;
 	private static MairlistPFLSource mairlistPFLSource = MairlistPFLSource.UNKNOWN;
 
-	private BlockingQueue<ReturnCommand> returnCommandBuffer;
+	private PriorityQueue<ReturnCommand> returnCommandBuffer;
+
+	private static class TimeComparator implements Comparator<ReturnCommand> {
+		@Override
+		public int compare(ReturnCommand r1, ReturnCommand r2) {
+			if (r1.timestamp < r2.timestamp)
+				return -1;
+			if (r1.timestamp > r2.timestamp)
+				return +1;
+			
+			return 0;
+		}
+	}
 
 	public enum CommandShortcut {
 		PLAYER1_STARTSTOP(1), PLAYER1_PFL_ONOFF(3), PLAYER2_STARTSTOP(2), PLAYER2_PFL_ONOFF(4), CARTWALL_MODEPFL(
@@ -164,7 +178,7 @@ public class Mairlist {
 	}
 
 	private Mairlist() {
-		returnCommandBuffer = new ArrayBlockingQueue<ReturnCommand>(20);
+		returnCommandBuffer = new PriorityQueue<ReturnCommand>(20, new TimeComparator());
 
 		try {
 			robot = new Robot();
@@ -302,7 +316,8 @@ public class Mairlist {
 		public void run() {
 			while (true) {
 				if (returnCommandBuffer.toArray().length != 0) {
-					//ReturnCommand[] returnCommandBufferArray = (ReturnCommand[]) returnCommandBuffer.toArray();
+					// ReturnCommand[] returnCommandBufferArray =
+					// (ReturnCommand[]) returnCommandBuffer.toArray();
 					int returnCommandBufferArrayLength = returnCommandBuffer.toArray().length;
 					String[] commands = { "STOP", "EMPTY", "LOADED" };
 
@@ -314,6 +329,7 @@ public class Mairlist {
 						}
 					}
 
+					/*
 					long[][] returnCommandTimestamps = new long[returnCommandBufferArrayLength][2];
 
 					for (int i = 0; i < returnCommandBufferArrayLength; i++) {
@@ -327,9 +343,12 @@ public class Mairlist {
 							return Long.compare(o2[1], o1[1]);
 						}
 					});
+					*/
 
 					for (int i = 0; i < returnCommandBufferArrayLength; i++) {
-						String data = ((ReturnCommand[]) returnCommandBuffer.toArray())[(int) returnCommandTimestamps[i][0]].command;
+						//String data = ((ReturnCommand[]) returnCommandBuffer
+						//		.toArray())[(int) returnCommandTimestamps[i][0]].command;
+						String data = returnCommandBuffer.poll().command;
 
 						if (data.contains("LOADED")) {
 							if (data.split(" ")[1].equals("0")) {
@@ -375,8 +394,8 @@ public class Mairlist {
 							}
 						}
 
-						for (int k = 0; i < returnCommandBufferArrayLength; i++)
-							returnCommandBuffer.poll();
+						//for (int k = 0; i < returnCommandBufferArrayLength; i++)
+						//	returnCommandBuffer.poll();
 					}
 
 					try {
