@@ -321,6 +321,7 @@ public class Mairlist {
 					int returnCommandBufferArrayLength = returnCommandBuffer.toArray().length;
 					String[] commands = { "STOP", "EMPTY", "LOADED" };
 
+					/*
 					if (returnCommandBufferContainsStrings(commands)) {
 						try {
 							Thread.sleep(100);
@@ -328,6 +329,7 @@ public class Mairlist {
 							e.printStackTrace();
 						}
 					}
+					*/
 
 					/*
 					long[][] returnCommandTimestamps = new long[returnCommandBufferArrayLength][2];
@@ -397,12 +399,12 @@ public class Mairlist {
 						//for (int k = 0; i < returnCommandBufferArrayLength; i++)
 						//	returnCommandBuffer.poll();
 					}
+				}
 
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 		}
