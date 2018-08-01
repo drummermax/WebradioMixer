@@ -319,7 +319,9 @@ public class Mairlist {
 					// ReturnCommand[] returnCommandBufferArray =
 					// (ReturnCommand[]) returnCommandBuffer.toArray();
 					int returnCommandBufferArrayLength = returnCommandBuffer.toArray().length;
-					String[] commands = { "STOP", "EMPTY", "LOADED" };
+
+					int returnCommandBufferSpecialCommandCounterPlayer1 = 0;
+					int returnCommandBufferSpecialCommandCounterPlayer2 = 0;
 
 					/*
 					if (returnCommandBufferContainsStrings(commands)) {
@@ -358,14 +360,18 @@ public class Mairlist {
 						if (data.contains("LOADED")) {
 							if (data.split(" ")[1].equals("0")) {
 								mairlistPlayerStatePlayer1 = MairlistPlayerState.LOADED;
+								returnCommandBufferSpecialCommandCounterPlayer1++;
 							} else if (data.split(" ")[1].equals("1")) {
 								mairlistPlayerStatePlayer2 = MairlistPlayerState.LOADED;
+								returnCommandBufferSpecialCommandCounterPlayer2++;
 							}
 						} else if (data.contains("EMPTY")) {
 							if (data.split(" ")[1].equals("0")) {
 								mairlistPlayerStatePlayer1 = MairlistPlayerState.EMPTY;
+								returnCommandBufferSpecialCommandCounterPlayer1++;
 							} else if (data.split(" ")[1].equals("1")) {
 								mairlistPlayerStatePlayer2 = MairlistPlayerState.EMPTY;
+								returnCommandBufferSpecialCommandCounterPlayer2++;
 							}
 						} else if (data.contains("PLAYING")) {
 							if (data.split(" ")[1].equals("0")) {
@@ -376,8 +382,10 @@ public class Mairlist {
 						} else if (data.contains("STOP")) {
 							if (data.split(" ")[1].equals("0")) {
 								mairlistPlayerStatePlayer1 = MairlistPlayerState.STOPPED;
+								returnCommandBufferSpecialCommandCounterPlayer1++;
 							} else if (data.split(" ")[1].equals("1")) {
 								mairlistPlayerStatePlayer2 = MairlistPlayerState.STOPPED;
+								returnCommandBufferSpecialCommandCounterPlayer2++;
 							}
 						} else if (data.contains("EOF")) {
 							if (data.split(" ")[1].equals("0")) {
@@ -401,6 +409,13 @@ public class Mairlist {
 
 						//for (int k = 0; i < returnCommandBufferArrayLength; i++)
 						//	returnCommandBuffer.poll();
+					}
+					
+					if (returnCommandBufferSpecialCommandCounterPlayer1 == 3) {
+						mairlistPlayerStatePlayer1 = MairlistPlayerState.LOADED;
+					}
+					if (returnCommandBufferSpecialCommandCounterPlayer2 == 3) {
+						mairlistPlayerStatePlayer2 = MairlistPlayerState.LOADED;
 					}
 				}
 
