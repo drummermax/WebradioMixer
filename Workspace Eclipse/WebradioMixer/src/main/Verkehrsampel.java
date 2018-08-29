@@ -233,9 +233,9 @@ public class Verkehrsampel {
 
 						Verkehrsampel.getInstance()
 								.setTimestampEOF(Verkehrsampel.getInstance().getCurrentTimestamp());
-
-						Verkehrsampel.getInstance().setBrightness_green(0);
 					}
+					
+					Verkehrsampel.getInstance().setBrightness_green(0);
 				} else {
 					Verkehrsampel.getInstance().setBrightness_green(15);
 					Verkehrsampel.getInstance().setBrightness_yellow(0);
