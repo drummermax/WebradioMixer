@@ -235,19 +235,21 @@ public class Verkehrsampel {
 								.setTimestampEOF(Verkehrsampel.getInstance().getCurrentTimestamp());
 					}
 					
-					Verkehrsampel.getInstance().setBrightness_green(0);
 				} else {
-					Verkehrsampel.getInstance().setBrightness_green(15);
 					Verkehrsampel.getInstance().setBrightness_yellow(0);
 				}
 				
 
 				if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) {
-					Verkehrsampel.getInstance().setBrightness_green(0);
 					Verkehrsampel.getInstance().setBrightness_red(15);
 				} else {
-					Verkehrsampel.getInstance().setBrightness_green(15);
 					Verkehrsampel.getInstance().setBrightness_red(0);
+				}
+				
+				if (!(MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) && !(Mairlist.getInstance().getMairlistPlayerStatePlayer1() == MairlistPlayerState.EOF || Mairlist.getInstance().getMairlistPlayerStatePlayer2() == MairlistPlayerState.EOF)) {
+					Verkehrsampel.getInstance().setBrightness_green(15);
+				} else {
+					Verkehrsampel.getInstance().setBrightness_green(0);
 				}
 				
 
