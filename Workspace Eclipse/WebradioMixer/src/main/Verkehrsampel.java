@@ -233,15 +233,20 @@ public class Verkehrsampel {
 
 						Verkehrsampel.getInstance()
 								.setTimestampEOF(Verkehrsampel.getInstance().getCurrentTimestamp());
+
+						Verkehrsampel.getInstance().setBrightness_green(0);
 					}
 				} else {
+					Verkehrsampel.getInstance().setBrightness_green(15);
 					Verkehrsampel.getInstance().setBrightness_yellow(0);
 				}
 				
 
 				if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) {
+					Verkehrsampel.getInstance().setBrightness_green(0);
 					Verkehrsampel.getInstance().setBrightness_red(15);
 				} else {
+					Verkehrsampel.getInstance().setBrightness_green(15);
 					Verkehrsampel.getInstance().setBrightness_red(0);
 				}
 				
@@ -251,7 +256,7 @@ public class Verkehrsampel {
 				Verkehrsampel.getInstance().sendeSerialPort(data);
 
 				try {
-					Thread.sleep(100);
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
