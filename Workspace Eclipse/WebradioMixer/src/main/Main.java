@@ -15,6 +15,8 @@ public class Main {
 
 		Filemanager.getInstance();
 		
+		Verkehrsampel.getInstance();
+		
 		MixingDesk.getInstance();
 		
 		try {
