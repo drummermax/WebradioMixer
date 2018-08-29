@@ -213,6 +213,8 @@ public class Verkehrsampel {
 		public void run() {
 			byte[] data = new byte[2];
 			
+			brightness_green = 15;
+			
 			data[0] = 0x00;
 			data[1] = (byte) 0xF0;
 			
