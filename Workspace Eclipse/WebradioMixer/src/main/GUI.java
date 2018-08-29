@@ -329,7 +329,7 @@ public class GUI extends JFrame implements MouseListener {
 
 		comboBox_comPortNames = new JComboBox<String>(Verkehrsampel.getInstance().getPortNames());
 		comboBox_comPortNames.setSelectedIndex(-1);
-		comboBox_comPortNames.setBounds(550, 275, 300, 25);
+		comboBox_comPortNames.setBounds(550, 275, 200, 25);
 		comboBox_comPortNames.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Verkehrsampel.getInstance().setPortName(comboBox_comPortNames.getSelectedItem().toString());
