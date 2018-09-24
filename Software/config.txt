@@ -24,3 +24,7 @@ midi in
 1
 midi out
 5
+buffersize_soundcards
+64
+latency_compensation
+650

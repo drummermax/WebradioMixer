@@ -1,19 +1,21 @@
 package main;
 
-import javax.sound.midi.MidiChannel;
-
 import audio.MixingDesk;
 import midi.MidiController;
 
 public class Main {
 
 	public static void main(String[] args) {		
+	
+		Filemanager.getInstance();
+	
 		if (args.length == 2) {
 			GlobalVariables.getInstance().setBufferSize(Integer.parseInt(args[0]));
 			GlobalVariables.getInstance().setLatencyCompensation(Integer.parseInt(args[1]));
+		} else {
+			GlobalVariables.getInstance().setBufferSize((int) Filemanager.getInstance().variables.get("buffersize_soundcards"));
+			GlobalVariables.getInstance().setLatencyCompensation((int) Filemanager.getInstance().variables.get("latency_compensation"));
 		}
-
-		Filemanager.getInstance();
 		
 		Verkehrsampel.getInstance();
 		
