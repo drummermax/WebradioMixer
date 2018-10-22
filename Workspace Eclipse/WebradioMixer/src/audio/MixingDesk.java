@@ -77,6 +77,9 @@ public class MixingDesk {
 		mairlistMasterRecord = new Input(audioFormat,
 				(int) Filemanager.getInstance().variables.get("mairlist master record"), true);
 
+		
+		System.out.println("HIER 1");
+		
 		// Input[] mairlistMasterInputs = { microphone1, mairlistChannel1,
 		// mairlistChannel2 };
 		Input[] mairlistMasterInputs = { microphone1, microphone2, mairlistChannel1, mairlistChannel2,
@@ -92,6 +95,8 @@ public class MixingDesk {
 				mairlistMasterInputsLatencyCompensation);
 		mairlistMaster.setVolume(1);
 		
+
+		System.out.println("HIER 2");
 		
 		int masterInitialVolumeProzent = (int) Filemanager.getInstance().variables.get("mairlist master initial volume");
 		
@@ -100,6 +105,8 @@ public class MixingDesk {
 		
 		mairlistMasterRecord.setVolume(masterInitialVolume); //avoid clipping in master channel
 
+
+		System.out.println("HIER 3");
 		
 		monitor = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("monitor"),
 				monitorInputs, monitorInputsLatencyCompensation);
@@ -108,17 +115,6 @@ public class MixingDesk {
 		phones = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("phones"), phonesInputs,
 				phonesInputsLatencyCompensation);
 		phones.setVolume(1);
-		
-
-		System.out.println("initLines vorbei!");
-		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
 	public void updateLines() {

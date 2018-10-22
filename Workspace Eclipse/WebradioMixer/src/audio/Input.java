@@ -69,7 +69,7 @@ public class Input {
 
 	public void open() {
 
-		System.out.println("UPDATE?!?!?");
+		System.out.println("open " + mixerInfosIndex);
 		
 		try {
 			Thread.sleep(3000);
