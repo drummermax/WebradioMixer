@@ -108,6 +108,17 @@ public class MixingDesk {
 		phones = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("phones"), phonesInputs,
 				phonesInputsLatencyCompensation);
 		phones.setVolume(1);
+		
+
+		System.out.println("initLines vorbei!");
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public void updateLines() {
