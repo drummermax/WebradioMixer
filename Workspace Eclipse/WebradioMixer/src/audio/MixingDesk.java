@@ -98,15 +98,6 @@ public class MixingDesk {
 		Double masterInitialVolume = new Double(masterInitialVolumeProzent);
 		masterInitialVolume = masterInitialVolume/100;
 		
-		System.out.println("MAIRLIST MASTER INIT VOL: " + masterInitialVolume);
-		
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		mairlistMasterRecord.setVolume(masterInitialVolume); //avoid clipping in master channel
 
 		
@@ -120,6 +111,15 @@ public class MixingDesk {
 	}
 
 	public void updateLines() {
+		System.out.println("UPDATE?!?!?");
+		
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		audioFormat = new AudioFormat(samplerate, numberOfBits, 2, true, true);
 
 		microphone1.updateLine(audioFormat);
