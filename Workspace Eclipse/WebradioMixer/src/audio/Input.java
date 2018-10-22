@@ -115,6 +115,8 @@ public class Input {
 	}
 
 	public void setVolume(double volume) {		
+		System.out.println("NEW VOLUME OF " + mixerInfosIndex + " : " + volume);
+		
 		this.setVolume = volume;
 		
 		if (!phonesActivated) {
