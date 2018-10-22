@@ -119,25 +119,40 @@ public class Input {
 		
 		this.setVolume = volume;
 		
+		System.out.println("DORT 1");
+		
 		if (!phonesActivated) {
 			volume = 0;
 		}
 		
+		System.out.println("DORT 2");
+		
 		this.volume = volume;
 
+		System.out.println("DORT 3");
+		
 //		System.out.println("cd " + MixingDesk.getInstance().getNircmdPath() + " && NIRCMD setsysvolume "
 //				+ (int) (volume * 65535) + " \"" + inputSettingsName + "\"");
 
 		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "cd " + MixingDesk.getInstance().getNircmdPath()
 				+ " && NIRCMD setsysvolume " + (int) (volume * 65535) + " \"" + inputSettingsName + "\"");
 
+
+		System.out.println("DORT 4");
+		
 		builder.redirectErrorStream(true);
+		
+
+		System.out.println("DORT 5");
+		
 		try {
 			builder.start();
 		} catch (IOException e) {
 			System.out.println("NIRCMD didn't work!");
 			e.printStackTrace();
 		}
+
+		System.out.println("DORT 6");
 
 		this.volume = volume;
 	}
