@@ -102,9 +102,9 @@ public class MixingDesk {
 		
 		Double masterInitialVolume = new Double(masterInitialVolumeProzent);
 		masterInitialVolume = masterInitialVolume/100;
-		
-		mairlistMasterRecord.setVolume(masterInitialVolume); //avoid clipping in master channel
 
+		System.out.println("HIER 21");
+		mairlistMasterRecord.setVolume(masterInitialVolume); //avoid clipping in master channel
 
 		System.out.println("HIER 3");
 		
