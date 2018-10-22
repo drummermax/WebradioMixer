@@ -68,17 +68,6 @@ public class Input {
 	}
 
 	public void open() {
-
-		System.out.println("open " + mixerInfosIndex);
-		
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
 		try {
 			targetDataLineIn.open(audioFormat);
 		} catch (LineUnavailableException e) {
@@ -114,36 +103,25 @@ public class Input {
 		return setVolume;
 	}
 
-	public void setVolume(double volume) {		
-		System.out.println("NEW VOLUME OF " + mixerInfosIndex + " : " + volume);
-		
+	public void setVolume(double volume) {
 		this.setVolume = volume;
-		
-		System.out.println("DORT 1");
 		
 		if (!phonesActivated) {
 			volume = 0;
 		}
 		
-		System.out.println("DORT 2");
-		
 		this.volume = volume;
-
-		System.out.println("DORT 3");
 		
 //		System.out.println("cd " + MixingDesk.getInstance().getNircmdPath() + " && NIRCMD setsysvolume "
 //				+ (int) (volume * 65535) + " \"" + inputSettingsName + "\"");
 
-		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "cd " + MixingDesk.getInstance().getNircmdPath()
+		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "cd " + MixingDesk.getInstance().getNircmdPath()
+		//		+ " && NIRCMD setsysvolume " + (int) (volume * 65535) + " \"" + inputSettingsName + "\"");
+
+		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "cd " + System.getProperty("user.dir") + "\\nircmd-x64"
 				+ " && NIRCMD setsysvolume " + (int) (volume * 65535) + " \"" + inputSettingsName + "\"");
-
-
-		System.out.println("DORT 4");
 		
 		builder.redirectErrorStream(true);
-		
-
-		System.out.println("DORT 5");
 		
 		try {
 			builder.start();
@@ -151,8 +129,6 @@ public class Input {
 			System.out.println("NIRCMD didn't work!");
 			e.printStackTrace();
 		}
-
-		System.out.println("DORT 6");
 
 		this.volume = volume;
 	}
