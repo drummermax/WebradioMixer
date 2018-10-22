@@ -100,6 +100,13 @@ public class MixingDesk {
 		
 		System.out.println("MAIRLIST MASTER INIT VOL: " + masterInitialVolume);
 		
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		mairlistMasterRecord.setVolume(masterInitialVolume); //avoid clipping in master channel
 
 		
