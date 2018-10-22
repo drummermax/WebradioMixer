@@ -68,6 +68,17 @@ public class Input {
 	}
 
 	public void open() {
+
+		System.out.println("UPDATE?!?!?");
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 		try {
 			targetDataLineIn.open(audioFormat);
 		} catch (LineUnavailableException e) {
