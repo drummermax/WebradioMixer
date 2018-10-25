@@ -15,14 +15,16 @@ stdout
 mairlist master
 8
 mairlist master record
-13
+29
 monitor
 5
 phones
 2
 telephone master
 7
-telephone master record
+telephone master record input
+18
+telephone master record output
 4
 midi in
 2
