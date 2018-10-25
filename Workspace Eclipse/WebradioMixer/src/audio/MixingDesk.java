@@ -166,6 +166,7 @@ public class MixingDesk {
 		monitor.updateInputData();
 		phones.updateInputData();
 		telephoneMaster.updateInputData();
+		telephoneMasterRecordOutput.updateInputData();
 
 		if (setRecording_microphones) {
 			if (!isRecording_microphones) {
