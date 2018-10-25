@@ -107,6 +107,8 @@ public class MixingDesk {
 		phones = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("phones"), phonesInputs,
 				phonesInputsLatencyCompensation);
 		phones.setVolume(1);
+		phones.setVolumeOfSingleInput(5, 0); //monitoring
+		phones.setVolumeOfSingleInput(6, 0); //monitoring
 	}
 
 	public void updateLines() {
