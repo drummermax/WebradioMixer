@@ -109,6 +109,14 @@ public class MixingDesk {
 																// in master
 																// channel
 
+		masterInitialVolumeProzent = (int) Filemanager.getInstance().variables
+				.get("telephone initial volume");
+
+		masterInitialVolume = new Double(masterInitialVolumeProzent);
+		masterInitialVolume = masterInitialVolume / 100;
+		
+		telephone.setVolume(masterInitialVolume);
+
 		mairlistMasterRecord.setVolume(1);
 		
 		
@@ -322,8 +330,7 @@ public class MixingDesk {
 			}
 		} else {
 			if (isRecording_telephone) {
-				if (!isRecording_telephone)
-					telephoneMasterRecordInput.close();
+				telephoneMasterRecordInput.close();
 
 				isRecording_telephone = false;
 
