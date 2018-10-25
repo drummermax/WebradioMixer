@@ -27,7 +27,7 @@ public class MidiController {
 	private static long[] timestamp;
 	private static double faderSampleFrequency = 10;
 
-	private static long timestampEOF1 = 0, timestampEOF2 = 0;
+	private static long timestampEOF1 = 0, timestampEOF2 = 0, timestampTelephone_onAir = 0, timestampTelephone_recording = 0;
 
 	public long getCurrentTimestamp() {
 		return System.currentTimeMillis();
@@ -271,6 +271,22 @@ public class MidiController {
 		MidiController.timestampEOF2 = timestampEOF2;
 	}
 
+	public long getTimestampTelephone_onAir() {
+		return timestampTelephone_onAir;
+	}
+
+	public void setTimestampTelephone_onAir(long timestampTelephone_onAir) {
+		MidiController.timestampTelephone_onAir = timestampTelephone_onAir;
+	}
+
+	public long getTimestampTelephone_recording() {
+		return timestampTelephone_recording;
+	}
+
+	public void setTimestampTelephone_recording(long timestampTelephone_recording) {
+		MidiController.timestampTelephone_recording = timestampTelephone_recording;
+	}
+
 	public static MidiController getInstance() {
 		if (instance == null) {
 			instance = new MidiController();
@@ -326,7 +342,7 @@ public class MidiController {
 
 			if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP1)) {
 				if (velocity == 127) {
-					MixingDesk.getInstance().toggleMonitoringToPhonesActive(1);
+					MixingDesk.getInstance().toggleRecording_telephone();
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP2)) {
 				if (velocity == 127) {
@@ -357,7 +373,7 @@ public class MidiController {
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP8)) {
 				if (velocity == 127) {
-
+					MixingDesk.getInstance().toggleTelephone_microphoneEnabled();
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN1)) {
 				if (velocity == 127) {
@@ -411,7 +427,7 @@ public class MidiController {
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN8)) {
 				if (velocity == 127) {
-
+					MixingDesk.getInstance().toggleTelephone_musicEnabled();
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER1)) {
 				if (velocity < 10) {
@@ -749,6 +765,51 @@ public class MidiController {
 					MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.RED);
 				} else {
 					MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.OFF);
+				}
+				
+
+				if (MixingDesk.getInstance().isSetRecording_telephone()) {
+					if (MidiController.getInstance().getCurrentTimestamp()
+							- MidiController.getInstance().getTimestampTelephone_recording() > 420) {
+						if (MIDIKey.BUTTONUP1.getLedColor() != MIDIKey.LEDColor.OFF) {
+							MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.OFF); // aus
+						} else {
+							MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.RED); // rot
+						}
+
+						MidiController.getInstance()
+								.setTimestampTelephone_recording(MidiController.getInstance().getCurrentTimestamp());
+					}
+				} else {
+					MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.OFF); // aus
+				}
+
+				if (MixingDesk.getInstance().isSpeakingActive2()) {
+					if (MidiController.getInstance().getCurrentTimestamp()
+							- MidiController.getInstance().getTimestampTelephone_onAir() > 420) {
+						if (MIDIKey.BUTTONDOWN2.getLedColor() != MIDIKey.LEDColor.OFF) {
+							MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.OFF); // aus
+						} else {
+							MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.RED); // rot
+						}
+
+						MidiController.getInstance()
+								.setTimestampTelephone_onAir(MidiController.getInstance().getCurrentTimestamp());
+					}
+				} else {
+					MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.OFF); // aus
+				}
+				
+				if (MixingDesk.getInstance().isTelephone_microphoneEnabled()) {
+					MIDIKey.BUTTONUP8.setLEDColor(MIDIKey.LEDColor.YELLOW);
+				} else {
+					MIDIKey.BUTTONUP8.setLEDColor(MIDIKey.LEDColor.OFF);
+				}
+				
+				if (MixingDesk.getInstance().isTelephone_musicEnabled()) {
+					MIDIKey.BUTTONDOWN8.setLEDColor(MIDIKey.LEDColor.YELLOW);
+				} else {
+					MIDIKey.BUTTONDOWN8.setLEDColor(MIDIKey.LEDColor.OFF);
 				}
 
 				try {

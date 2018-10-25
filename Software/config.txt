@@ -12,14 +12,18 @@ mairlist cartwall
 22
 stdout
 27
-mairlist master record
-28
 mairlist master
 8
+mairlist master record
+28
 monitor
 3
 phones
 4
+telephone master
+8
+telephone master record
+28
 midi in
 1
 midi out
@@ -28,3 +32,5 @@ buffersize_soundcards
 64
 latency_compensation
 650
+mairlist master initial volume
+80
