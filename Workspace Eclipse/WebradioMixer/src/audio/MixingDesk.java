@@ -44,10 +44,12 @@ public class MixingDesk {
 
 			instance.setSpeakingAktive(1, false);
 			instance.setSpeakingAktive(2, false);
+			instance.deactivateMicrophone(2);
+			
 			instance.setMonitoringToPhonesActive(1, false);
 			instance.setMonitoringToPhonesActive(2, false);
 			instance.setPflActive(false);
-			instance.setCartwallActive(false);
+			instance.setCartwallActive(true);
 			instance.setPhonesStdWiedergabe(false);
 			instance.setMonitorMuted(false);
 			instance.setTelephone_microphoneEnabled(false);
@@ -119,6 +121,8 @@ public class MixingDesk {
 				(int) Filemanager.getInstance().variables.get("telephone master"), telephoneMasterInputs,
 				telephoneMasterInputsLatencyCompensation);
 		telephoneMaster.setVolume(1);
+		
+		telephoneMasterRecord.setVolume(1);
 	}
 
 	public void updateLines() {
