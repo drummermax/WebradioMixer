@@ -44,6 +44,7 @@ public class MixingDesk {
 
 			instance.setSpeakingAktive(1, false);
 			instance.setSpeakingAktive(2, false);
+			instance.deactivateMicrophone(1);
 			instance.deactivateMicrophone(2);
 
 			instance.setPflActive(false);
@@ -122,7 +123,7 @@ public class MixingDesk {
 		telephoneMaster = new OutputCombined(audioFormat,
 				(int) Filemanager.getInstance().variables.get("telephone master"), telephoneMasterInputs,
 				telephoneMasterInputsLatencyCompensation);
-		telephoneMaster.setVolume(0.9);
+		telephoneMaster.setVolume(masterInitialVolume);
 
 		telephoneMasterRecordOutput = new OutputCombined(audioFormat,
 				(int) Filemanager.getInstance().variables.get("telephone master record output"), telephoneMasterRecordInputs,
