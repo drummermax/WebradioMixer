@@ -2,7 +2,7 @@ procedure OnLoad;
 begin
 end;
 
-procedure OnPlayerEOFWarning(PlaylistIndex: integer; PlayerIndex: integer; Item: IPlaylistItem);
+procedure OnPlayerEOFWarning(PlaylistIndex: integer; PlayerIndex: integer);
 var text: string;
 begin
 	text := '"EOF ' + IntToStr(PlayerIndex) + '"';
@@ -16,7 +16,7 @@ begin
 	ShellExecuteHidden('cmd.exe', '/c D: && cd D:\Desktop\WebradioMixer\Software && java -jar WebradioMixerPackageTransmitter.jar ' + text);
 end;
 
-procedure OnPFLOn(PlayerControl: IPlayerControl; Item: IPlaylistItem; PFLCount: integer);
+procedure OnPFLOn(Item: IPlaylistItem; PFLCount: integer);
 var text: string;
 begin
 	text := '"PFL ON"';
@@ -24,7 +24,7 @@ begin
 	ShellExecuteHidden('cmd.exe', '/c D: && cd D:\Desktop\WebradioMixer\Software && java -jar WebradioMixerPackageTransmitter.jar ' + text);
 end;
 
-procedure OnPFLOff(PlayerControl: IPlayerControl; Item: IPlaylistItem; PFLCount: integer);
+procedure OnPFLOff(Item: IPlaylistItem; PFLCount: integer);
 var text: string;
 begin
 	text := '"PFL OFF"';
