@@ -30,8 +30,9 @@ public class MixingDesk {
 
 	private static boolean setRecording_microphones = false, setRecording_manually = false,
 			isRecording_microphones = false, isRecording_manually = false;
-	private static boolean speakingActive1 = false, speakingActive2 = false, pflActive = false, cartwallActive = false,
-			monitorMuted = false, phonesStdWiedergabe = false;
+	private static boolean speakingActive1 = false, speakingActive2 = false, monitoringToPhonesActive1 = false,
+			monitoringToPhonesActive2 = false, pflActive = false, cartwallActive = false, monitorMuted = false,
+			phonesStdWiedergabe = false;
 	private static AudioInputStream aircheck_microphones, aircheck_manually;
 	private static File aircheckFile_microphones, aircheckFile_manually;
 	private static AudioFileFormat.Type aircheckFileType = AudioFileFormat.Type.WAVE;
@@ -64,18 +65,15 @@ public class MixingDesk {
 	public void initLines() {
 		audioFormat = new AudioFormat(samplerate, numberOfBits, 2, true, true);
 
-		microphone1 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("microphone 1"), false);
-		microphone2 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("microphone 2"), false);
-		mairlistChannel1 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist channel 1"),
-				true);
-		mairlistChannel2 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist channel 2"),
-				true);
-		mairlistPFL = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist pfl"), true);
-		mairlistCartwall = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist cartwall"),
-				true);
-		stdOut = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("stdout"), true);
+		microphone1 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("microphone 1"));
+		microphone2 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("microphone 2"));
+		mairlistChannel1 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist channel 1"));
+		mairlistChannel2 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist channel 2"));
+		mairlistPFL = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist pfl"));
+		mairlistCartwall = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist cartwall"));
+		stdOut = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("stdout"));
 		mairlistMasterRecord = new Input(audioFormat,
-				(int) Filemanager.getInstance().variables.get("mairlist master record"), true);
+				(int) Filemanager.getInstance().variables.get("mairlist master record"));
 
 		// Input[] mairlistMasterInputs = { microphone1, mairlistChannel1,
 		// mairlistChannel2 };
@@ -92,15 +90,16 @@ public class MixingDesk {
 				mairlistMasterInputsLatencyCompensation);
 		mairlistMaster.setVolume(1);
 
-		
-		int masterInitialVolumeProzent = (int) Filemanager.getInstance().variables.get("mairlist master initial volume");
-		
+		int masterInitialVolumeProzent = (int) Filemanager.getInstance().variables
+				.get("mairlist master initial volume");
+
 		Double masterInitialVolume = new Double(masterInitialVolumeProzent);
-		masterInitialVolume = masterInitialVolume/100;
+		masterInitialVolume = masterInitialVolume / 100;
 
-		mairlistMasterRecord.setVolume(masterInitialVolume); //avoid clipping in master channel
+		mairlistMasterRecord.setVolume(masterInitialVolume); // avoid clipping
+																// in master
+																// channel
 
-		
 		monitor = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("monitor"),
 				monitorInputs, monitorInputsLatencyCompensation);
 		monitor.setVolume(1);
@@ -150,7 +149,7 @@ public class MixingDesk {
 					setRecording_manually = false;
 					mairlistMasterRecord.close();
 				}
-				
+
 				System.out.println("started recording microphones");
 
 				mairlistMasterRecord.open();
@@ -245,7 +244,7 @@ public class MixingDesk {
 					mairlistMasterRecord.close();
 
 				isRecording_manually = false;
-				
+
 				System.out.println("finished recording manually");
 
 				// try {
@@ -275,10 +274,8 @@ public class MixingDesk {
 
 	private void activateMicrophone(int microphoneNumber) {
 		if (microphoneNumber == 1) {
-			microphone1.setPhonesActivated(true);
 			mairlistMaster.setVolumeOfSingleInput(0, 1);
 		} else if (microphoneNumber == 2) {
-			microphone2.setPhonesActivated(true);
 			mairlistMaster.setVolumeOfSingleInput(1, 1);
 		}
 
@@ -287,10 +284,8 @@ public class MixingDesk {
 
 	private void deactivateMicrophone(int microphoneNumber) {
 		if (microphoneNumber == 1) {
-			microphone1.setPhonesActivated(false);
 			mairlistMaster.setVolumeOfSingleInput(0, 0);
 		} else if (microphoneNumber == 2) {
-			microphone2.setPhonesActivated(false);
 			mairlistMaster.setVolumeOfSingleInput(1, 0);
 		}
 	}
@@ -368,6 +363,34 @@ public class MixingDesk {
 
 		if (!speakingActive1 && !speakingActive2)
 			setMonitorMuted(false);
+	}
+	
+	public void toggleMonitoringToPhonesActive(int microphoneNumber) {
+		if (microphoneNumber == 1) {
+			setMonitoringToPhonesActive(microphoneNumber, !monitoringToPhonesActive1);
+		} else if (microphoneNumber == 2) {
+			setMonitoringToPhonesActive(microphoneNumber, !monitoringToPhonesActive2);
+		}
+	}
+	
+	public void setMonitoringToPhonesActive(int microphoneNumber, boolean monitoringToPhonesActive) {
+		if (microphoneNumber == 1) {
+			if (monitoringToPhonesActive) {
+				phones.setVolumeOfSingleInput(0, 1);
+			} else {
+				phones.setVolumeOfSingleInput(0, 0);
+			}
+			
+			monitoringToPhonesActive1 = monitoringToPhonesActive;
+		} else if (microphoneNumber == 2) {
+			if (monitoringToPhonesActive) {
+				phones.setVolumeOfSingleInput(1, 1);
+			} else {
+				phones.setVolumeOfSingleInput(1, 0);
+			}
+			
+			monitoringToPhonesActive2 = monitoringToPhonesActive;
+		}
 	}
 
 	public void togglePflActive() {
@@ -504,6 +527,14 @@ public class MixingDesk {
 
 	public boolean isSpeakingActive2() {
 		return speakingActive2;
+	}
+
+	public boolean isMonitoringToPhonesActive1() {
+		return monitoringToPhonesActive1;
+	}
+
+	public boolean isMonitoringToPhonesActive2() {
+		return monitoringToPhonesActive2;
 	}
 
 	public boolean isMonitorMuted() {

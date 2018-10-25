@@ -25,15 +25,13 @@ public class Input {
 	private byte[] outputData;
 	private int outputDataLength;
 
-	private boolean phonesActivated;
 	private double setVolume = 0, volume = 0; // range 0..1
 
 	private boolean opened = false;
 
-	public Input(AudioFormat audioFormat, int mixerInfosIndex, boolean phonesActivated) {
+	public Input(AudioFormat audioFormat, int mixerInfosIndex) {
 		this.audioFormat = audioFormat;
 		this.mixerInfosIndex = mixerInfosIndex;
-		this.phonesActivated = phonesActivated;
 
 		updateLine(audioFormat);
 
@@ -85,16 +83,6 @@ public class Input {
 		opened = false;
 	}
 
-	public boolean isPhonesActivated() {
-		return phonesActivated;
-	}
-
-	public void setPhonesActivated(boolean phonesActivated) {
-		this.phonesActivated = phonesActivated;
-
-		setVolume(setVolume);
-	}
-
 	public double getVolume() {
 		return volume;
 	}
@@ -105,10 +93,6 @@ public class Input {
 
 	public void setVolume(double volume) {
 		this.setVolume = volume;
-		
-		if (!phonesActivated) {
-			volume = 0;
-		}
 		
 		this.volume = volume;
 		
