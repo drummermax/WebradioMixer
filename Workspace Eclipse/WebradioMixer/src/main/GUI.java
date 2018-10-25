@@ -30,14 +30,14 @@ public class GUI extends JFrame implements MouseListener {
 
 	private JButton button_updateLines, button_mute, button_quit;
 
-	private JComboBox<String> comboBox_lineInMicrophone1, comboBox_lineInMicrophone2, comboBox_lineInMairlistChannel1,
+	private JComboBox<String> comboBox_lineInMicrophone1, comboBox_lineInTelephone, comboBox_lineInMairlistChannel1,
 			comboBox_lineInMairlistChannel2, comboBox_lineInMairlistPFL, comboBox_lineInMairlistCartwall,
 			comboBox_lineInStdOut, comboBox_lineInMairlistMasterRecord, comboBox_lineOutMairlistMaster,
 			comboBox_lineOutMonitor, comboBox_lineOutPhones, comboBox_comPortNames;
 
 	private JTextField textfield_samplerate, textfield_bits, textfield_faderSampleFrequency;
 
-	private JLabel label_lineInMicrophone1, label_lineInMicrophone2, label_lineInMairlistChannel1,
+	private JLabel label_lineInMicrophone1, label_lineInTelephone, label_lineInMairlistChannel1,
 			label_lineInMairlistChannel2, label_lineInMairlistPFL, label_lineInMairlistCartwall, label_lineInStdOut,
 			label_lineInMairlistMasterRecord, label_lineOutMairlistMaster, label_lineOutMonitor, label_lineOutPhones;
 
@@ -71,7 +71,7 @@ public class GUI extends JFrame implements MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				int[] newConfig = {
 						Integer.parseInt(comboBox_lineInMicrophone1.getSelectedItem().toString().split("\\:")[0]),
-						Integer.parseInt(comboBox_lineInMicrophone2.getSelectedItem().toString().split("\\:")[0]),
+						Integer.parseInt(comboBox_lineInTelephone.getSelectedItem().toString().split("\\:")[0]),
 						Integer.parseInt(comboBox_lineInMairlistChannel1.getSelectedItem().toString().split("\\:")[0]),
 						Integer.parseInt(comboBox_lineInMairlistChannel2.getSelectedItem().toString().split("\\:")[0]),
 						Integer.parseInt(comboBox_lineInMairlistPFL.getSelectedItem().toString().split("\\:")[0]),
@@ -167,21 +167,21 @@ public class GUI extends JFrame implements MouseListener {
 		});
 		panel.add(comboBox_lineInMicrophone1);
 
-		comboBox_lineInMicrophone2 = new JComboBox<String>(getInputLinesStringArray());
-		comboBox_lineInMicrophone2.setSelectedIndex(
-				getComboBoxIndexByLineNumberInput((int) Filemanager.getInstance().variables.get("microphone 2")));
-		comboBox_lineInMicrophone2.setBounds(200, 25, 300, 25);
-		comboBox_lineInMicrophone2.addActionListener(new ActionListener() {
+		comboBox_lineInTelephone = new JComboBox<String>(getInputLinesStringArray());
+		comboBox_lineInTelephone.setSelectedIndex(
+				getComboBoxIndexByLineNumberInput((int) Filemanager.getInstance().variables.get("telephone")));
+		comboBox_lineInTelephone.setBounds(200, 25, 300, 25);
+		comboBox_lineInTelephone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					MixingDesk.getInstance().getTelephone().setMixerInfosIndex(
-							Integer.parseInt(comboBox_lineInMicrophone2.getSelectedItem().toString().split("\\:")[0]));
+							Integer.parseInt(comboBox_lineInTelephone.getSelectedItem().toString().split("\\:")[0]));
 				} catch (NumberFormatException eNumberFirmatException) {
 				}
 
 			}
 		});
-		panel.add(comboBox_lineInMicrophone2);
+		panel.add(comboBox_lineInTelephone);
 
 		comboBox_lineInMairlistChannel1 = new JComboBox<String>(getInputLinesStringArray());
 		comboBox_lineInMairlistChannel1.setSelectedIndex(
@@ -342,9 +342,9 @@ public class GUI extends JFrame implements MouseListener {
 		label_lineInMicrophone1.setBounds(25, 0, 150, 25);
 		panel.add(label_lineInMicrophone1);
 
-		label_lineInMicrophone2 = new JLabel("Microphone 2");
-		label_lineInMicrophone2.setBounds(25, 25, 150, 25);
-		panel.add(label_lineInMicrophone2);
+		label_lineInTelephone = new JLabel("Telephone");
+		label_lineInTelephone.setBounds(25, 25, 150, 25);
+		panel.add(label_lineInTelephone);
 
 		label_lineInMairlistChannel1 = new JLabel("mAirList Channel 1");
 		label_lineInMairlistChannel1.setBounds(25, 50, 150, 25);
