@@ -28,10 +28,10 @@ public class MixingDesk {
 	private static boolean setRecording_microphones = false, setRecording_manually = false,
 			setRecording_telephone = false, isRecording_microphones = false, isRecording_manually = false,
 			isRecording_telephone;
-	private static boolean speakingActive1 = false, speakingActive2 = false, monitoringToPhonesActive1 = false,
-			monitoringToPhonesActive2 = false, pflActive = false, cartwallActive = false, monitorMuted = false,
-			phonesStdWiedergabe = false;
-	private static boolean telephone_microphoneEnabled = false, telephone_musicEnabled = false;
+	private static boolean speakingActive1 = false, speakingActive2 = false, pflActive = false, cartwallActive = false,
+			monitorMuted = false, phonesStdWiedergabe = false;
+	private static boolean telephone_phonesEnabled = false, telephone_microphoneEnabled = false,
+			telephone_musicEnabled = false;
 	private static AudioInputStream aircheck_microphones, aircheck_manually, aircheck_telephone;
 	private static File aircheckFile_microphones, aircheckFile_manually, aircheckFile_telephone;
 	private static AudioFileFormat.Type aircheckFileType = AudioFileFormat.Type.WAVE;
@@ -45,13 +45,12 @@ public class MixingDesk {
 			instance.setSpeakingAktive(1, false);
 			instance.setSpeakingAktive(2, false);
 			instance.deactivateMicrophone(2);
-			
-			instance.setMonitoringToPhonesActive(1, false);
-			instance.setMonitoringToPhonesActive(2, false);
+
 			instance.setPflActive(false);
 			instance.setCartwallActive(true);
 			instance.setPhonesStdWiedergabe(false);
 			instance.setMonitorMuted(false);
+			instance.setTelephone_phonesEnabled(false);
 			instance.setTelephone_microphoneEnabled(false);
 			instance.setTelephone_musicEnabled(false);
 		}
@@ -88,9 +87,8 @@ public class MixingDesk {
 		boolean[] mairlistMasterInputsLatencyCompensation = { false, false, true, true, true };
 		Input[] monitorInputs = { mairlistChannel1, mairlistChannel2, mairlistCartwall };
 		boolean[] monitorInputsLatencyCompensation = { false, false, false };
-		Input[] phonesInputs = { mairlistChannel1, mairlistChannel2, mairlistPFL, mairlistCartwall, stdOut, microphone1,
-				telephone };
-		boolean[] phonesInputsLatencyCompensation = { false, false, false, false, false, false, false };
+		Input[] phonesInputs = { mairlistChannel1, mairlistChannel2, mairlistPFL, mairlistCartwall, stdOut, telephone };
+		boolean[] phonesInputsLatencyCompensation = { false, false, false, false, false, false };
 		Input[] telephoneMasterInputs = { microphone1, mairlistChannel1, mairlistChannel2, mairlistCartwall };
 		boolean[] telephoneMasterInputsLatencyCompensation = { false, false, false, false };
 
@@ -121,7 +119,7 @@ public class MixingDesk {
 				(int) Filemanager.getInstance().variables.get("telephone master"), telephoneMasterInputs,
 				telephoneMasterInputsLatencyCompensation);
 		telephoneMaster.setVolume(1);
-		
+
 		telephoneMasterRecord.setVolume(1);
 	}
 
@@ -430,34 +428,6 @@ public class MixingDesk {
 			setMonitorMuted(false);
 	}
 
-	public void toggleMonitoringToPhonesActive(int microphoneNumber) {
-		if (microphoneNumber == 1) {
-			setMonitoringToPhonesActive(microphoneNumber, !monitoringToPhonesActive1);
-		} else if (microphoneNumber == 2) {
-			setMonitoringToPhonesActive(microphoneNumber, !monitoringToPhonesActive2);
-		}
-	}
-
-	public void setMonitoringToPhonesActive(int microphoneNumber, boolean monitoringToPhonesActive) {
-		if (microphoneNumber == 1) {
-			if (monitoringToPhonesActive) {
-				phones.setVolumeOfSingleInput(5, 1);
-			} else {
-				phones.setVolumeOfSingleInput(5, 0);
-			}
-
-			monitoringToPhonesActive1 = monitoringToPhonesActive;
-		} else if (microphoneNumber == 2) {
-			if (monitoringToPhonesActive) {
-				phones.setVolumeOfSingleInput(6, 1);
-			} else {
-				phones.setVolumeOfSingleInput(6, 0);
-			}
-
-			monitoringToPhonesActive2 = monitoringToPhonesActive;
-		}
-	}
-
 	public void togglePflActive() {
 		setPflActive(!pflActive);
 	}
@@ -500,6 +470,20 @@ public class MixingDesk {
 		}
 
 		MixingDesk.monitorMuted = monitorMuted;
+	}
+
+	public void toggleTelephone_phonesEnabled() {
+		setTelephone_phonesEnabled(!telephone_phonesEnabled);
+	}
+
+	public void setTelephone_phonesEnabled(boolean telephone_phonesEnabled) {
+		if (telephone_phonesEnabled) {
+			phones.setVolumeOfSingleInput(5, 1);
+		} else {
+			phones.setVolumeOfSingleInput(5, 0);
+		}
+
+		MixingDesk.telephone_phonesEnabled = telephone_phonesEnabled;
 	}
 
 	public void toggleTelephone_microphoneEnabled() {
@@ -638,12 +622,8 @@ public class MixingDesk {
 		return speakingActive2;
 	}
 
-	public boolean isMonitoringToPhonesActive1() {
-		return monitoringToPhonesActive1;
-	}
-
-	public boolean isMonitoringToPhonesActive2() {
-		return monitoringToPhonesActive2;
+	public boolean isTelephone_phonesEnabled() {
+		return telephone_phonesEnabled;
 	}
 
 	public boolean isMonitorMuted() {

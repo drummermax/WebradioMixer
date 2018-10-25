@@ -346,7 +346,7 @@ public class MidiController {
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP2)) {
 				if (velocity == 127) {
-					MixingDesk.getInstance().toggleMonitoringToPhonesActive(2);
+					MixingDesk.getInstance().toggleTelephone_phonesEnabled();
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP3)) {
 				if (velocity == 127) {
@@ -735,13 +735,7 @@ public class MidiController {
 					MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				}
 
-				if (MixingDesk.getInstance().isMonitoringToPhonesActive1()) {
-					MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.GREEN); // grün
-				} else {
-					MIDIKey.BUTTONUP1.setLEDColor(MIDIKey.LEDColor.OFF); // aus
-				}
-
-				if (MixingDesk.getInstance().isMonitoringToPhonesActive2()) {
+				if (MixingDesk.getInstance().isTelephone_phonesEnabled()) {
 					MIDIKey.BUTTONUP2.setLEDColor(MIDIKey.LEDColor.GREEN); // grün
 				} else {
 					MIDIKey.BUTTONUP2.setLEDColor(MIDIKey.LEDColor.OFF); // aus
