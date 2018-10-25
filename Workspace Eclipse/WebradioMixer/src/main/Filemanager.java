@@ -18,7 +18,7 @@ public class Filemanager {
 
 	public Map<String, Number> variables;
 	
-	private final int numberOfVariables = 18;
+	private final int numberOfVariables = 19;
 
 	public static Filemanager getInstance() {
 		if (instance == null) {

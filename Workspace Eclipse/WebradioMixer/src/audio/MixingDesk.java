@@ -16,9 +16,9 @@ public class MixingDesk {
 	private static MixingDesk instance;
 
 	private static Input microphone1, telephone, mairlistChannel1, mairlistChannel2, mairlistPFL, mairlistCartwall,
-			stdOut, mairlistMasterRecord, telephoneMasterRecord;
+			stdOut, mairlistMasterRecord, telephoneMasterRecordInput;
 
-	private static OutputCombined monitor, phones, mairlistMaster, telephoneMaster;
+	private static OutputCombined monitor, phones, mairlistMaster, telephoneMaster, telephoneMasterRecordOutput;
 
 	private static AudioFormat audioFormat;
 	private static int samplerate = 44100, numberOfBits = 16;
@@ -78,8 +78,8 @@ public class MixingDesk {
 		stdOut = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("stdout"));
 		mairlistMasterRecord = new Input(audioFormat,
 				(int) Filemanager.getInstance().variables.get("mairlist master record"));
-		telephoneMasterRecord = new Input(audioFormat,
-				(int) Filemanager.getInstance().variables.get("telephone master record"));
+		telephoneMasterRecordInput = new Input(audioFormat,
+				(int) Filemanager.getInstance().variables.get("telephone master record input"));
 
 		// Input[] mairlistMasterInputs = { microphone1, mairlistChannel1,
 		// mairlistChannel2 };
@@ -91,6 +91,8 @@ public class MixingDesk {
 		boolean[] phonesInputsLatencyCompensation = { false, false, false, false, false, false };
 		Input[] telephoneMasterInputs = { microphone1, mairlistChannel1, mairlistChannel2, mairlistCartwall };
 		boolean[] telephoneMasterInputsLatencyCompensation = { false, false, false, false };
+		Input[] telephoneMasterRecordInputs = { microphone1, telephone };
+		boolean[] telephoneMasterRecordInputsLatencyCompensation = { false, false };
 
 		mairlistMaster = new OutputCombined(audioFormat,
 				(int) Filemanager.getInstance().variables.get("mairlist master"), mairlistMasterInputs,
@@ -120,7 +122,12 @@ public class MixingDesk {
 				telephoneMasterInputsLatencyCompensation);
 		telephoneMaster.setVolume(1);
 
-		telephoneMasterRecord.setVolume(1);
+		telephoneMasterRecordOutput = new OutputCombined(audioFormat,
+				(int) Filemanager.getInstance().variables.get("telephone master record output"), telephoneMasterRecordInputs,
+				telephoneMasterRecordInputsLatencyCompensation);
+		telephoneMasterRecordOutput.setVolume(1);
+
+		telephoneMasterRecordInput.setVolume(1);
 	}
 
 	public void updateLines() {
@@ -134,12 +141,14 @@ public class MixingDesk {
 		mairlistCartwall.updateLine(audioFormat);
 		stdOut.updateLine(audioFormat);
 		mairlistMasterRecord.updateLine(audioFormat);
-		telephoneMasterRecord.updateLine(audioFormat);
+		telephoneMasterRecordInput.updateLine(audioFormat);
 
 		mairlistMaster.updateLine(audioFormat);
 		monitor.updateLine(audioFormat);
 		phones.updateLine(audioFormat);
 		telephoneMaster.updateLine(audioFormat);
+		mairlistMasterRecord.updateLine(audioFormat);
+		telephoneMasterRecordOutput.updateLine(audioFormat);
 	}
 
 	public void updateMixingDesk() {
@@ -278,9 +287,9 @@ public class MixingDesk {
 
 				System.out.println("started recording telephone");
 
-				telephoneMasterRecord.open();
+				telephoneMasterRecordInput.open();
 
-				aircheck_telephone = new AudioInputStream(telephoneMasterRecord.getTargetDataLine());
+				aircheck_telephone = new AudioInputStream(telephoneMasterRecordInput.getTargetDataLine());
 
 				SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 				Date now = new Date();
@@ -310,7 +319,7 @@ public class MixingDesk {
 		} else {
 			if (isRecording_telephone) {
 				if (!isRecording_telephone)
-					telephoneMasterRecord.close();
+					telephoneMasterRecordInput.close();
 
 				isRecording_telephone = false;
 
