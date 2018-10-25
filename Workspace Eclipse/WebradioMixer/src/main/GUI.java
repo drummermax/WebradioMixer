@@ -174,7 +174,7 @@ public class GUI extends JFrame implements MouseListener {
 		comboBox_lineInMicrophone2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					MixingDesk.getInstance().getMicrophone2().setMixerInfosIndex(
+					MixingDesk.getInstance().getTelephone().setMixerInfosIndex(
 							Integer.parseInt(comboBox_lineInMicrophone2.getSelectedItem().toString().split("\\:")[0]));
 				} catch (NumberFormatException eNumberFirmatException) {
 				}

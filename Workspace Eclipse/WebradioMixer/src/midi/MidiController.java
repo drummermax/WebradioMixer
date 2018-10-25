@@ -444,7 +444,7 @@ public class MidiController {
 					velocity = 127;
 				}
 
-				MixingDesk.getInstance().getMicrophone2().setVolume(velocity / 127);
+				MixingDesk.getInstance().getTelephone().setVolume(velocity / 127);
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER3)) {
 				if (velocity < 10) {
 					velocity = 0;

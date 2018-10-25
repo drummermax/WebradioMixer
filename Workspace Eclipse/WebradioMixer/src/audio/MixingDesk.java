@@ -15,7 +15,7 @@ import main.Filemanager;
 public class MixingDesk {
 	private static MixingDesk instance;
 
-	private static Input microphone1, microphone2, mairlistChannel1, mairlistChannel2, mairlistPFL, mairlistCartwall,
+	private static Input microphone1, telephone, mairlistChannel1, mairlistChannel2, mairlistPFL, mairlistCartwall,
 			stdOut, mairlistMasterRecord, telephoneMasterRecord;
 
 	private static OutputCombined monitor, phones, mairlistMaster, telephoneMaster;
@@ -69,7 +69,7 @@ public class MixingDesk {
 		audioFormat = new AudioFormat(samplerate, numberOfBits, 2, true, true);
 
 		microphone1 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("microphone 1"));
-		microphone2 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("microphone 2"));
+		telephone = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("microphone 2"));
 		mairlistChannel1 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist channel 1"));
 		mairlistChannel2 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist channel 2"));
 		mairlistPFL = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist pfl"));
@@ -82,13 +82,13 @@ public class MixingDesk {
 
 		// Input[] mairlistMasterInputs = { microphone1, mairlistChannel1,
 		// mairlistChannel2 };
-		Input[] mairlistMasterInputs = { microphone1, microphone2, mairlistChannel1, mairlistChannel2,
+		Input[] mairlistMasterInputs = { microphone1, telephone, mairlistChannel1, mairlistChannel2,
 				mairlistCartwall };
 		boolean[] mairlistMasterInputsLatencyCompensation = { false, false, true, true, true };
 		Input[] monitorInputs = { mairlistChannel1, mairlistChannel2, mairlistCartwall };
 		boolean[] monitorInputsLatencyCompensation = { false, false, false };
 		Input[] phonesInputs = { mairlistChannel1, mairlistChannel2, mairlistPFL, mairlistCartwall, stdOut, microphone1,
-				microphone2 };
+				telephone };
 		boolean[] phonesInputsLatencyCompensation = { false, false, false, false, false, false, false };
 		Input[] telephoneMasterInputs = { microphone1, mairlistChannel1, mairlistChannel2, mairlistCartwall };
 		boolean[] telephoneMasterInputsLatencyCompensation = { false, false, false, false };
@@ -126,7 +126,7 @@ public class MixingDesk {
 		audioFormat = new AudioFormat(samplerate, numberOfBits, 2, true, true);
 
 		microphone1.updateLine(audioFormat);
-		microphone2.updateLine(audioFormat);
+		telephone.updateLine(audioFormat);
 		mairlistChannel1.updateLine(audioFormat);
 		mairlistChannel2.updateLine(audioFormat);
 		mairlistPFL.updateLine(audioFormat);
@@ -143,7 +143,7 @@ public class MixingDesk {
 
 	public void updateMixingDesk() {
 		microphone1.updateOutputData();
-		microphone2.updateOutputData();
+		telephone.updateOutputData();
 		mairlistChannel1.updateOutputData();
 		mairlistChannel2.updateOutputData();
 		mairlistPFL.updateOutputData();
@@ -563,8 +563,8 @@ public class MixingDesk {
 		return microphone1;
 	}
 
-	public Input getMicrophone2() {
-		return microphone2;
+	public Input getTelephone() {
+		return telephone;
 	}
 
 	public Input getMairlistChannel1() {
