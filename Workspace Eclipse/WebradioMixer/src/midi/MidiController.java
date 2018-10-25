@@ -365,8 +365,11 @@ public class MidiController {
 
 					if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_ONAIR);
+						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_RESET);
+						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_START);
 					} else {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_OFFAIR);
+						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_STOP);
 					}
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN2)) {
@@ -375,8 +378,11 @@ public class MidiController {
 
 					if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_ONAIR);
+						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_RESET);
+						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_START);
 					} else {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_OFFAIR);
+						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_STOP);
 					}
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN3)) {

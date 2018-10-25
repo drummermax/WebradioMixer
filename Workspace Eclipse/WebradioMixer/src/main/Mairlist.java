@@ -109,7 +109,10 @@ public class Mairlist {
 																																		"PLAYLIST 1 EXTRAPFL ON/OFF"), GUI_ONAIR(
 																																				"ON AIR"), GUI_OFFAIR(
 																																						"OFF AIR"), GUI_ONOFFAIR(
-																																								"ON/OFF AIR");
+																																								"ON/OFF AIR"), TALKTIMER_START(
+																																										"TALKTIMER START"), TALKTIMER_STOP(
+																																												"TALKTIMER STOP"), TALKTIMER_RESET(
+																																														"TALKTIMER RESET");
 
 		private final String text;
 
