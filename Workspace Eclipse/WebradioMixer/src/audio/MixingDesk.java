@@ -69,7 +69,7 @@ public class MixingDesk {
 		audioFormat = new AudioFormat(samplerate, numberOfBits, 2, true, true);
 
 		microphone1 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("microphone 1"));
-		telephone = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("microphone 2"));
+		telephone = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("telephone"));
 		mairlistChannel1 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist channel 1"));
 		mairlistChannel2 = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist channel 2"));
 		mairlistPFL = new Input(audioFormat, (int) Filemanager.getInstance().variables.get("mairlist pfl"));
