@@ -82,8 +82,7 @@ public class MixingDesk {
 
 		// Input[] mairlistMasterInputs = { microphone1, mairlistChannel1,
 		// mairlistChannel2 };
-		Input[] mairlistMasterInputs = { microphone1, telephone, mairlistChannel1, mairlistChannel2,
-				mairlistCartwall };
+		Input[] mairlistMasterInputs = { microphone1, telephone, mairlistChannel1, mairlistChannel2, mairlistCartwall };
 		boolean[] mairlistMasterInputsLatencyCompensation = { false, false, true, true, true };
 		Input[] monitorInputs = { mairlistChannel1, mairlistChannel2, mairlistCartwall };
 		boolean[] monitorInputsLatencyCompensation = { false, false, false };
@@ -530,7 +529,7 @@ public class MixingDesk {
 
 		MixingDesk.telephone_musicEnabled = telephone_musicEnabled;
 	}
-	
+
 	public void toggleRecording_telephone() {
 		setSetRecording_telephone(!setRecording_telephone);
 	}
