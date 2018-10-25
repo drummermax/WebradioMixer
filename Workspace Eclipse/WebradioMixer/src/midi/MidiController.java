@@ -326,11 +326,11 @@ public class MidiController {
 
 			if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP1)) {
 				if (velocity == 127) {
-					MixingDesk.getInstance().toggleMonitoringToPhonesActive(0);
+					MixingDesk.getInstance().toggleMonitoringToPhonesActive(1);
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP2)) {
 				if (velocity == 127) {
-					MixingDesk.getInstance().toggleMonitoringToPhonesActive(1);
+					MixingDesk.getInstance().toggleMonitoringToPhonesActive(2);
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONUP3)) {
 				if (velocity == 127) {
