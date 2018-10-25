@@ -82,8 +82,8 @@ public class MixingDesk {
 		boolean[] mairlistMasterInputsLatencyCompensation = { false, false, true, true, true };
 		Input[] monitorInputs = { mairlistChannel1, mairlistChannel2, mairlistCartwall };
 		boolean[] monitorInputsLatencyCompensation = { false, false, false };
-		Input[] phonesInputs = { mairlistChannel1, mairlistChannel2, mairlistPFL, mairlistCartwall, stdOut };
-		boolean[] phonesInputsLatencyCompensation = { false, false, false, false, false };
+		Input[] phonesInputs = { mairlistChannel1, mairlistChannel2, mairlistPFL, mairlistCartwall, stdOut, microphone1, microphone2 };
+		boolean[] phonesInputsLatencyCompensation = { false, false, false, false, false, false, false };
 
 		mairlistMaster = new OutputCombined(audioFormat,
 				(int) Filemanager.getInstance().variables.get("mairlist master"), mairlistMasterInputs,
@@ -376,17 +376,17 @@ public class MixingDesk {
 	public void setMonitoringToPhonesActive(int microphoneNumber, boolean monitoringToPhonesActive) {
 		if (microphoneNumber == 1) {
 			if (monitoringToPhonesActive) {
-				phones.setVolumeOfSingleInput(0, 1);
+				phones.setVolumeOfSingleInput(5, 1);
 			} else {
-				phones.setVolumeOfSingleInput(0, 0);
+				phones.setVolumeOfSingleInput(5, 0);
 			}
 			
 			monitoringToPhonesActive1 = monitoringToPhonesActive;
 		} else if (microphoneNumber == 2) {
 			if (monitoringToPhonesActive) {
-				phones.setVolumeOfSingleInput(1, 1);
+				phones.setVolumeOfSingleInput(6, 1);
 			} else {
-				phones.setVolumeOfSingleInput(1, 0);
+				phones.setVolumeOfSingleInput(6, 0);
 			}
 			
 			monitoringToPhonesActive2 = monitoringToPhonesActive;
