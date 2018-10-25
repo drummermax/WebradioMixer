@@ -1,21 +1,21 @@
 microphone 1
 17
 telephone
-21
-mairlist channel 1
 22
+mairlist channel 1
+23
 mairlist channel 2
 19
 mairlist pfl
-23
+24
 mairlist cartwall
-25
+27
 stdout
-28
+30
 mairlist master
 8
 mairlist master record
-29
+21
 monitor
 5
 phones
@@ -35,4 +35,6 @@ buffersize_soundcards
 latency_compensation
 675
 mairlist master initial volume
-90
+97
+telephone initial volume
+95
