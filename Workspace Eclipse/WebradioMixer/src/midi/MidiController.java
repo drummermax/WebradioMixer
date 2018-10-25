@@ -363,11 +363,13 @@ public class MidiController {
 				if (velocity == 127) {
 					MixingDesk.getInstance().toggleSpeakingActive(1);
 
-					if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) {
+					if (MixingDesk.getInstance().isSpeakingActive1() && !MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_ONAIR);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_RESET);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_START);
-					} else {
+					}
+					
+					if (!MixingDesk.getInstance().isSpeakingActive1() && !MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_OFFAIR);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_STOP);
 					}
@@ -375,12 +377,14 @@ public class MidiController {
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN2)) {
 				if (velocity == 127) {
 					MixingDesk.getInstance().toggleSpeakingActive(2);
-
-					if (MixingDesk.getInstance().isSpeakingActive1() || MixingDesk.getInstance().isSpeakingActive2()) {
+					
+					if (!MixingDesk.getInstance().isSpeakingActive1() && MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_ONAIR);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_RESET);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_START);
-					} else {
+					}
+					
+					if (!MixingDesk.getInstance().isSpeakingActive1() && !MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_OFFAIR);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_STOP);
 					}
