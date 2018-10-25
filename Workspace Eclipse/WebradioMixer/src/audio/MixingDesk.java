@@ -97,7 +97,6 @@ public class MixingDesk {
 		mairlistMaster = new OutputCombined(audioFormat,
 				(int) Filemanager.getInstance().variables.get("mairlist master"), mairlistMasterInputs,
 				mairlistMasterInputsLatencyCompensation);
-		mairlistMaster.setVolume(1);
 
 		int masterInitialVolumeProzent = (int) Filemanager.getInstance().variables
 				.get("mairlist master initial volume");
@@ -105,10 +104,13 @@ public class MixingDesk {
 		Double masterInitialVolume = new Double(masterInitialVolumeProzent);
 		masterInitialVolume = masterInitialVolume / 100;
 
-		mairlistMasterRecord.setVolume(masterInitialVolume); // avoid clipping
+		mairlistMaster.setVolume(masterInitialVolume); // avoid clipping
 																// in master
 																// channel
 
+		mairlistMasterRecord.setVolume(1);
+		
+		
 		monitor = new OutputCombined(audioFormat, (int) Filemanager.getInstance().variables.get("monitor"),
 				monitorInputs, monitorInputsLatencyCompensation);
 		monitor.setVolume(1);
@@ -120,7 +122,7 @@ public class MixingDesk {
 		telephoneMaster = new OutputCombined(audioFormat,
 				(int) Filemanager.getInstance().variables.get("telephone master"), telephoneMasterInputs,
 				telephoneMasterInputsLatencyCompensation);
-		telephoneMaster.setVolume(1);
+		telephoneMaster.setVolume(0.9);
 
 		telephoneMasterRecordOutput = new OutputCombined(audioFormat,
 				(int) Filemanager.getInstance().variables.get("telephone master record output"), telephoneMasterRecordInputs,
