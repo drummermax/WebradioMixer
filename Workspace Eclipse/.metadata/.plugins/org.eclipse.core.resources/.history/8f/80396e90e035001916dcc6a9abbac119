@@ -1,0 +1,28 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		Socket pingSocket = null;
+        PrintWriter out = null;
+
+        try {
+            pingSocket = new Socket("127.0.0.1", 9001);
+            out = new PrintWriter(pingSocket.getOutputStream(), true);
+        } catch (IOException e) {
+            return;
+        }
+        
+        if (args[0].contains("LOADED")) {
+        	Thread.sleep(200);
+        } else if (args[0].contains("EMPTY")) {
+        	Thread.sleep(100);
+        }
+
+        out.println(args[0] + " #" + System.currentTimeMillis());
+        out.close();
+        pingSocket.close();
+	}
+}

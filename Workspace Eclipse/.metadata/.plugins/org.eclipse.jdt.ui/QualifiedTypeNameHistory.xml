@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="main.Mairlist.mairlistPlayerState"/>
-<fullyQualifiedTypeName name="main.Mairlist.mairlistPFLSources"/>
-<fullyQualifiedTypeName name="main.Mairlist.MairlistPFLSources"/>
-<fullyQualifiedTypeName name="java.lang.Runnable"/>
-<fullyQualifiedTypeName name="main.Mairlist.MairlistPlayerState"/>
-<fullyQualifiedTypeName name="midi.MidiController.ledUpdater"/>
-<fullyQualifiedTypeName name="midi.MidiController"/>
-<fullyQualifiedTypeName name="Main.MairlistPFLSource"/>
-<fullyQualifiedTypeName name="main.Mairlist.MairlistPFLSource"/>
-<fullyQualifiedTypeName name="audio.MixingDesk"/>
-<fullyQualifiedTypeName name="main.Mairlist.CommandTCP"/>
-<fullyQualifiedTypeName name="MidiHandler.MIDIKey"/>
-<fullyQualifiedTypeName name="MidiHandler.MIDIKey.LEDColor"/>
-<fullyQualifiedTypeName name="midi.MidiController.MIDIKey"/>
-<fullyQualifiedTypeName name="midi.MidiController.MIDIKey.LEDColor"/>
-<fullyQualifiedTypeName name="javax.sound.sampled.AudioSystem"/>
-<fullyQualifiedTypeName name="javax.sound.midi.ShortMessage"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
-<fullyQualifiedTypeName name="main.Mairlist"/>
-<fullyQualifiedTypeName name="java.util.Arrays"/>
-<fullyQualifiedTypeName name="java.util.Comparator"/>
-<fullyQualifiedTypeName name="main.Mairlist.ReturnCommand"/>
+    <fullyQualifiedTypeName name="main.Mairlist.mairlistPlayerState"/>
+    <fullyQualifiedTypeName name="main.Mairlist.mairlistPFLSources"/>
+    <fullyQualifiedTypeName name="main.Mairlist.MairlistPFLSources"/>
+    <fullyQualifiedTypeName name="java.lang.Runnable"/>
+    <fullyQualifiedTypeName name="main.Mairlist.MairlistPlayerState"/>
+    <fullyQualifiedTypeName name="midi.MidiController.ledUpdater"/>
+    <fullyQualifiedTypeName name="midi.MidiController"/>
+    <fullyQualifiedTypeName name="Main.MairlistPFLSource"/>
+    <fullyQualifiedTypeName name="main.Mairlist.MairlistPFLSource"/>
+    <fullyQualifiedTypeName name="audio.MixingDesk"/>
+    <fullyQualifiedTypeName name="main.Mairlist.CommandTCP"/>
+    <fullyQualifiedTypeName name="MidiHandler.MIDIKey"/>
+    <fullyQualifiedTypeName name="MidiHandler.MIDIKey.LEDColor"/>
+    <fullyQualifiedTypeName name="midi.MidiController.MIDIKey"/>
+    <fullyQualifiedTypeName name="midi.MidiController.MIDIKey.LEDColor"/>
+    <fullyQualifiedTypeName name="javax.sound.sampled.AudioSystem"/>
+    <fullyQualifiedTypeName name="javax.sound.midi.ShortMessage"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="main.Mairlist"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.util.Comparator"/>
+    <fullyQualifiedTypeName name="main.Mairlist.ReturnCommand"/>
 </qualifiedTypeNameHistroy>

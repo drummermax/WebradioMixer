@@ -1,2 +1,6 @@
-GitRepositoriesView.GitDirectories=D\:\\WebradioMixer\\.git;
+GitRepositoriesView.GitDirectories=C\:\\Users\\maxwi\\WebradioMixer\\.git;
+GitRepositoriesView.GitDirectories.relative=C\:\\Users\\maxwi\\WebradioMixer\\.git;
+RepositorySearchDialogDeepSearch=true
+RepositorySearchDialogSearchPath=C\:\\Users\\maxwi\\WebradioMixer
+RepositorySearchDialogSkipHidden=true
 eclipse.preferences.version=1

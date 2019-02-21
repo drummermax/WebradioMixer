@@ -4,7 +4,7 @@ import java.net.Socket;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		Socket pingSocket = null;
         PrintWriter out = null;
 
@@ -13,6 +13,12 @@ public class Main {
             out = new PrintWriter(pingSocket.getOutputStream(), true);
         } catch (IOException e) {
             return;
+        }
+        
+        if (args[0].contains("LOADED")) {
+        	Thread.sleep(200);
+        } else if (args[0].contains("EMPTY")) {
+        	Thread.sleep(100);
         }
 
         out.println(args[0] + " #" + System.currentTimeMillis());
