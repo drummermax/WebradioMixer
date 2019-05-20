@@ -433,42 +433,32 @@ public class MidiController {
 					MixingDesk.getInstance().toggleTelephone_musicEnabled();
 				}
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER1)) {
-				if (velocity < 10) {
+				if (velocity < 5) {
 					velocity = 0;
-				} else if (velocity >= 109) {
-					velocity = 127;
 				}
 
 				MixingDesk.getInstance().getMicrophone1().setVolume(velocity / 127);
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER2)) {
-				if (velocity < 10) {
+				if (velocity < 5) {
 					velocity = 0;
-				} else if (velocity >= 109) {
-					velocity = 127;
 				}
 
 				MixingDesk.getInstance().getTelephone().setVolume(velocity / 127);
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER3)) {
-				if (velocity < 10) {
+				if (velocity < 5) {
 					velocity = 0;
-				} else if (velocity >= 109) {
-					velocity = 127;
 				}
 
 				MixingDesk.getInstance().getMairlistChannel1().setVolume(velocity / 127);
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER4)) {
-				if (velocity < 10) {
+				if (velocity < 5) {
 					velocity = 0;
-				} else if (velocity >= 109) {
-					velocity = 127;
 				}
 
 				MixingDesk.getInstance().getMairlistChannel2().setVolume(velocity / 127);
 			} else if (midikey.equalsMIDIKey(MIDIKey.FADER5)) {
-				if (velocity < 10) {
+				if (velocity < 5) {
 					velocity = 0;
-				} else if (velocity >= 109) {
-					velocity = 127;
 				}
 
 				MixingDesk.getInstance().getMairlistCartwall().setVolume(velocity / 127);
