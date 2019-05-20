@@ -92,6 +92,8 @@ public class Input {
 	}
 
 	public void setVolume(double volume) {
+		System.out.println("Set " + this.mixerInfosIndex + " to volume " + volume);
+		
 		this.setVolume = volume;
 		
 		this.volume = volume;
