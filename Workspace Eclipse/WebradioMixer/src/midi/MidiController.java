@@ -27,7 +27,8 @@ public class MidiController {
 	private static long[] timestamp;
 	private static double faderSampleFrequency = 10;
 
-	private static long timestampEOF1 = 0, timestampEOF2 = 0, timestampTelephone_onAir = 0, timestampTelephone_recording = 0;
+	private static long timestampEOF1 = 0, timestampEOF2 = 0, timestampTelephone_onAir = 0,
+			timestampTelephone_recording = 0;
 
 	public long getCurrentTimestamp() {
 		return System.currentTimeMillis();
@@ -321,22 +322,22 @@ public class MidiController {
 
 			MIDIKey midikey = new MIDIKey(channel, note_cc);
 
-			// System.out.println("MIDI: Channel = " + channel + " note_cc = " +
-			// note_cc + " velocity = " + velocity);
+			System.out.println("MIDI: Channel = " + channel + " note_cc = " + note_cc + " velocity = " + velocity);
 
 			if (midikey.isFader()) {
 				long currentTimestamp = MidiController.getInstance().getCurrentTimestamp();
 				long faderTimestamp = MidiController.getInstance().getTimestamp()[note_cc - 77];
-				
+
 				if (currentTimestamp - faderTimestamp < (1000 / faderSampleFrequency)) {
-					//System.out.println("time return with " + (currentTimestamp - faderTimestamp));
-					//System.out.println("current: " + currentTimestamp);
-					//System.out.println("fader: " + faderTimestamp);
+					// System.out.println("time return with " +
+					// (currentTimestamp - faderTimestamp));
+					// System.out.println("current: " + currentTimestamp);
+					// System.out.println("fader: " + faderTimestamp);
 					return;
 				} else {
 					MidiController.getInstance().setTimestamp(note_cc - 77,
 							MidiController.getInstance().getCurrentTimestamp());
-					//System.out.println("no time return");
+					// System.out.println("no time return");
 				}
 			}
 
@@ -384,8 +385,9 @@ public class MidiController {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_RESET);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_START);
 					}
-					
-					if (!MixingDesk.getInstance().isSpeakingActive1() && !MixingDesk.getInstance().isSpeakingActive2()) {
+
+					if (!MixingDesk.getInstance().isSpeakingActive1()
+							&& !MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_OFFAIR);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_STOP);
 					}
@@ -393,14 +395,15 @@ public class MidiController {
 			} else if (midikey.equalsMIDIKey(MIDIKey.BUTTONDOWN2)) {
 				if (velocity == 127) {
 					MixingDesk.getInstance().toggleSpeakingActive(2);
-					
+
 					if (!MixingDesk.getInstance().isSpeakingActive1() && MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_ONAIR);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_RESET);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_START);
 					}
-					
-					if (!MixingDesk.getInstance().isSpeakingActive1() && !MixingDesk.getInstance().isSpeakingActive2()) {
+
+					if (!MixingDesk.getInstance().isSpeakingActive1()
+							&& !MixingDesk.getInstance().isSpeakingActive2()) {
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.GUI_OFFAIR);
 						Mairlist.getInstance().sendCommandTCP(Mairlist.CommandTCP.TALKTIMER_STOP);
 					}
@@ -760,7 +763,6 @@ public class MidiController {
 				} else {
 					MIDIKey.BUTTONRECORD.setLEDColor(MIDIKey.LEDColor.OFF);
 				}
-				
 
 				if (MixingDesk.getInstance().isSetRecording_telephone()) {
 					if (MidiController.getInstance().getCurrentTimestamp()
@@ -793,13 +795,13 @@ public class MidiController {
 				} else {
 					MIDIKey.BUTTONDOWN2.setLEDColor(MIDIKey.LEDColor.OFF); // aus
 				}
-				
+
 				if (MixingDesk.getInstance().isTelephone_microphoneEnabled()) {
 					MIDIKey.BUTTONUP8.setLEDColor(MIDIKey.LEDColor.YELLOW);
 				} else {
 					MIDIKey.BUTTONUP8.setLEDColor(MIDIKey.LEDColor.OFF);
 				}
-				
+
 				if (MixingDesk.getInstance().isTelephone_musicEnabled()) {
 					MIDIKey.BUTTONDOWN8.setLEDColor(MIDIKey.LEDColor.YELLOW);
 				} else {
